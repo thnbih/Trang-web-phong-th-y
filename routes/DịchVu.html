@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name='robots' content='noindex, nofollow' />
 	<title>Dịch vụ &#8211; AN NHiên</title>
+	<link rel="stylesheet" type="text/css" href="/style.css" />
 	<link rel='dns-prefetch' href='//s0.wp.com' />
 	<link rel='dns-prefetch' href='//wordpress.com' />
 	<link rel='dns-prefetch' href='//widgets.wp.com' />
@@ -105,9 +106,8 @@
 	<meta name="twitter:card" content="summary" />
 
 	<!-- End Jetpack Open Graph Tags -->
-	<link rel="shortcut icon" type="image/x-icon" href="https://s0.wp.com/i/favicon.ico"
-		sizes="16x16 24x24 32x32 48x48" />
-	<link rel="icon" type="image/x-icon" href="https://s0.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48" />
+	<link rel="shortcut icon" type="image/x-icon" href="/meo.png" sizes="16x16 24x24 32x32 48x48" />
+	<link rel="icon" type="image/x-icon" href="/meo.png" sizes="16x16 24x24 32x32 48x48" />
 	<link rel="apple-touch-icon" href="https://s0.wp.com/i/webclip.png" />
 	<link rel="search" type="application/opensearchdescription+xml" href="https://annhien52.wordpress.com/osd.xml"
 		title="AN NHiên" />
@@ -144,164 +144,6 @@
 
 <body
 	class="page-template-default page page-id-26 logged-in admin-bar no-customize-support wp-embed-responsive customizer-styles-applied jetpack-reblog-enabled has-launch-banner">
-	<div id="wpadminbar" class="nojq nojs ltr nav-unification">
-		<a class="screen-reader-shortcut" href="#wp-toolbar" tabindex="1">Chuyển đến thanh công cụ</a>
-		<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Thanh công cụ" tabindex="0">
-			<ul id="wp-admin-bar-root-default" class="ab-top-menu">
-
-				<li id="wp-admin-bar-blog" class="my-sites mb-trackable"><a class="ab-item"
-						href="https://wordpress.com/sites/annhien52.wordpress.com">Blog của tôi</a> </li>
-				<li id="wp-admin-bar-jumptotop-button-menu"><a class="ab-item" href="#">
-						<div id="jumptotop"><span class="noticon noticon-top"></span></div>
-					</a> </li>
-				<li id="wp-admin-bar-newdash" class="mb-trackable"><a class="ab-item"
-						href="https://wordpress.com/read">Đọc</a> </li>
-			</ul>
-			<ul id="wp-admin-bar-top-secondary" class="ab-top-secondary ab-top-menu">
-
-				<li id="wp-admin-bar-notes" class="menupop"><a class="ab-item"
-						href="https://wordpress.com/notifications"><span id="wpnt-notes-unread-count"
-							class="wpnt-loading wpn-read"></span><span class="noticon noticon-bell"></span><span
-							class="ab-text">Thông báo</span></a>
-					<div id="wpnt-notes-panel2" style="display:none" lang="vi" dir="ltr">
-						<div class="wpnt-notes-panel-header"><span class="wpnt-notes-header"></span><span
-								class="wpnt-notes-panel-link"></span></div>
-					</div>
-				</li>
-				<li id="wp-admin-bar-my-account" class="with-avatar mb-trackable"><a class="ab-item"
-						href="https://wordpress.com/me/"><img alt=''
-							src='https://2.gravatar.com/avatar/b9a4e24a929b4fe839dbb631b0f2a5b553e4911a18cfb89831f4ca56fc753a13?s=32&#038;d=mm&#038;r=G'
-							srcset='https://2.gravatar.com/avatar/b9a4e24a929b4fe839dbb631b0f2a5b553e4911a18cfb89831f4ca56fc753a13?s=32&#038;d=mm&#038;r=G 1x, https://2.gravatar.com/avatar/b9a4e24a929b4fe839dbb631b0f2a5b553e4911a18cfb89831f4ca56fc753a13?s=48&#038;d=mm&#038;r=G 1.5x, https://2.gravatar.com/avatar/b9a4e24a929b4fe839dbb631b0f2a5b553e4911a18cfb89831f4ca56fc753a13?s=64&#038;d=mm&#038;r=G 2x, https://2.gravatar.com/avatar/b9a4e24a929b4fe839dbb631b0f2a5b553e4911a18cfb89831f4ca56fc753a13?s=96&#038;d=mm&#038;r=G 3x, https://2.gravatar.com/avatar/b9a4e24a929b4fe839dbb631b0f2a5b553e4911a18cfb89831f4ca56fc753a13?s=128&#038;d=mm&#038;r=G 4x'
-							class='avatar avatar-32' height='32' width='32' loading='lazy' decoding='async' /><span
-							class="ab-text">Me</span></a> </li>
-				<li id="wp-admin-bar-ab-new-post" class="mb-trackable"><a class="ab-item"
-						href="https://wordpress.com/post/annhien52.wordpress.com"><span>Viết bài</span></a> </li>
-			</ul>
-		</div>
-		<a class="screen-reader-shortcut"
-			href="https://annhien52.wordpress.com/wp-login.php?action=logout&#038;_wpnonce=71dc48ef16">Đăng xuất</a>
-	</div>
-
-
-	<script type="text/javascript">
-		/* <![CDATA[ */
-		(function () {
-			function init() {
-				document.addEventListener('load', function () {
-					// hack to hide the gravatar hovercard
-					document.querySelectorAll('#wpadminbar img.grav-hashed').forEach(function (el) {
-						el.classList.remove('grav-hashed');
-					});
-				})
-
-				// debug bar extra
-				window.clickDebugLink = function (parentId, obj) {
-					if (!window.jQuery) {
-						return;
-					}
-					var $ = window.jQuery;
-
-					$('#' + parentId).children('div').hide();
-
-					document.getElementById(obj.href.substr(obj.href.indexOf('#') + 1)).style.display = 'block';
-					$(obj.href.substr(obj.href.indexOf('#'))).show()
-
-					$(obj).parent().addClass('current').siblings('li').removeClass('current');
-
-					return false;
-				};
-			}
-
-			if (document.readyState !== 'loading') {
-				init();
-			} else {
-				document.addEventListener('DOMContentLoaded', init);
-			}
-		})();
-		/* ]]> */
-	</script>
-	<div class="wpcom-bubble action-bubble">
-		<div class="bubble-txt"></div>
-	</div>
-	<script type="text/javascript">
-		function hideBubble() {
-			var bubble = document.querySelector('div.wpcom-bubble');
-			if (!bubble) {
-				return;
-			}
-			bubble.parentElement.removeChild(bubble);
-
-			bubble = document.createElement('div');
-			bubble.classList.add('wpcom-bubble');
-			bubble.classList.add('action-bubble');
-			bubble.innerHTML = '<div class="bubble-txt"></div>';
-			document.body.appendChild(bubble);
-		}
-	</script>
-	<script type="text/javascript">
-		(function () {
-			'use strict';
-
-			var isShowing = false;
-
-			document.querySelectorAll('#wp-admin-bar-jumptotop-button-menu a').forEach(function (el) {
-				el.addEventListener('click', function (e) {
-					e.preventDefault();
-					if (window.CSS && window.CSS.supports && window.CSS.supports('scroll-behavior', 'smooth')) {
-						window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-					} else {
-						window.scroll(0, 0);
-					}
-				});
-			});
-
-			function hideShowButton() {
-				var jumpToTop = document.querySelector('#jumptotop');
-				if (isShowing) {
-					jumpToTop.style.transform = 'translateY( 0 )';
-				} else {
-					jumpToTop.style.transform = 'translateY( -50px )';
-				}
-			}
-
-			function hideShowTbJumpToTop() {
-				var total_width = 0;
-				// Calculate total width taken by items minus our button to see if it'll
-				// overlap with other toolbar menus.
-				document.querySelectorAll('#wp-admin-bar-root-default > li').forEach(function (el) {
-					if (el.getAttribute('id') !== 'wp-admin-bar-jumptotop-button-menu') {
-						total_width += el.offsetWidth;
-					}
-				});
-				var menu = document.querySelector('#wp-admin-bar-jumptotop-button-menu');
-				if (!menu) {
-					return;
-				}
-
-				if (menu.offsetLeft - total_width < 10) {
-					isShowing = false;
-				} else if (window.scrollY >= 350 && !isShowing) {
-					if (menu.offsetLeft - total_width < 10) {
-						return;
-					}
-					isShowing = true;
-				} else if (window.scrollY < 1 && isShowing) {
-					isShowing = false;
-				}
-				hideShowButton();
-			}
-
-			// handle on page load if auto scrolling to a position
-			hideShowTbJumpToTop();
-
-			// Bind to scroll event
-			var jumpToTopTimer = null;
-			window.addEventListener('scroll', function () {
-				clearTimeout(jumpToTopTimer);
-				jumpToTopTimer = setTimeout(hideShowTbJumpToTop, 150);
-			}, { passive: true });
-		})();
-	</script>
 
 	<div class="wp-site-blocks">
 		<header class="wp-block-template-part">
@@ -315,7 +157,7 @@
 						<div
 							class="wp-block-group is-nowrap is-layout-flex wp-container-core-group-is-layout-1 wp-block-group-is-layout-flex">
 
-							<h1 class="wp-block-site-title"><a href="https://annhien52.wordpress.com" target="_self"
+							<h1 class="wp-block-site-title"><a href="/" target="_self"
 									rel="home">AN NHiên</a></h1>
 						</div>
 					</div>
@@ -359,38 +201,36 @@
 											data-wp-watch="callbacks.focusFirstElement" id="modal-3-content">
 											<ul
 												class="wp-block-navigation__container is-responsive order-1 md:order-0 wp-block-navigation">
-												<ul class="wp-block-page-list">
-													<li
-														class="wp-block-pages-list__item wp-block-navigation-item open-on-hover-click">
-														<a class="wp-block-pages-list__item__link wp-block-navigation-item__content"
-															href="https://annhien52.wordpress.com/bai-viet-blog/">Bài
-															viết Blog</a></li>
-													<li
-														class="wp-block-pages-list__item wp-block-navigation-item open-on-hover-click">
-														<a class="wp-block-pages-list__item__link wp-block-navigation-item__content"
-															href="https://annhien52.wordpress.com/cua-hang/">Cửa
-															hàng</a></li>
-													<li
-														class="wp-block-pages-list__item current-menu-item wp-block-navigation-item open-on-hover-click">
-														<a class="wp-block-pages-list__item__link wp-block-navigation-item__content"
-															href="https://annhien52.wordpress.com/dich-vu/"
-															aria-current="page">Dịch vụ</a></li>
-													<li
-														class="wp-block-pages-list__item wp-block-navigation-item open-on-hover-click">
-														<a class="wp-block-pages-list__item__link wp-block-navigation-item__content"
-															href="https://annhien52.wordpress.com/gallery/">Gallery</a>
-													</li>
-													<li
-														class="wp-block-pages-list__item wp-block-navigation-item open-on-hover-click">
-														<a class="wp-block-pages-list__item__link wp-block-navigation-item__content"
-															href="https://annhien52.wordpress.com/gioi-thieu/">Giới
-															thiệu</a></li>
-													<li
-														class="wp-block-pages-list__item wp-block-navigation-item open-on-hover-click">
-														<a class="wp-block-pages-list__item__link wp-block-navigation-item__content"
-															href="https://annhien52.wordpress.com/lien-he/">Liên hệ</a>
-													</li>
-												</ul>
+												<li class=" wp-block-navigation-item wp-block-navigation-link"><a
+														class="wp-block-navigation-item__content"
+														href="/bai-viet-blog/"><span
+															class="wp-block-navigation-item__label">Bài viết
+															Blog</span></a>
+												</li>
+												<li class=" wp-block-navigation-item wp-block-navigation-link"><a
+														class="wp-block-navigation-item__content"
+														href="/cua-hang/"><span
+															class="wp-block-navigation-item__label">Cửa hàng</span></a>
+												</li>
+												<li class=" wp-block-navigation-item wp-block-navigation-link"><a
+														class="wp-block-navigation-item__content" href="/dich-vu/"><span
+															class="wp-block-navigation-item__label">Dịch vụ</span></a>
+												</li>
+												<li class=" wp-block-navigation-item wp-block-navigation-link"><a
+														class="wp-block-navigation-item__content"
+														href="/livestream/"><span
+															class="wp-block-navigation-item__label">Livestream</span></a>
+												</li>
+												<li class=" wp-block-navigation-item wp-block-navigation-link"><a
+														class="wp-block-navigation-item__content"
+														href="/gioi-thieu/"><span
+															class="wp-block-navigation-item__label">Giới
+															thiệu</span></a>
+												</li>
+												<li class=" wp-block-navigation-item wp-block-navigation-link"><a
+														class="wp-block-navigation-item__content" href="/lien-he/"><span
+															class="wp-block-navigation-item__label">Liên hệ</span></a>
+												</li>
 											</ul>
 										</div>
 									</div>
@@ -979,8 +819,6 @@
 
 
 
-					<p class="has-text-align-center has-small-font-size"><a
-							href="https://wordpress.com/?ref=footer_blog" rel="nofollow">Blog tại WordPress.com.</a></p>
 				</div>
 
 
@@ -1332,112 +1170,6 @@
 		</div>
 
 	</div>
-	<div id="actionbar" style="display: none;" class="actnbr-pub-assembler actnbr-has-customize actnbr-has-edit">
-		<ul>
-			<li class="actnbr-btn actnbr-customize">
-				<a
-					href="https://annhien52.wordpress.com/wp-admin/site-editor.php?postType=wp_template&#038;postId=pub/assembler//page">
-					<svg class="gridicon gridicons-customize" height="20" width="20" xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 24 24">
-						<g>
-							<path
-								d="M2 6c0-1.505.78-3.08 2-4 0 .845.69 2 2 2 1.657 0 3 1.343 3 3 0 .386-.08.752-.212 1.09.74.594 1.476 1.19 2.19 1.81L8.9 11.98c-.62-.716-1.214-1.454-1.807-2.192C6.753 9.92 6.387 10 6 10c-2.21 0-4-1.79-4-4zm12.152 6.848l1.34-1.34c.607.304 1.283.492 2.008.492 2.485 0 4.5-2.015 4.5-4.5 0-.725-.188-1.4-.493-2.007L18 9l-2-2 3.507-3.507C18.9 3.188 18.225 3 17.5 3 15.015 3 13 5.015 13 7.5c0 .725.188 1.4.493 2.007L3 20l2 2 6.848-6.848c1.885 1.928 3.874 3.753 5.977 5.45l1.425 1.148 1.5-1.5-1.15-1.425c-1.695-2.103-3.52-4.092-5.448-5.977z" />
-						</g>
-					</svg> <span>Sửa Site</span>
-				</a>
-			</li>
-			<li class="actnbr-btn actnbr-edit">
-				<a href="https://wordpress.com/page/annhien52.wordpress.com/26">
-					<svg class="gridicon gridicons-pencil" height="20" width="20" xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 24 24">
-						<g>
-							<path
-								d="M13 6l5 5-9.507 9.507c-.686-.686-.69-1.794-.012-2.485l-.002-.003c-.69.676-1.8.673-2.485-.013-.677-.677-.686-1.762-.036-2.455l-.008-.008c-.694.65-1.78.64-2.456-.036L13 6zm7.586-.414l-2.172-2.172c-.78-.78-2.047-.78-2.828 0L14 5l5 5 1.586-1.586c.78-.78.78-2.047 0-2.828zM3 18v3h3c0-1.657-1.343-3-3-3z" />
-						</g>
-					</svg> <span>Sửa</span>
-				</a>
-			</li>
-			<li class="actnbr-btn actnbr-stats">
-				<a href="https://wordpress.com/stats/post/26/annhien52.wordpress.com">
-					<svg class="gridicon gridicons-stats-alt" height="20" width="20" xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 24 24">
-						<g>
-							<path d="M21 21H3v-2h18v2zM8 10H4v7h4v-7zm6-7h-4v14h4V3zm6 3h-4v11h4V6z" />
-						</g>
-					</svg> <span>Thống kê</span>
-				</a>
-			</li>
-			<li class="actnbr-ellipsis actnbr-hidden">
-				<svg class="gridicon gridicons-ellipsis" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 24 24">
-					<g>
-						<path
-							d="M7 12c0 1.104-.896 2-2 2s-2-.896-2-2 .896-2 2-2 2 .896 2 2zm12-2c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm-7 0c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2z" />
-					</g>
-				</svg>
-				<div class="actnbr-popover tip tip-top-left actnbr-more">
-					<div class="tip-arrow"></div>
-					<div class="tip-inner">
-						<ul>
-							<li class="actnbr-sitename">
-								<a href="https://annhien52.wordpress.com">
-									<img alt='' src='https://s0.wp.com/i/logo/wpcom-gray-white.png'
-										srcset='https://s0.wp.com/i/logo/wpcom-gray-white.png 1x'
-										class='avatar avatar-50' height='50' width='50' /> AN NHiên </a>
-							</li>
-							<li class="actnbr-folded-customize">
-								<a
-									href="https://annhien52.wordpress.com/wp-admin/site-editor.php?postType=wp_template&#038;postId=pub/assembler//page">
-									<svg class="gridicon gridicons-customize" height="20" width="20"
-										xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-										<g>
-											<path
-												d="M2 6c0-1.505.78-3.08 2-4 0 .845.69 2 2 2 1.657 0 3 1.343 3 3 0 .386-.08.752-.212 1.09.74.594 1.476 1.19 2.19 1.81L8.9 11.98c-.62-.716-1.214-1.454-1.807-2.192C6.753 9.92 6.387 10 6 10c-2.21 0-4-1.79-4-4zm12.152 6.848l1.34-1.34c.607.304 1.283.492 2.008.492 2.485 0 4.5-2.015 4.5-4.5 0-.725-.188-1.4-.493-2.007L18 9l-2-2 3.507-3.507C18.9 3.188 18.225 3 17.5 3 15.015 3 13 5.015 13 7.5c0 .725.188 1.4.493 2.007L3 20l2 2 6.848-6.848c1.885 1.928 3.874 3.753 5.977 5.45l1.425 1.148 1.5-1.5-1.15-1.425c-1.695-2.103-3.52-4.092-5.448-5.977z" />
-										</g>
-									</svg> <span>Sửa Site</span>
-								</a>
-							</li>
-							<li class="actnbr-folded-follow">
-								<a class="actnbr-action actnbr-actn-follow  no-display" href="">
-									<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 20 20">
-										<path clip-rule="evenodd"
-											d="m4 4.5h12v6.5h1.5v-6.5-1.5h-1.5-12-1.5v1.5 10.5c0 1.1046.89543 2 2 2h7v-1.5h-7c-.27614 0-.5-.2239-.5-.5zm10.5 2h-9v1.5h9zm-5 3h-4v1.5h4zm3.5 1.5h-1v1h1zm-1-1.5h-1.5v1.5 1 1.5h1.5 1 1.5v-1.5-1-1.5h-1.5zm-2.5 2.5h-4v1.5h4zm6.5 1.25h1.5v2.25h2.25v1.5h-2.25v2.25h-1.5v-2.25h-2.25v-1.5h2.25z"
-											fill-rule="evenodd"></path>
-									</svg>
-									<span>Theo dõi</span>
-								</a>
-								<a class="actnbr-action actnbr-actn-following " href="">
-									<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 20 20">
-										<path fill-rule="evenodd" clip-rule="evenodd"
-											d="M16 4.5H4V15C4 15.2761 4.22386 15.5 4.5 15.5H11.5V17H4.5C3.39543 17 2.5 16.1046 2.5 15V4.5V3H4H16H17.5V4.5V12.5H16V4.5ZM5.5 6.5H14.5V8H5.5V6.5ZM5.5 9.5H9.5V11H5.5V9.5ZM12 11H13V12H12V11ZM10.5 9.5H12H13H14.5V11V12V13.5H13H12H10.5V12V11V9.5ZM5.5 12H9.5V13.5H5.5V12Z"
-											fill="#008A20"></path>
-										<path class="following-icon-tick" d="M13.5 16L15.5 18L19 14.5" stroke="#008A20"
-											stroke-width="1.5"></path>
-									</svg>
-									<span>Thành viên đăng kí</span>
-								</a>
-							</li>
-							<li class="actnbr-theme">
-								<a href="https://wordpress.com/theme/assembler/">Tải chủ đề: Assembler</a>
-							</li>
-							<li class="actnbr-shortlink"><a href="https://wp.me/PfAPyJ-q">URL rút gọn</a></li>
-							<li class="actnbr-reader">
-								<a href="https://wordpress.com/read/blogs/230423045/posts/26">
-									Xem toàn bộ bài viết </a>
-							</li>
-							<li class="actnbr-follows">
-								<a href="https://wordpress.com/following/manage?s=annhien52.wordpress.com">
-									Quản lý theo dõi </a>
-							</li>
-							<li class="actnbr-fold"><a href="">Ẩn menu</a></li>
-						</ul>
-					</div>
-				</div>
-			</li>
-		</ul>
-	</div>
 
 	<script>
 		window.addEventListener("load", function (event) {
@@ -1582,115 +1314,6 @@
 	</script>
 	<noscript><img src="https://pixel.wp.com/b.gif?v=noscript"
 			style="height:1px;width:1px;overflow:hidden;position:absolute;bottom:1px;" alt="" /></noscript>
-	<div class="launch-banner" id="launch-banner" style="display:none;">
-		<div class="launch-banner-content">
-			<div class="launch-banner-section my-home-button">
-				<a href="https://wordpress.com/home/annhien52.wordpress.com">
-					<svg class="icon icon-home" width="8" height="14" viewBox="0 0 8 14" fill="none"
-						xmlns="http://www.w3.org/2000/svg">
-						<path d="M6.5 2L1.5 7L6.5 12" stroke-width="1.5" stroke-linecap="square" />
-					</svg>
-					<span class="is-desktop">Tổng quan</span>
-				</a>
-			</div>
-			<div class="launch-banner-section bar-controls">
-				<a class="edit-item-button" href="https://wordpress.com/page/annhien52.wordpress.com/26" target="_blank"
-					rel="noopener noreferrer">
-					<svg class="icon icon-edit" width="16" height="16" viewBox="0 0 16 16" fill="none"
-						xmlns="http://www.w3.org/2000/svg">
-						<path
-							d="M1.397 11.858L0.866564 11.3278L0.685098 11.5094L0.652921 11.764L1.397 11.858ZM1 15L0.255916 14.906L0.133382 15.8757L1.1018 15.7431L1 15ZM4.14583 14.569L4.24764 15.3121L4.4971 15.2779L4.6754 15.1001L4.14583 14.569ZM14.6061 4.1389L14.0846 3.59977L14.0765 3.60781L14.6061 4.1389ZM14.6061 2.28131L14.076 2.81203L14.0846 2.82038L14.6061 2.28131ZM13.7171 1.39346L13.1786 1.91563L13.1871 1.92411L13.7171 1.39346ZM11.8572 1.39346L12.3877 1.92374L12.3957 1.91556L11.8572 1.39346ZM0.652921 11.764L0.255916 14.906L1.74408 15.094L2.14109 11.9521L0.652921 11.764ZM1.1018 15.7431L4.24764 15.3121L4.04403 13.8259L0.898197 14.2569L1.1018 15.7431ZM4.6754 15.1001L15.1356 4.67L14.0765 3.60781L3.61627 14.0379L4.6754 15.1001ZM15.1275 4.67797C15.3244 4.48754 15.481 4.25948 15.5879 4.00731L14.207 3.4216C14.1786 3.48853 14.137 3.54916 14.0846 3.59983L15.1275 4.67797ZM15.5879 4.00731C15.6949 3.75513 15.75 3.48402 15.75 3.21011H14.25C14.25 3.28275 14.2354 3.35467 14.207 3.4216L15.5879 4.00731ZM15.75 3.21011C15.75 2.93619 15.6949 2.66508 15.5879 2.4129L14.207 2.99861C14.2354 3.06554 14.25 3.13746 14.25 3.21011H15.75ZM15.5879 2.4129C15.481 2.16073 15.3244 1.93267 15.1275 1.74224L14.0846 2.82038C14.137 2.87105 14.1786 2.93167 14.207 2.99861L15.5879 2.4129ZM15.1361 1.75065L14.2471 0.862801L13.1871 1.92411L14.0761 2.81196L15.1361 1.75065ZM14.2555 0.871351C14.0649 0.674719 13.8366 0.518422 13.5844 0.4117L12.9999 1.79314C13.0672 1.8216 13.128 1.86325 13.1787 1.91556L14.2555 0.871351ZM13.5844 0.4117C13.3321 0.30498 13.061 0.25 12.7872 0.25V1.75C12.8603 1.75 12.9326 1.76468 12.9999 1.79314L13.5844 0.4117ZM12.7872 0.25C12.5133 0.25 12.2422 0.30498 11.99 0.4117L12.5744 1.79314C12.6417 1.76468 12.7141 1.75 12.7872 1.75V0.25ZM11.99 0.4117C11.7377 0.518421 11.5095 0.674718 11.3188 0.871351L12.3957 1.91556C12.4464 1.86325 12.5072 1.8216 12.5744 1.79314L11.99 0.4117ZM11.3268 0.863238L0.866564 11.3278L1.92744 12.3883L12.3877 1.92368L11.3268 0.863238Z" />
-						<path d="M10.6924 3.15381L12.875 5.34619" stroke-width="1.5" stroke-linecap="round"
-							stroke-linejoin="round" />
-					</svg>
-					<span class="is-mobile">Sửa</span>
-					<span class="is-desktop">Chỉnh sửa trang</span>
-				</a>
-				<a class="change-theme-button" href="https://wordpress.com/themes/annhien52.wordpress.com"
-					target="_blank" rel="noopener noreferrer">
-					<svg class="icon icon-theme" width="20" height="20" viewBox="0 0 20 20" fill="none"
-						xmlns="http://www.w3.org/2000/svg">
-						<path d="M3 7.6665H17" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-						<path d="M7.66687 16.9998V7.6665" stroke-width="1.5" stroke-linecap="round"
-							stroke-linejoin="round" />
-						<rect x="3" y="3" width="14" height="14" rx="1" stroke-width="1.5" />
-					</svg>
-					<span class="is-mobile">Thay đổi</span>
-					<span class="is-desktop">Đổi chủ đề</span>
-				</a>
-				<div class="launch-bar-global-styles-button">
-					<div class="launch-bar-global-styles-popover hidden">
-						<div class="launch-bar-global-styles-close">
-							<svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48">
-								<path
-									d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
-							</svg>
-						</div>
-						<div class="launch-bar-global-styles-message">
-							Your site includes <a href="https://wordpress.com/support/using-styles/"
-								target="_blank">premium styles</a> that are only visible to visitors after upgrading to
-							the WordPress.com Explorer plan or higher. </div>
-						<a class="launch-bar-global-styles-upgrade"
-							href="https://wordpress.com/plans/annhien52.wordpress.com?plan=value_bundle&#038;feature=style-customization">
-							Nâng cấp ngay </a>
-						<a class="launch-bar-global-styles-reset"
-							href="https://wordpress.com/support/using-styles/#reset-all-styles" target="_blank">
-							<svg width="15" height="14" viewBox="0 0 15 14" fill="none"
-								xmlns="http://www.w3.org/2000/svg">
-								<path
-									d="M5.8125 5.6875C5.8125 4.75552 6.56802 4 7.5 4C8.43198 4 9.1875 4.75552 9.1875 5.6875C9.1875 6.55621 8.53108 7.2716 7.6872 7.36473C7.58427 7.37609 7.5 7.45895 7.5 7.5625V8.5M7.5 9.25V10.375M13.5 7C13.5 10.3137 10.8137 13 7.5 13C4.18629 13 1.5 10.3137 1.5 7C1.5 3.68629 4.18629 1 7.5 1C10.8137 1 13.5 3.68629 13.5 7Z"
-									stroke="#1E1E1E" stroke-width="1.5" />
-							</svg>
-							Remove premium styles <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15"
-								height="15" aria-hidden="true" focusable="false">
-								<path
-									d="M18.2 17c0 .7-.6 1.2-1.2 1.2H7c-.7 0-1.2-.6-1.2-1.2V7c0-.7.6-1.2 1.2-1.2h3.2V4.2H7C5.5 4.2 4.2 5.5 4.2 7v10c0 1.5 1.2 2.8 2.8 2.8h10c1.5 0 2.8-1.2 2.8-2.8v-3.6h-1.5V17zM14.9 3v1.5h3.7l-6.4 6.4 1.1 1.1 6.4-6.4v3.7h1.5V3h-6.3z">
-								</path>
-							</svg>
-						</a>
-						<a class="launch-bar-global-styles-preview" href="/dich-vu/?hide-global-styles">
-							<label><input type="checkbox" checked><span></span></label>
-							Preview premium styles </a>
-					</div>
-					<a class="launch-bar-global-styles-toggle" href="#">
-						<svg width="25" height="25" viewBox="0 96 960 960" xmlns="http://www.w3.org/2000/svg">
-							<path
-								d="M479.982 776q14.018 0 23.518-9.482 9.5-9.483 9.5-23.5 0-14.018-9.482-23.518-9.483-9.5-23.5-9.5-14.018 0-23.518 9.482-9.5 9.483-9.5 23.5 0 14.018 9.482 23.518 9.483 9.5 23.5 9.5ZM453 623h60V370h-60v253Zm27.266 353q-82.734 0-155.5-31.5t-127.266-86q-54.5-54.5-86-127.341Q80 658.319 80 575.5q0-82.819 31.5-155.659Q143 347 197.5 293t127.341-85.5Q397.681 176 480.5 176q82.819 0 155.659 31.5Q709 239 763 293t85.5 127Q880 493 880 575.734q0 82.734-31.5 155.5T763 858.316q-54 54.316-127 86Q563 976 480.266 976Zm.234-60Q622 916 721 816.5t99-241Q820 434 721.188 335 622.375 236 480 236q-141 0-240.5 98.812Q140 433.625 140 576q0 141 99.5 240.5t241 99.5Zm-.5-340Z"
-								style="fill: orange" />
-						</svg>
-						<span class="is-mobile">
-							Nâng cấp </span>
-						<span class="is-desktop">
-							Upgrade required </span>
-					</a>
-				</div>
-				<a class="launch-site-button"
-					href="https://wordpress.com/start/launch-site?siteSlug=annhien52.wordpress.com&#038;source=site&#038;hide_initial_query=yes">
-					<svg class="icon icon-launch" width="18" height="18" viewBox="0 0 18 18"
-						xmlns="http://www.w3.org/2000/svg">
-						<path
-							d="M8.99994 16.5C13.1421 16.5 16.4999 13.1421 16.4999 9C16.4999 4.85786 13.1421 1.5 8.99994 1.5C4.8578 1.5 1.49994 4.85786 1.49994 9C1.49994 13.1421 4.8578 16.5 8.99994 16.5Z"
-							stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-						<path d="M1.49994 9H16.4999" stroke-width="1.5" stroke-linecap="round"
-							stroke-linejoin="round" />
-						<path
-							d="M8.99994 1.5C10.8759 3.55376 11.942 6.21903 11.9999 9C11.942 11.781 10.8759 14.4462 8.99994 16.5C7.12398 14.4462 6.05787 11.781 5.99994 9C6.05787 6.21903 7.12398 3.55376 8.99994 1.5V1.5Z"
-							stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-					</svg>
-					<span class="is-mobile">Launch</span>
-					<span class="is-desktop">Khởi động blog</span>
-				</a>
-			</div>
-			<div class="launch-banner-section dismiss-button">
-				<button>
-					<svg class="icon icon-dismiss" width="20" height="20" viewBox="0 0 20 20" fill="none"
-						xmlns="http://www.w3.org/2000/svg">
-						<path d="M4.34643 4L15.9997 16M3.99966 16L15.6529 4" stroke-width="1.5" />
-					</svg>
-				</button>
-			</div>
-		</div>
-	</div>
 	<script>
 		if ('object' === typeof wpcom_mobile_user_agent_info) {
 

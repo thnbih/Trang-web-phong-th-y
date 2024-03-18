@@ -1138,7 +1138,7 @@
         --wp--preset--color--theme-2: #EFEFEB;
         --wp--preset--color--theme-3: #FFDFD3;
         /* --wp--preset--color--theme-4: #D63D00; */
-        --wp--preset--color--theme-4: white;
+        --wp--preset--color--theme-4: rgb(220, 164, 164);
 
         --wp--preset--color--theme-5: #1A1A1A;
         --wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg, rgba(6, 147, 227, 1) 0%, rgb(155, 81, 224) 100%);
