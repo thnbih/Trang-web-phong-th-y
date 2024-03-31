@@ -1,5 +1,90 @@
 @charset "UTF-8";
 
+.full-width {
+  width: 100%; /* Thiết lập chiều rộng là 100% */
+}
+
+#chat-container {
+  flex: 1; /* Cửa sổ chat chiếm 1 phần */
+  overflow: hidden;
+}
+
+#control-buttons {
+  display: flex; /* Hiển thị các nút điều khiển theo chiều ngang */
+  justify-content: center; /* Căn giữa các nút điều khiển */
+  margin-top: 10px; /* Khoảng cách từ nút điều khiển đến cửa sổ chat */
+}
+
+#chat-container {
+  flex: 1; /* Cửa sổ chat chiếm 1 phần */
+  overflow-y: auto; /* Cho phép cuộn nếu nội dung vượt quá chiều cao */
+}
+
+#chat-container {
+  width: 300px; /* Điều chỉnh chiều rộng của cửa sổ chat */
+  height: 400px; /* Điều chỉnh chiều cao của cửa sổ chat */
+  border: 2px solid #ccc; /* Viền của cửa sổ chat */
+  border-radius: 5px; /* Bo tròn các góc */
+  overflow-y: scroll; /* Cho phép cuộn nếu nội dung vượt quá chiều cao */
+  margin-left: 20px; /* Canh lề bên trái */
+  padding: 10px; /* Khoảng cách giữa nội dung và biên */
+}
+
+#messages {
+  margin-bottom: 10px; /* Khoảng cách giữa tin nhắn và input */
+}
+
+#chat-container {
+  position: relative; /* Đặt vị trí tương đối */
+}
+
+#message-input {
+  position: absolute; /* Đặt vị trí tuyệt đối */
+  bottom: 10px; /* Đặt ở phía dưới cùng */
+  left: 10px; /* Đặt ở phía trái */
+  width: 120px; /* Điều chỉnh chiều rộng của input */
+}
+
+#send-button {
+  position: absolute; /* Đặt vị trí tuyệt đối */
+  bottom: 10px; /* Đặt ở phía dưới cùng */
+  right: 0px; /* Đặt ở phía phải */
+  width: 50px; /* Điều chỉnh chiều rộng của button */
+}
+
+
+#messages div {
+  margin-bottom: 5px; /* Khoảng cách giữa các tin nhắn */
+}
+
+
+
+#video-container {
+  width: 100%;
+  height: 100%;
+  max-width: 1000px; /* Adjust width as needed */
+  border: #020381;
+}
+
+button {
+  margin-right: 100px; /* Add margin between buttons */
+}
+
+.transparent-button {
+  background-color: transparent;
+  border: 2px solid #ff69b4; /* Màu viền button màu hồng */
+  color: #ff69b4; /* Màu chữ */
+  padding: 10px 20px; /* Điều chỉnh padding cho nút */
+  font-size: 16px; /* Điều chỉnh kích thước font */
+  cursor: pointer; /* Con trỏ chuột thành dạng bấm được */
+}
+
+.transparent-button:hover {
+  background-color: #ff69b4; /* Màu nền button khi hover */
+  color: white; /* Màu chữ khi hover */
+}
+
+
 /* <style id='wp-block-site-logo-inline-css'> */
 .wp-block-site-logo {
   box-sizing: border-box;
