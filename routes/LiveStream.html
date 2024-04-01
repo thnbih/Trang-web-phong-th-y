@@ -498,33 +498,36 @@
           </div>
           <div style="height:var(--wp--preset--spacing--20)" aria-hidden="true" class="wp-block-spacer"></div>
         </div>
-        <div
-          class="wp-block-group alignfull has-global-padding is-content-justification-center is-layout-constrained wp-container-core-group-is-layout-10 wp-block-group-is-layout-constrained"
+        <div class="wp-block-jetpack-contact-form is-style-animated"
           style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--20);padding-right:var(--wp--style--root--padding-right, var(--wp--custom--gap--horizontal));padding-bottom:var(--wp--preset--spacing--20);padding-left:var(--wp--style--root--padding-left, var(--wp--custom--gap--horizontal))">
-          <div class="container"  style="display: flex; justify-content: center;">
+          <div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"
+            style="display: flex; justify-content: center;">
             <div id="video-container" style="width: 100%; height: 100%; overflow: hidden; flex: 1">
               <video id="video" autoplay style="object-fit: cover; width: 100%; height: 100%;"></video>
             </div>
-          
-            <div id="chat-container">
+
+            <div id="chat-container" class="wp-block-jetpack-contact-form is-style-animated">
               <div id="messages"></div>
-              <input type="text" id="message-input" placeholder="Nhập nội dung chat...">
-              <button id="send-button">Gửi</button>
+              <input type="text" name="g25-thint" id="message-input" value class="grunion-field-wrap"
+                placeholder="Nhập nội dung chat..." style="border-radius: 5px; padding: 16px;" control-id="ControlID-3">
+              <label for="g25-thint" class="animated-label__label "></label>
+              <button id="send-button" class="wp-block-button__link"
+                style="margin-right: 0px; padding: 16px">Gửi</button>
             </div>
           </div>
-          
+
           <div id="control-buttons">
-            <button id="start-button" class="transparent-button">Start Live Stream</button>
-            <button id="stop-button" class="transparent-button">Stop Live Stream</button>
+            <button id="start-button" class="wp-block-button__link">Start Live Stream</button>
+            <button id="stop-button" class="wp-block-button__link" style="margin-right: 0px;">Stop Live Stream</button>
           </div>
 
           <script>
             const videoContainer = document.getElementById('video-container');
             const startButton = document.getElementById('start-button');
             const stopButton = document.getElementById('stop-button');
-          
+
             let stream;
-          
+
             async function startStream() {
               try {
                 stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
@@ -538,7 +541,7 @@
                 console.error('Error accessing camera:', err);
               }
             }
-          
+
             function stopStream() {
               if (stream) {
                 stream.getTracks().forEach(track => track.stop());
@@ -547,7 +550,7 @@
                 stopButton.disabled = true;
               }
             }
-          
+
             startButton.addEventListener('click', startStream);
             stopButton.addEventListener('click', stopStream);
           </script>
@@ -569,13 +572,13 @@
 
             sendButton.addEventListener('click', sendMessage);
 
-            messageInput.addEventListener('keypress', function(e) {
+            messageInput.addEventListener('keypress', function (e) {
               if (e.key === 'Enter') {
                 sendMessage();
               }
             });
           </script>
-          <div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+          <!-- <div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div> -->
         </div>
       </div>
     </main>
@@ -1065,7 +1068,7 @@
       }
     }
   </script>
-  
+
 
 </body>
 

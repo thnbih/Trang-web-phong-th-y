@@ -36,6 +36,14 @@ app.get('/lien-he', (req, res) => {
     return res.status(200).sendFile(path.resolve(__dirname, './routes/LienHe.html'));
 });
 
+app.get('/login', (req, res) => {
+    return res.status(200).sendFile(path.resolve(__dirname, './public/login.html'));
+});
+
+app.get('/signup', (req, res) => {
+    return res.status(200).sendFile(path.resolve(__dirname, './public/signup.html'));
+});
+
 app.listen(5000, () => {
     console.log('Server is running on port 5000');
 });
