@@ -1,0 +1,63 @@
+.baiVietBlog3 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .flexWrapperOne {
+    display: flex;
+    align-items: flex-start;
+    &:not(:last-of-type) {
+      margin-bottom: 18px;
+    }
+  }
+  .paintTall2 {
+    width: 31.68%;
+    align-self: stretch;
+    object-fit: cover;
+    &:not(:last-of-type) {
+      margin-right: 32px;
+    }
+  }
+  .flexWrapperTwo {
+    margin-bottom: 13px;
+    display: flex;
+    align-items: flex-start;
+  }
+  .collaborationMagic {
+    width: 24.14%;
+    font-family: "Fjalla One";
+    font-size: 32px;
+    font-weight: 400;
+    line-height: normal;
+    color: $light-pink;
+    align-self: stretch;
+    margin-right: 166px;
+  }
+  .teamworkTriumphs {
+    width: 23.62%;
+    font-family: "Fjalla One";
+    font-size: 32px;
+    font-weight: 400;
+    line-height: normal;
+    color: $light-pink;
+    align-self: stretch;
+    margin-right: 172px;
+  }
+  .adaptiveAdvantage {
+    width: 22.56%;
+    font-family: "Fjalla One";
+    font-size: 32px;
+    font-weight: 400;
+    line-height: normal;
+    color: $light-pink;
+    align-self: stretch;
+  }
+  .num9ThangBa2024 {
+    width: 16.87%;
+    color: $light-pink;
+    align-self: stretch;
+    @include libre-baskerville-20-regular;
+    &:not(:last-of-type) {
+      margin-right: 262px;
+    }
+  }

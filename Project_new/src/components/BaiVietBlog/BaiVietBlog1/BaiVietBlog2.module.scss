@@ -1,0 +1,63 @@
+.baiVietBlog2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .flexWrapperOne {
+    display: flex;
+    align-items: flex-start;
+    &:not(:last-of-type) {
+      margin-bottom: 16px;
+    }
+  }
+  .paintTall2 {
+    width: 31.68%;
+    align-self: stretch;
+    object-fit: cover;
+    &:not(:last-of-type) {
+      margin-right: 32px;
+    }
+  }
+  .flexWrapperTwo {
+    margin-bottom: 9px;
+    display: flex;
+    align-items: flex-start;
+  }
+  .theArtOfConnect {
+    width: 22.13%;
+    font-family: "Fjalla One";
+    font-size: 32px;
+    font-weight: 400;
+    line-height: normal;
+    color: $light-pink;
+    align-self: stretch;
+    margin-right: 194px;
+  }
+  .beyondTheObstacle {
+    width: 24.1%;
+    font-family: "Fjalla One";
+    font-size: 32px;
+    font-weight: 400;
+    line-height: normal;
+    color: $light-pink;
+    align-self: stretch;
+    margin-right: 172px;
+  }
+  .growthUnlocked {
+    width: 20.97%;
+    font-family: "Fjalla One";
+    font-size: 32px;
+    font-weight: 400;
+    line-height: normal;
+    color: $light-pink;
+    align-self: stretch;
+  }
+  .num9ThangBa2024 {
+    width: 16.87%;
+    color: $light-pink;
+    align-self: stretch;
+    @include libre-baskerville-20-regular;
+    &:not(:last-of-type) {
+      margin-right: 262px;
+    }
+  }

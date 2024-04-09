@@ -1,0 +1,24 @@
+.dichVu1 {
+    padding: 0 1100px 36px 0;
+  }
+  .welcomeToAWorldOfLimitlessPossibil {
+    height: 100%;
+    width: 66.43%;
+    font-family: "Libre Baskerville";
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 35px;
+    color: $light-pink;
+    display: flex;
+    position: absolute;
+    right: -4px;
+    top: 0;
+  }
+  .dchV {
+    height: 100%;
+    width: 100%;
+    color: $light-pink;
+    display: flex;
+    text-align: center;
+    @include fjalla-one-55-regular;
+  }
