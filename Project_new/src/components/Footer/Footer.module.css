@@ -1,0 +1,39 @@
+.footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    bottom:0;
+}
+.Name-page{
+    display: flex;
+    color: white;
+}
+.Product{
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+h3{
+    border: none;
+}
+
+.Service{
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+.Information{
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+.Help{
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+li{
+    padding-top: 5px;
+    text-align: left;
+}
