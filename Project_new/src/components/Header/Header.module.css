@@ -1,0 +1,97 @@
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .Logo{
+        display: flex;
+        margin-left: 20px;
+    }
+
+    .Menu{
+        display: flex;
+    }
+
+  .logo {
+    width: 40px;
+    align-self: stretch;
+    margin-right: 9px;
+    border-radius: 550px;
+    object-fit: cover;
+  }
+  .anNhien {
+    height: 34.63%;
+    width: 140px;
+    color: white;
+    display: flex;
+    margin-right: 45px;
+    text-decoration: none;
+    margin-top: 10px;
+  }
+  .dchV {
+    width: 100px;
+    height: 34.63%;
+    color: white;
+    text-align: center;
+    margin-right: 10px;    
+    text-decoration: none;
+  }
+  .dchV:hover{
+    background-color: rgba(236, 168, 145, 0.2);
+    border-radius: 15%;
+  }
+
+  .baiVitBlog {
+    width: 100px;
+    height: 34.63%;
+    color: white;
+    text-align: center;
+    margin-right: 10px;
+    text-decoration: none;
+  }
+  .baiVitBlog:hover{
+    background-color: rgba(236, 168, 145, 0.2);
+    border-radius: 15%;
+  }
+
+  .caHang {
+    width: 100px;
+    height: 34.63%;
+    color: white;
+    text-align: center;
+    margin-right: 10px; 
+    text-decoration: none;   
+  }
+  .caHang:hover{
+    background-color: rgba(236, 168, 145, 0.2);
+    border-radius: 15%;
+  }
+
+
+  .liveStream {
+    width: 100px;
+    height: 34.63%;
+    color: white;
+    text-align: center;
+    margin-right: 10px;  
+    text-decoration: none;  
+  }
+  .liveStream:hover{
+    background-color: rgba(236, 168, 145, 0.2);
+    border-radius: 15%;
+  }
+
+  .taiKhon {
+    height: 34.63%;
+    width: 100px;
+    color: white;
+    text-align: center;
+    margin-right: 10px;
+    border-radius: 15%;
+    text-decoration: none;
+  }
+  .taiKhon:hover{
+    background-color: rgba(236, 168, 145, 0.2);
+    border-radius: 15%;
+  }
