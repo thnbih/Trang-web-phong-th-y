@@ -1,0 +1,58 @@
+.group5 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .group4 {
+    margin-bottom: 27px;
+    margin-left: 112px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .theoDoi {
+    height: 57.02%;
+    width: 64.44%;
+    color: $light-pink;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 17px;
+    @include fjalla-one-55-regular;
+  }
+  .enterYourEmailBelowToReceiveUpdate {
+    height: 28.93%;
+    color: $light-pink;
+    align-self: stretch;
+    display: flex;
+    text-align: center;
+    @include libre-baskerville-24-regular;
+  }
+  .frame1 {
+    padding: 3px 0 0;
+    display: flex;
+    align-items: flex-start;
+  }
+  .group3 {
+    display: flex;
+    align-items: flex-start;
+  }
+  .rectangle8 {
+    width: 79.06%;
+    background-color: $transparent-white-2;
+    margin-right: 11px;
+    align-self: stretch;
+  }
+  .group2 {
+    background-color: $light-pink;
+    padding: 18px 29px 17px 28px;
+    display: flex;
+    align-items: center;
+  }
+  .subcribe {
+    color: $linen;
+    flex: 1;
+    align-self: stretch;
+    text-align: center;
+    @include libre-baskerville-24-regular;
+  }
