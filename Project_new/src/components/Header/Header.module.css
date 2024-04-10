@@ -29,18 +29,6 @@
     text-decoration: none;
     margin-top: 10px;
   }
-  .dchV {
-    width: 100px;
-    height: 34.63%;
-    color: white;
-    text-align: center;
-    margin-right: 10px;    
-    text-decoration: none;
-  }
-  .dchV:hover{
-    background-color: rgba(236, 168, 145, 0.2);
-    border-radius: 15%;
-  }
 
   .dropdown {
     position: relative;
@@ -69,59 +57,57 @@
   }
 
 
-
-
-
-  .baiVitBlog {
-    width: 100px;
-    height: 34.63%;
-    color: white;
-    text-align: center;
-    margin-right: 10px;
+  nav{
+    position: relative;
+    width: 700px;
+    height: 50px;
+    background:rgba(236, 168, 145, 0.2);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  nav a{
+    position: relative;
+    display: inline-block;
+    font-size: 1em;
+    font-weight: 500;
     text-decoration: none;
-  }
-  .baiVitBlog:hover{
-    background-color: rgba(236, 168, 145, 0.2);
-    border-radius: 15%;
-  }
-
-  .caHang {
-    width: 100px;
-    height: 34.63%;
+    padding: 0 23px;
+    z-index: 1;
     color: white;
-    text-align: center;
-    margin-right: 10px; 
-    text-decoration: none;   
   }
-  .caHang:hover{
-    background-color: rgba(236, 168, 145, 0.2);
-    border-radius: 15%;
+  nav span{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 100%;
+    background: linear-gradient(45deg, #534646, #a10b0b);
+    transition: 0.5s;
+    border-radius: 5px;
   }
 
-
-  .liveStream {
+  nav a:nth-child(1):hover~span{
+    left: 0;
+  }
+  nav a:nth-child(2):hover~span{
+    left: 125px;
+    width: 150px;
+  }
+  nav a:nth-child(3):hover~span{
+    left: 260px;
+    width: 120px;
+  }
+  nav a:nth-child(4):hover~span{
+    left: 375px;
+    width: 120px;
+  }
+  nav a:nth-child(5):hover~span{
+    left: 485px;
+    width: 110px;
+  }
+  nav a:nth-child(6):hover~span{
+    left: 590px;
     width: 100px;
-    height: 34.63%;
-    color: white;
-    text-align: center;
-    margin-right: 10px;  
-    text-decoration: none;  
-  }
-  .liveStream:hover{
-    background-color: rgba(236, 168, 145, 0.2);
-    border-radius: 15%;
-  }
-
-  .taiKhon {
-    height: 34.63%;
-    width: 100px;
-    color: white;
-    text-align: center;
-    margin-right: 10px;
-    border-radius: 15%;
-    text-decoration: none;
-  }
-  .taiKhon:hover{
-    background-color: rgba(236, 168, 145, 0.2);
-    border-radius: 15%;
   }
