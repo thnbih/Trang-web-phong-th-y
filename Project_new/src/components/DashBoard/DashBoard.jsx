@@ -50,10 +50,7 @@ function DashBoard() {
 
             <div className={styles['DashBoard3']}>
                 <h2>Cua hang</h2>
-                <p className={styles['name-store']}>Navigating life’s intricate fabric, choices unfold
-        paths to the extraordinary, demanding creativity,
-        curiosity, and courage for a truly fulfilling
-        journey.</p>
+                <p className={styles['name-store']}>Navigating life’s intricate fabric, choices unfold paths to the extraordinary, demanding creativity curiosity, and courage for a truly fulfilling journey.</p>
                 <div className={styles['button-store']}>
                     <p className={styles['text-button-store']}>Bat dau</p>
                 </div>

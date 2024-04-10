@@ -10,7 +10,14 @@ function Header() {
                 <a className={styles.anNhien} href='#'>An Nhiên</a>
             </div>
             <div className={styles['Menu']}>
-                <a className={styles.dchV} href="#">Dịch vụ</a>
+                    <div className={styles.dropdown}>
+                        <a className={styles.dchV} href="#">Dịch vụ</a>
+                        <div className={styles.dropdownContent}>
+                            <a href="#">Option 1</a>
+                            <a href="#">Option 2</a>
+                            <a href="#">Option 3</a>
+                        </div>
+                    </div>
                 <a className={styles.baiVitBlog} href='#'>Bài viết blog</a>
                 <a className={styles.caHang} href='#'>Cửa hàng</a>
                 <a className={styles.liveStream} href='#'>LiveStream</a>
