@@ -1,0 +1,91 @@
+.BigDashBoard{
+    padding-top: 10px;
+}
+
+.DashBoard1{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.DashBoard2{
+    padding-top: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.DashBoard3{
+    margin-top: 100px;
+    background-size: 100% 100%;
+    background-position: center;
+    background-image: url("https://static.overlay-tech.com/assets/06e9080b-50ea-4c25-982c-910257bd35a5.png");
+    padding: 100px 515px 76px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.DashBoard4{
+    padding-top: 80px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 200px;
+}
+
+.mini-container1{
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+.mini-container2{
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.name-store{
+    height: 49.44%;
+    color: black;
+    align-self: stretch;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.button-store{
+    background-color: pink;
+    padding: 23px 20px 22px 20px; 
+    display: flex;
+    align-items: center;
+}
+
+.button-store:hover{
+    background-color: aqua;
+}
+
+.text-button-store{
+    color: black;
+    flex: 1;
+    align-self: stretch;
+    text-align: center;
+}
+
+.comment{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+h1{
+    color: white;
+}
+h2{
+    margin-bottom: 0;
+}
+
+p{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.img{
+    width: 100%;
+    align-self: stretch;
+    object-fit: cover;
+}
