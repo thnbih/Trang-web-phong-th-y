@@ -10,7 +10,6 @@ function App() {
       <header><Header/></header>
 
       <div><BoiBaiTarot/></div>
-      <div><DashBoard/></div>
       <div>
         <Footer/>
       </div>
