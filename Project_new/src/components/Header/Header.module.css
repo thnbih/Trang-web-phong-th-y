@@ -2,6 +2,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        padding-top: 10px;
     }
 
     .Logo{
@@ -38,7 +39,7 @@
   .dropdownContent {
       display: none;
       position: absolute;
-      background-color: #cf9494;
+      background-color: red;
       min-width: 160px;
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
       z-index: 1;
@@ -46,7 +47,7 @@
   }
 
   .dropdownContent a {
-      color: black;
+      color: white;
       padding: 12px 16px;
       text-decoration: none;
       display: block;
@@ -59,8 +60,8 @@
 
   nav{
     position: relative;
-    width: 700px;
-    height: 50px;
+    width: 675px;
+    height: 30px;
     background:rgba(236, 168, 145, 0.2);
     border-radius: 8px;
     display: flex;
@@ -73,7 +74,7 @@
     font-size: 1em;
     font-weight: 500;
     text-decoration: none;
-    padding: 0 23px;
+    padding: 0 20px;
     z-index: 1;
     color: white;
   }
@@ -83,8 +84,8 @@
     left: 0;
     width: 120px;
     height: 100%;
-    background: linear-gradient(45deg, #534646, #a10b0b);
-    transition: 0.5s;
+    background-color: coral;
+    transition: 0.25s;
     border-radius: 5px;
   }
 
