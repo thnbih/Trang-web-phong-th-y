@@ -1,0 +1,1 @@
+export {default} from './BoiBai52La'
