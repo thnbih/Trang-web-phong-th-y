@@ -1,8 +1,9 @@
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 10px;
+    }
 
 .Logo {
   display: flex;
@@ -31,6 +32,7 @@
   margin-top: 10px;
 }
 
+<<<<<<< HEAD
 .dropdown {
   position: relative;
   display: inline-block;
@@ -45,6 +47,24 @@
   z-index: 1;
   border-radius: 10%;
 }
+=======
+  .dropdownContent {
+      display: none;
+      position: absolute;
+      background-color: red;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 10%;
+  }
+
+  .dropdownContent a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+  }
+>>>>>>> 9e27120f7096ba6da9fe38d12372bc85d0d0165e
 
 .dropdownContent a {
   color: black;
@@ -58,6 +78,7 @@
 }
 
 
+<<<<<<< HEAD
 nav {
   position: relative;
   width: 700px;
@@ -68,6 +89,38 @@ nav {
   justify-content: center;
   align-items: center;
 }
+=======
+  nav{
+    position: relative;
+    width: 675px;
+    height: 30px;
+    background:rgba(236, 168, 145, 0.2);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  nav a{
+    position: relative;
+    display: inline-block;
+    font-size: 1em;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0 20px;
+    z-index: 1;
+    color: white;
+  }
+  nav span{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 100%;
+    background-color: coral;
+    transition: 0.25s;
+    border-radius: 5px;
+  }
+>>>>>>> 9e27120f7096ba6da9fe38d12372bc85d0d0165e
 
 nav a {
   position: relative;
