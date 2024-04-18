@@ -9,7 +9,7 @@ function App() {
       <header><Header/></header>
 
       <div><DashBoard/></div>
-      
+
       <div>
         <Footer/>
       </div>
