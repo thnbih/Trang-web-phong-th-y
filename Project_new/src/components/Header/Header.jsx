@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import styles from './Header.module.css';
 
-function Header() {
+function Header({ onNavLinkClick }) {
   const [showNav, setShowNav] = useState(false);
 
   const toggleNav = () => {
     setShowNav(!showNav);
+  };
+
+  const handleNavLinkClick = (componentName) => {
+    onNavLinkClick(componentName);
+    setShowNav(false);
   };
 
   return (
@@ -17,7 +22,7 @@ function Header() {
             className={styles.logo}
             src="https://static.overlay-tech.com/assets/9b8f6e55-f5d0-42d0-b508-be81c2425e2f.png"
           />
-          <a className={styles.anNhien} href="#">
+          <a className={styles.anNhien} href="#" onClick={() => handleNavLinkClick('Dashboard')}>
             An Nhiên
           </a>
         </div>
@@ -26,18 +31,36 @@ function Header() {
         </button>
         <nav className={`${showNav ? styles.show : ''}`}>
           <div className={styles.dropdown}>
-            <a href="#">Dịch vụ</a>
+            <a href="#" onClick={() => handleNavLinkClick('BoiBaiTarot')}>
+              Dịch vụ
+            </a>
             <div className={styles.dropdownContent}>
-              <a href="#">Bói bài tây</a>
-              <a href="#">Tarot</a>
-              <a href="#">Xem ngày sinh</a>
+              <a href="#" onClick={() => handleNavLinkClick('BoiBaiTarot')}>
+                Bói bài tây
+              </a>
+              <a href="#" onClick={() => handleNavLinkClick('Tarot')}>
+                Tarot
+              </a>
+              <a href="#" onClick={() => handleNavLinkClick('BoiNgaySinh')}>
+                Xem ngày sinh
+              </a>
             </div>
           </div>
-          <a href="#">Bài viết blog</a>
-          <a href="#">Cửa hàng</a>
-          <a href="#">LiveStream</a>
-          <a href="#">Liên hệ</a>
-          <a href="#">Tài khoản</a>
+          <a href="#" onClick={() => handleNavLinkClick('Blog')}>
+            Bài viết blog
+          </a>
+          <a href="#" onClick={() => handleNavLinkClick('Store')}>
+            Cửa hàng
+          </a>
+          <a href="#" onClick={() => handleNavLinkClick('LiveStream')}>
+            LiveStream
+          </a>
+          <a href="#" onClick={() => handleNavLinkClick('Contact')}>
+            Liên hệ
+          </a>
+          <a href="#" onClick={() => handleNavLinkClick('Account')}>
+            Tài khoản
+          </a>
         </nav>
       </div>
     </>
