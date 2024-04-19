@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './BoiBaiTarot.module.css';
 
 function BoiBaiTarot() {
-    const [flipped, setFlipped] = useState(false);
+    const [flipped, setFlipped] = useState(true);
 
     const flipCard = () => {
         setFlipped(!flipped);
