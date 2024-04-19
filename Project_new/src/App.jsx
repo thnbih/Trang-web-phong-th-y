@@ -4,6 +4,7 @@ import Footer from './components/Footer'
 import DashBoard from './components/DashBoard'
 import BoiBaiTarot from './components/BoiBaiTarot/BoiBaiTarot'
 import BoiBai52La from './components/BoiBai52La'
+import BoiNgaySinh from './components/BoiNgaySinh'
 import './App.css'
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
 
       <div><BoiBaiTarot/></div>
       <div><BoiBai52La/></div>
+      <div><BoiNgaySinh/></div>
       <div>
         <Footer/>
       </div>

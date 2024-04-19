@@ -1,0 +1,121 @@
+/* Heder */
+.Header {
+    margin-top: 25px;
+}
+
+.Header-container{
+    display: flex;
+}
+
+.Header .Header-title{
+    width: 1000px;
+}
+
+.Header .Header-title h1{
+    display: block;
+    height: auto;
+    font-size: 39.4827px;
+    font-weight: 800;
+    color: #FAACA8;
+    font-family: var(--wp--preset--font-family--fjalla-one);
+}
+
+.Header .Header-text p{
+    display: block;
+    text-align: left;
+    margin: 26.4534px 0px;
+    color: #FAACA8;
+    font-size: 25px;
+    font-weight: 200;
+    font-family: var(--wp--preset--font-family--libre-baskerville);
+}
+/* End Header */
+
+/* Body */
+.Body {
+    margin-top: 50px;
+}
+
+.Body .Guide-text {
+    display: block;
+    text-align: center;
+    color: #FAACA8;
+    font-size: 25px;
+    font-weight: 500;
+    font-family: var(--wp--preset--font-family--libre-baskerville);
+}
+
+.Body .Input-area {
+    display: block;
+    margin: 25px;
+}
+
+.Body .Input-area ul {
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.Body .Input-area li {
+    margin: 0px;
+    width: 250px;
+}
+
+.Body .Input-area .input-container {
+    text-align: center;
+}
+
+.Body .input-text {
+    align-items: center;
+}
+
+.Body .input-text p{
+    text-align: center;
+    color: #FAACA8;
+    font-size: 25px;
+    font-weight: 500;
+    font-family: var(--wp--preset--font-family--libre-baskerville);
+}
+
+.Body .input-area {
+    margin-top: 20px;
+    align-items: center;
+}
+
+.Body .Button-area {
+    display: flex;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    justify-content: center;
+}
+
+.Body .Button-area button{
+    background-color: #FAACA8;
+    width: 150px;
+    height: 45px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.Body .Button-area p{
+    color: #EFEFEB;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.Body .select {
+    width: 100px;
+    height: 35px;
+    color: #FAACA8;
+    font-family: var(--wp--preset--font-family--josefin-sans);
+    font-size: 20px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 2px solid #FAACA8;
+
+}
+/* End Body */
