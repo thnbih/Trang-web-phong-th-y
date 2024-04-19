@@ -28,7 +28,7 @@ function BoiNgaySinh() {
                     </div>
                 </div>
 
-                <div className={styles['Body']}>
+                <form className={styles['Body']}>
                     <div className={styles['Guide-text']}>
                         <p>Hãy cho chúng mình biết thông tin của bạn!</p>
                     </div>
@@ -40,7 +40,7 @@ function BoiNgaySinh() {
                                         <p>Ngày</p>
                                     </div>
                                     <div className={styles['input-area']}>
-                                        <select className={styles['select']} size={1}>
+                                        <select className={styles['select']} name="day" size={1}>
                                             {Array.from({ length: 30 }, (_, index) => (
                                                 <option key={index + 1} value={index + 1}>
                                                     {index + 1}
@@ -56,7 +56,7 @@ function BoiNgaySinh() {
                                         <p>Tháng</p>
                                     </div>
                                     <div className={styles['input-area']}>
-                                        <select className={styles['select']} size={1}>
+                                        <select className={styles['select']} name="month" size={1}>
                                             {Array.from({ length: 12 }, (_, index) => (
                                                 <option key={index + 1} value={index + 1}>
                                                     {index + 1}
@@ -72,7 +72,7 @@ function BoiNgaySinh() {
                                         <p>Năm</p>
                                     </div>
                                     <div className={styles['input-area']}>
-                                        <select className={styles['select']} size={1}>
+                                        <select className={styles['select']} name="year" size={1}>
                                             {Array.from({ length: 80 }, (_, index) => (
                                                 <option key={index + 1950} value={index + 1950}>
                                                     {index + 1950}
@@ -85,11 +85,11 @@ function BoiNgaySinh() {
                         </ul>
                     </div>
                     <div className={styles['Button-area']}>
-                        <button>
+                        <button type="submit">
                             <p>Xem ngay</p>
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
         </>
     );
