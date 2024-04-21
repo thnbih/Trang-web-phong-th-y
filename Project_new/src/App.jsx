@@ -21,7 +21,7 @@ function App() {
         return <DashBoard />;
       case 'BoiBaiTarot':
         return <BoiBaiTarot />;
-      case 'Tarot':
+      case 'BaiTay':
         return <BoiBai52La />;
       case 'BoiNgaySinh':
         return <BoiNgaySinh />;

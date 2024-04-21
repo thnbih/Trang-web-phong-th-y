@@ -27,25 +27,12 @@ function Header({ onNavLinkClick }) {
           </a>
         </div>
         <button className={styles.navToggle} onClick={toggleNav}>
-          {showNav ? 'Hide Menu' : 'Show Menu'}
+          Menu
         </button>
         <nav className={`${showNav ? styles.show : ''}`}>
-          <div className={styles.dropdown}>
-            <a href="#" onClick={() => handleNavLinkClick('BoiBaiTarot')}>
-              Dịch vụ
-            </a>
-            <div className={styles.dropdownContent}>
-              <a href="#" onClick={() => handleNavLinkClick('BoiBaiTarot')}>
-                Bói bài tây
-              </a>
-              <a href="#" onClick={() => handleNavLinkClick('Tarot')}>
-                Tarot
-              </a>
-              <a href="#" onClick={() => handleNavLinkClick('BoiNgaySinh')}>
-                Xem ngày sinh
-              </a>
-            </div>
-          </div>
+          <a href="#" onClick={() => handleNavLinkClick('BoiBaiTarot')}>
+            Dịch vụ
+          </a>
           <a href="#" onClick={() => handleNavLinkClick('BaiVietBlog')}>
             Bài viết blog
           </a>
@@ -62,6 +49,28 @@ function Header({ onNavLinkClick }) {
             Tài khoản
           </a>
         </nav>
+      </div>
+
+      <div className={`${styles.fullScreenNav} ${showNav ? styles.show : ''}`}>
+      <button className={styles.closeButton} onClick={toggleNav}>X</button>
+        <a href="#" onClick={() => handleNavLinkClick('BoiBaiTarot')}>
+          Dịch vụ
+        </a>
+        <a href="#" onClick={() => handleNavLinkClick('BaiVietBlog')}>
+          Bài viết blog
+        </a>
+        <a href="#" onClick={() => handleNavLinkClick('Store')}>
+          Cửa hàng
+        </a>
+        <a href="#" onClick={() => handleNavLinkClick('LiveStream')}>
+          LiveStream
+        </a>
+        <a href="#" onClick={() => handleNavLinkClick('Contact')}>
+          Liên hệ
+        </a>
+        <a href="#" onClick={() => handleNavLinkClick('Account')}>
+          Tài khoản
+        </a>
       </div>
     </>
   );

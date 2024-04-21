@@ -89,3 +89,57 @@ p{
     align-self: stretch;
     object-fit: cover;
 }
+
+
+/* Media query for tablets and smaller screens */
+@media (max-width: 768px) {
+    .BigDashBoard {
+        padding-top: 5px;
+    }
+
+    .DashBoard1,
+    .DashBoard2,
+    .DashBoard3,
+    .DashBoard4 {
+        flex-direction: column;
+    }
+
+    .DashBoard3 {
+        padding: 50px 20px;
+    }
+
+    .mini-container1 {
+        margin-bottom: 20px;
+    }
+
+    .button-store {
+        padding: 15px 10px;
+    }
+
+    .comment {
+        flex-direction: column;
+    }
+}
+
+/* Media query for mobile screens */
+@media (max-width: 480px) {
+    .BigDashBoard {
+        padding-top: 2px;
+    }
+
+    .DashBoard3 {
+        padding: 30px 10px;
+    }
+
+    .name-store {
+        font-size: 14px;
+    }
+
+    .text-button-store {
+        font-size: 14px;
+    }
+
+    .comment {
+        margin-top: 20px;
+    }
+}
