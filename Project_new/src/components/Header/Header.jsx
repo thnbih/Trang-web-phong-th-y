@@ -46,7 +46,7 @@ function Header({ onNavLinkClick }) {
               </a>
             </div>
           </div>
-          <a href="#" onClick={() => handleNavLinkClick('Blog')}>
+          <a href="#" onClick={() => handleNavLinkClick('BaiVietBlog')}>
             Bài viết blog
           </a>
           <a href="#" onClick={() => handleNavLinkClick('Store')}>

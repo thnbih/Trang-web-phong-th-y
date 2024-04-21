@@ -1,0 +1,134 @@
+/* HeaderBlog */
+.HeaderBlog{
+  margin-top: 50px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.HeaderBlog .header-title{
+  display:block;
+  padding-left: 100px;
+  padding-top: 0px;
+}
+
+.HeaderBlog .header-desc{
+  display: inline-block;
+  padding: 10px;
+  width: 950px;
+  margin-left: 550px;
+}
+
+.HeaderBlog .header-title h1{
+  font-size: 65px;
+  color: #FAACA8;
+}
+
+.HeaderBlog .header-desc p{
+  font-size: 20px;
+  color: #FAACA8;
+}
+
+/*  End HeaderBlog */
+
+
+/* Section-one */
+.section-one{
+  margin-top: 30px;
+  display: flex;
+  margin-left: 0px;
+}
+
+.section-one .list-item{
+  margin-left: 0px;
+}
+
+.section-one .list-item ul{
+  list-style-type: none;
+}
+
+.section-one .list-item li{
+  display: inline-block;
+  margin: 0;
+}
+
+.section-one .container .images{
+  object-fit: cover;
+  width: 345px;
+}
+
+.section-one .container .inner-desc{
+  margin: 0;
+  padding: 0;
+}
+
+.section-one .container .inner-desc .title{
+  margin: 0;
+  padding: 0;
+}
+
+.section-one .container .inner-desc .title h1{
+  color: #FAACA8;
+  margin: 10px 0;
+  font-size: 25px;
+}
+
+.section-one .container .inner-desc .desc{
+  padding: 0;
+  margin: 0;
+}
+
+.section-one .container .inner-desc .desc p{
+  color: #FAACA8;
+  font-size: 20px;
+}
+
+/* End Section-one */
+
+/* Section-two */
+.section-two{
+  margin: 90px 200px;
+}
+
+.section-two .header{
+  padding-top: 60px;
+  padding-left: 350px;
+}
+
+.section-two .header h1{
+  color: #FAACA8;
+  font-size: 40px;
+}
+
+.section-two .desc{
+  padding-left: 250px;
+}
+
+.section-two .desc p{
+  color: #FAACA8;
+  font-size: 25px;
+}
+
+.section-two .button_text{
+  padding-left: 110px;
+  padding-top: 30px;
+}
+
+.section-two .button_text .text-input input{
+  color:#FAACA8;
+  background: linear-gradient(rgba(100, 96, 96, 0.5), rgba(111, 107, 107, 0.5));
+  background-size: cover;
+  font-size: 22px;
+  width: 450px;
+  height: 40px;
+  margin-right: 40px;
+}
+
+.section-two .button_text .text-input button{
+  background-color:#FAACA8;
+  width: 140px;
+  height: 45px;
+  font-size: 20px;
+  color: white;
+}
+
+/* End Section-two */

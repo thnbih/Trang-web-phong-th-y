@@ -5,6 +5,7 @@ import DashBoard from './components/DashBoard';
 import BoiBaiTarot from './components/BoiBaiTarot/BoiBaiTarot';
 import BoiBai52La from './components/BoiBai52La';
 import BoiNgaySinh from './components/BoiNgaySinh';
+import BaiVietBlog from './components/BaiVietBlog';
 import './App.css';
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
         return <BoiBai52La />;
       case 'BoiNgaySinh':
         return <BoiNgaySinh />;
+      case 'BaiVietBlog':
+        return <BaiVietBlog />
       // Add cases for other components as needed
       default:
         return <DashBoard />;
