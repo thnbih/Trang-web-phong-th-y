@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import styles from './SignUp.module.css';
 
 function SignUp() {
@@ -17,14 +19,32 @@ function SignUp() {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Send form data to backend or perform other actions
+        if (formData.password !== formData.confirmPassword) {
+            alert('Passwords do not match');
+            return;
+        }
+
+        try {
+            // Send form data to server-side API
+            const response = await axios.post('/api/register', {
+                username: formData.username,
+                password: formData.password
+            });
+
+            // Handle successful registration
+            console.log(response.data);
+        } catch (error) {
+            // Handle registration error
+            console.error(error);
+        }
+
         console.log(formData);
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={styles.label}>
             <label htmlFor="username">Username:</label>
             <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} required/><br/><br/>
 
@@ -38,6 +58,9 @@ function SignUp() {
             <input type="password" id="confirmPassword" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required/><br/><br/>
 
             <input type="submit" value="Register"/>
+            <Link to="/login">
+                <button>Go to Login</button>
+            </Link>
         </form>
     );
 }

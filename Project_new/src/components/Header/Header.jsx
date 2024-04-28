@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 
-function Header({ onNavLinkClick }) {
+function Header() {
   const [showNav, setShowNav] = useState(false);
 
   const toggleNav = () => {
     setShowNav(!showNav);
-  };
-
-  const handleNavLinkClick = (componentName) => {
-    onNavLinkClick(componentName);
-    setShowNav(false);
   };
 
   return (
@@ -22,55 +18,29 @@ function Header({ onNavLinkClick }) {
             className={styles.logo}
             src="https://static.overlay-tech.com/assets/9b8f6e55-f5d0-42d0-b508-be81c2425e2f.png"
           />
-          <a className={styles.anNhien} href="#" onClick={() => handleNavLinkClick('Dashboard')}>
+          <Link className={styles.anNhien} to="/">
             An Nhiên
-          </a>
+          </Link>
         </div>
         <button className={styles.navToggle} onClick={toggleNav}>
           Menu
         </button>
         <nav className={`${showNav ? styles.show : ''}`}>
-          <a href="#" onClick={() => handleNavLinkClick('BoiBaiTarot')}>
-            Dịch vụ
-          </a>
-          <a href="#" onClick={() => handleNavLinkClick('BaiVietBlog')}>
-            Bài viết blog
-          </a>
-          <a href="#" onClick={() => handleNavLinkClick('Store')}>
-            Cửa hàng
-          </a>
-          <a href="#" onClick={() => handleNavLinkClick('LiveStream')}>
-            LiveStream
-          </a>
-          <a href="#" onClick={() => handleNavLinkClick('Contact')}>
-            Liên hệ
-          </a>
-          <a href="#" onClick={() => handleNavLinkClick('Account')}>
-            Tài khoản
-          </a>
+          <Link to="/boi-bai-52-la">Bói Bài 52 Lá</Link>
+          <Link to="/boi-bai-tay">Bói Bài Tây</Link>
+          <Link to="/boi-ngay-sinh">Bói Ngày Sinh</Link>
+          <Link to="/livestream">LiveStream</Link>
+          <Link to="/tai-khoan">Tài khoản</Link>
         </nav>
       </div>
 
       <div className={`${styles.fullScreenNav} ${showNav ? styles.show : ''}`}>
-      <button className={styles.closeButton} onClick={toggleNav}>X</button>
-        <a href="#" onClick={() => handleNavLinkClick('BoiBaiTarot')}>
-          Dịch vụ
-        </a>
-        <a href="#" onClick={() => handleNavLinkClick('BaiVietBlog')}>
-          Bài viết blog
-        </a>
-        <a href="#" onClick={() => handleNavLinkClick('Store')}>
-          Cửa hàng
-        </a>
-        <a href="#" onClick={() => handleNavLinkClick('LiveStream')}>
-          LiveStream
-        </a>
-        <a href="#" onClick={() => handleNavLinkClick('Contact')}>
-          Liên hệ
-        </a>
-        <a href="#" onClick={() => handleNavLinkClick('Account')}>
-          Tài khoản
-        </a>
+        <button className={styles.closeButton} onClick={toggleNav}>X</button>
+        <Link to="/boi-bai-52-la">Bói Bài 52 Lá</Link>
+        <Link to="/boi-bai-tay">Bói Bài Tây</Link>
+        <Link to="/boi-ngay-sinh">Bói Ngày Sinh</Link>
+        <Link to="/livestream">LiveStream</Link>
+        <Link to="/tai-khoan">Tài khoản</Link>
       </div>
     </>
   );

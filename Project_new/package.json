@@ -7,13 +7,19 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "startS": "nodemon server.cjs"
   },
   "dependencies": {
-    "openai": "^4.37.1",
+    "axios": "^1.6.8",
+    "bcrypt": "^5.1.1",
     "express": "^4.19.2",
+    "mongodb": "^6.5.0",
+    "nodemon": "^3.1.0",
+    "openai": "^4.37.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.23.0",
     "serve-static": "^1.15.0"
   },
   "devDependencies": {
