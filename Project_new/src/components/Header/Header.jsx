@@ -27,7 +27,7 @@ function Header() {
         </button>
         <nav className={`${showNav ? styles.show : ''}`}>
           <Link to="/boi-bai-52-la">Bói Bài 52 Lá</Link>
-          <Link to="/boi-bai-tay">Bói Bài Tây</Link>
+          <Link to="/boi-bai-tarot">Bói Bài Tarot</Link>
           <Link to="/boi-ngay-sinh">Bói Ngày Sinh</Link>
           <Link to="/livestream">LiveStream</Link>
           <Link to="/tai-khoan">Tài khoản</Link>

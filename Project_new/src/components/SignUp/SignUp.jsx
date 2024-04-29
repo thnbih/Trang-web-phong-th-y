@@ -1,61 +1,64 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './SignUp.module.css';
 
-function SignUp() {
-    const [formData, setFormData] = useState({
-        username: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
-    });
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
+function SignUp() {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const navigate = useNavigate();
+
+    const handleUsernameChange = (e) => {
+        setUsername(e.target.value);
+    };
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+    };
+
+    const handleConfirmPasswordChange = (e) => {
+        setConfirmPassword(e.target.value);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (formData.password !== formData.confirmPassword) {
+        if (password !== confirmPassword) {
             alert('Passwords do not match');
             return;
         }
 
         try {
             // Send form data to server-side API
-            const response = await axios.post('/api/register', {
-                username: formData.username,
-                password: formData.password
+            const response = await axios.post('http://localhost:5000/api/register', {
+                username,
+                password
             });
 
             // Handle successful registration
             console.log(response.data);
+
+            alert(JSON.stringify(response.data.message));
+
+            navigate('/login');
         } catch (error) {
             // Handle registration error
             console.error(error);
+            alert(JSON.stringify(error.response.data));
         }
-
-        console.log(formData);
     };
 
     return (
         <form onSubmit={handleSubmit} className={styles.label}>
             <label htmlFor="username">Username:</label>
-            <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} required/><br/><br/>
-
-            <label htmlFor="email">Email:</label>
-            <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required/><br/><br/>
+            <input type="text" id="username" value={username} onChange={handleUsernameChange} required/><br/><br/>
 
             <label htmlFor="password">Password:</label>
-            <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required/><br/><br/>
+            <input type="password" id="password" value={password} onChange={handlePasswordChange} required/><br/><br/>
 
             <label htmlFor="confirmPassword">Confirm Password:</label>
-            <input type="password" id="confirmPassword" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required/><br/><br/>
+            <input type="password" id="confirmPassword" value={confirmPassword} onChange={handleConfirmPasswordChange} required/><br/><br/>
 
             <input type="submit" value="Register"/>
             <Link to="/login">

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -19,16 +21,21 @@ const Login = () => {
 
     try {
       // Send the login request to the backend
-      const response = await axios.post('/api/login', {
+      const response = await axios.post('http://localhost:5000/api/login', {
         username,
         password,
       });
 
+
       // Handle successful login
       console.log(response.data.message);
+      alert(JSON.stringify(response.data.message));
+
+      navigate('/');
     } catch (error) {
       // Handle login error
       console.error(error.response.data.error);
+      alert(JSON.stringify(error.response.data.error));
     }
   };
 
