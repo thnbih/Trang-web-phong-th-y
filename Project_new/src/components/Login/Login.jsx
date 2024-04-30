@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { setCookie } from './cookie'
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -26,10 +27,15 @@ const Login = () => {
         password,
       });
 
-
       // Handle successful login
       console.log(response.data.message);
       alert(JSON.stringify(response.data.message));
+
+      // set cookie
+      const time = 1;
+      setCookie("id", response.data.data.user._id, time);
+      setCookie("username", response.data.data.user.username, time);
+      setCookie("token", response.data.data.access_token, time);
 
       navigate('/');
     } catch (error) {
@@ -64,7 +70,7 @@ const Login = () => {
           />
         </div>
         <button type="submit">Login</button>
-        <Link to='/tai-khoan'>
+        <Link to='/signUp'>
             <button>Go to Signup</button>
         </Link>
       </form>

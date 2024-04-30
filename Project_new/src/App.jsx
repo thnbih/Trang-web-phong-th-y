@@ -9,6 +9,9 @@ import BoiNgaySinh from './components/BoiNgaySinh';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import './App.css';
+import TaiKhoan from './components/TaiKhoan/TaiKhoan';
+import ProfilePage from './components/ProfilePage';
+import Logout from './components/Logout';
 
 function App() {
   return (
@@ -23,8 +26,11 @@ function App() {
           <Route path="/boi-bai-tarot" element={<BoiBaiTarot />} />
           <Route path="/boi-ngay-sinh" element={<BoiNgaySinh />} />
           <Route path="/livestream" element={<DashBoard />} />
-          <Route path="/tai-khoan" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/tai-khoan" element={<TaiKhoan />} />
+          <Route path="/profilepage" element={<ProfilePage />} />
+          <Route path="/logout" element={<Logout />} />
         </Routes>
         <footer>
           <Footer />
