@@ -9,6 +9,7 @@ import BoiNgaySinh from './components/BoiNgaySinh';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import './App.css';
+import Call from './components/Call';
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
           <Route path="/boi-bai-52-la" element={<BoiBai52La />} />
           <Route path="/boi-bai-tarot" element={<BoiBaiTarot />} />
           <Route path="/boi-ngay-sinh" element={<BoiNgaySinh />} />
-          <Route path="/livestream" element={<DashBoard />} />
+          <Route path="/livestream" element={<Call />} />
           <Route path="/tai-khoan" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
         </Routes>
