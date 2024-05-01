@@ -4,17 +4,9 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const session = require('express-session');
-
-const { MongoClient, ServerApiVersion } = require("mongodb");
-const bcrypt = require("bcrypt");
-const cors = require("cors");
-const session = require("express-session");
-const http = require("http");
-const querystring = require("querystring");
-const url = require("url");
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
-dotenv.config()
+dotenv.config();
 
 class MySummarizationPipeline {
   static task = "summarization";
@@ -103,156 +95,28 @@ client
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
         // Insert user data into MongoDB with the hashed password
-        const result = await db
-          .collection("account")
-          .insertOne({ username, password: hashedPassword });
-
-                // Handle successful registration
-                res.status(200).json({ message: 'Registration successful' });
-            } catch (error) {
-                // Handle registration error
-                console.error(error);
-                res.status(500).json({ error: 'Registration failed' });
-            }
-        });
-
-        // API endpoint for user login
-        app.post('/api/login', async (req, res) => {
-            const { username, password } = req.body;
-
-            try {
-                // Find the user in the database
-                const user = await db.collection('account').findOne({ username });
-
-                if (!user) {
-                    // User not found
-                    return res.status(404).json({ error: 'User not found' });
-                }
-
-                // Compare the provided password with the hashed password
-                const isPasswordValid = await bcrypt.compare(password, user.password);
-
-                if (!isPasswordValid) {
-                    // Invalid password
-                    return res.status(401).json({ error: 'Invalid password' });
-                }
-
-                // Login successful
-                res.status(200).json({ message: 'Login successful' });
-            } catch (error) {
-                // Handle login error
-                console.error(error);
-                res.status(500).json({ error: 'Login failed' });
-            }
-        });
-
-        app.post('/lat-bai-tay', async (req, res) => {
-            try {
-                const db = client.db('52la');
-
-                // Get the 'cards' collection
-                const cardsCollection = db.collection('cards');
-
-                // Get 5 random cards from the collection
-                const cards = await cardsCollection.aggregate([{ $sample: { size: 5 } }]).toArray();
-
-                // Store the selected cards in the session
-                req.session.cards = cards;
-
-                // Send the cards as a response
-                res.json(cards);
-            } catch (error) {
-                console.error('Error fetching cards:', error);
-                res.status(500).json({ error: 'Failed to fetch cards' });
-            }
-        });
-
-        app.post('/lat-bai-tarot', async (req, res) => {
-            try {
-                const db = client.db('tarot'); // Assuming you have a separate database for Tarot cards
-
-                // Get the 'tarotCards' collection
-                const tarotCardsCollection = db.collection('cards');
-
-                // Get 3 random Tarot cards from the collection
-                const tarotCards = await tarotCardsCollection.aggregate([{ $sample: { size: 3 } }]).toArray();
-
-                // Store the selected Tarot cards in the session
-                req.session.tarotCards = tarotCards;
-
-                // Send the Tarot cards as a response
-                res.json(tarotCards);
-            } catch (error) {
-                console.error('Error fetching Tarot cards:', error);
-                res.status(500).json({ error: 'Failed to fetch Tarot cards' });
-            }
-        });
-
-        app.post('/boi-ngay-sinh', async (req, res) => {
-            const { day, month, year } = req.body;
-        
-            try {
-                const boiNgaySinhDb = client.db('BoiNgaySinh');
-        
-                // Get the zodiac sign
-                const zodiacSignsCollection = boiNgaySinhDb.collection('zodiacSigns');
-                const zodiacSign = await zodiacSignsCollection.findOne({
-                    'Range.start': { $lte: `${day}/${month}` },
-                    'Range.end': { $gte: `${day}/${month}` },
-                });
-        
-                // Get the month meaning
-                const monthMeaningsCollection = boiNgaySinhDb.collection('ThangSinh');
-                const monthMeaning = await monthMeaningsCollection.findOne({ month });
-        
-                // Get the year meaning
-                const yearMeaningsCollection = boiNgaySinhDb.collection('NamSinh');
-                const yearMeaning = await yearMeaningsCollection.findOne({ year });
-        
-                // Get the soChuDao
-                const soChuDaoCollection = boiNgaySinhDb.collection('SoChuDao');
-                const soChuDao = await soChuDaoCollection.findOne({ day, month, year });
-        
-                res.json({
-                    zodiacSign: zodiacSign.Name,
-                    monthMeaning: monthMeaning.meaning,
-                    yearMeaning: yearMeaning.meaning,
-                    soChuDao: soChuDao.meaning,
-                });
-            } catch (error) {
-                console.error('Error fetching birth date meanings:', error);
-                res.status(500).json({ error: 'Failed to fetch birth date meanings' });
-            }
-        });
-
-        // Start the server
-        app.listen(5000, () => {
-            console.log('Server is running on port 5000');
-        });
-    })
-    .catch(err => {
-        console.error('Failed to connect to MongoDB', err);
-    });
+        await db.collection("account").insertOne({ username, password: hashedPassword });
 
         // Handle successful registration
-        res.status(200).json({ message: "Registration successful" });
+        res.status(200).json({ message: 'Registration successful' });
       } catch (error) {
         // Handle registration error
         console.error(error);
-        res.status(500).json({ error: "Registration failed" });
+        res.status(500).json({ error: 'Registration failed' });
       }
     });
 
     // API endpoint for user login
-    app.post("/api/login", async (req, res) => {
+    app.post('/api/login', async (req, res) => {
       const { username, password } = req.body;
+
       try {
         // Find the user in the database
-        const user = await db.collection("account").findOne({ username });
+        const user = await db.collection('account').findOne({ username });
 
         if (!user) {
           // User not found
-          return res.status(404).json({ error: "User not found" });
+          return res.status(404).json({ error: 'User not found' });
         }
 
         // Compare the provided password with the hashed password
@@ -260,15 +124,12 @@ client
 
         if (!isPasswordValid) {
           // Invalid password
-          return res.status(401).json({ error: "Invalid password" });
+          return res.status(401).json({ error: 'Invalid password' });
         }
 
         const genneralAccessToken = async (payload) => {
-            console.log(payload)
           const access_token = jwt.sign(
-            {
-              ...payload,
-            },
+            payload,
             process.env.ACCESS_TOKEN,
             { expiresIn: "30s" }
           );
@@ -278,9 +139,7 @@ client
 
         const genneralRefreshToken = async (payload) => {
           const refresh_token = jwt.sign(
-            {
-              ...payload,
-            },
+            payload,
             process.env.REFRESH_TOKEN,
             { expiresIn: "365d" }
           );
@@ -290,12 +149,12 @@ client
 
         const access_token = await genneralAccessToken({
           id: user._id,
-          isAdmin: "true"
+          isAdmin: true
         });
 
         const refresh_token = await genneralRefreshToken({
-            id: user._id,
-          isAdmin: "true"
+          id: user._id,
+          isAdmin: true
         });
 
         // Login successful, return message and user
@@ -307,25 +166,22 @@ client
             refresh_token: refresh_token,
           },
         });
-        console.log(res);
       } catch (error) {
         // Handle login error
         console.error(error);
-        res.status(500).json({ error: "Login failed" });
+        res.status(500).json({ error: 'Login failed' });
       }
     });
 
-    app.post("/lat-bai-tay", async (req, res) => {
+    app.post('/lat-bai-tay', async (req, res) => {
       try {
-        const db = client.db("52la");
+        const db = client.db('52la');
 
         // Get the 'cards' collection
-        const cardsCollection = db.collection("cards");
+        const cardsCollection = db.collection('cards');
 
         // Get 5 random cards from the collection
-        const cards = await cardsCollection
-          .aggregate([{ $sample: { size: 5 } }])
-          .toArray();
+        const cards = await cardsCollection.aggregate([{ $sample: { size: 5 } }]).toArray();
 
         // Store the selected cards in the session
         req.session.cards = cards;
@@ -333,22 +189,20 @@ client
         // Send the cards as a response
         res.json(cards);
       } catch (error) {
-        console.error("Error fetching cards:", error);
-        res.status(500).json({ error: "Failed to fetch cards" });
+        console.error('Error fetching cards:', error);
+        res.status(500).json({ error: 'Failed to fetch cards' });
       }
     });
 
-    app.post("/lat-bai-tarot", async (req, res) => {
+    app.post('/lat-bai-tarot', async (req, res) => {
       try {
-        const db = client.db("tarot"); // Assuming you have a separate database for Tarot cards
+        const db = client.db('tarot'); // Assuming you have a separate database for Tarot cards
 
         // Get the 'tarotCards' collection
-        const tarotCardsCollection = db.collection("cards");
+        const tarotCardsCollection = db.collection('cards');
 
         // Get 3 random Tarot cards from the collection
-        const tarotCards = await tarotCardsCollection
-          .aggregate([{ $sample: { size: 3 } }])
-          .toArray();
+        const tarotCards = await tarotCardsCollection.aggregate([{ $sample: { size: 3 } }]).toArray();
 
         // Store the selected Tarot cards in the session
         req.session.tarotCards = tarotCards;
@@ -356,49 +210,53 @@ client
         // Send the Tarot cards as a response
         res.json(tarotCards);
       } catch (error) {
-        console.error("Error fetching Tarot cards:", error);
-        res.status(500).json({ error: "Failed to fetch Tarot cards" });
+        console.error('Error fetching Tarot cards:', error);
+        res.status(500).json({ error: 'Failed to fetch Tarot cards' });
+      }
+    });
+
+    app.post('/boi-ngay-sinh', async (req, res) => {
+      const { day, month, year } = req.body;
+
+      try {
+        const boiNgaySinhDb = client.db('BoiNgaySinh');
+
+        // Get the zodiac sign
+        const zodiacSignsCollection = boiNgaySinhDb.collection('zodiacSigns');
+        const zodiacSign = await zodiacSignsCollection.findOne({
+          'Range.start': { $lte: `${day}/${month}` },
+          'Range.end': { $gte: `${day}/${month}` },
+        });
+
+        // Get the month meaning
+        const monthMeaningsCollection = boiNgaySinhDb.collection('ThangSinh');
+        const monthMeaning = await monthMeaningsCollection.findOne({ month });
+
+        // Get the year meaning
+        const yearMeaningsCollection = boiNgaySinhDb.collection('NamSinh');
+        const yearMeaning = await yearMeaningsCollection.findOne({ year });
+
+        // Get the soChuDao
+        const soChuDaoCollection = boiNgaySinhDb.collection('SoChuDao');
+        const soChuDao = await soChuDaoCollection.findOne({ day, month, year });
+
+        res.json({
+          zodiacSign: zodiacSign.Name,
+          monthMeaning: monthMeaning.meaning,
+          yearMeaning: yearMeaning.meaning,
+          soChuDao: soChuDao.meaning,
+        });
+      } catch (error) {
+        console.error('Error fetching birth date meanings:', error);
+        res.status(500).json({ error: 'Failed to fetch birth date meanings' });
       }
     });
 
     // Start the server
     app.listen(5000, () => {
-      console.log("Server is running on port 5000");
+      console.log('Server is running on port 5000');
     });
   })
-  .catch((err) => {
-    console.error("Failed to connect to MongoDB", err);
+  .catch(err => {
+    console.error('Failed to connect to MongoDB', err);
   });
-
-// Define the HTTP server
-const server = http.createServer(async (req, res) => {
-  if (req.method === "POST" && req.url === "/summarize") {
-    let body = "";
-    req.on("data", (chunk) => {
-      body += chunk.toString();
-    });
-    req.on("end", async () => {
-      try {
-        const cards = JSON.parse(body);
-        const summarizedMeaning = await summarizeCardMeanings(cards);
-        res.statusCode = 200;
-        res.setHeader("Content-Type", "application/json");
-        res.end(JSON.stringify({ summarizedMeaning }));
-      } catch (error) {
-        console.error("Error summarizing card meanings:", error);
-        res.statusCode = 500;
-        res.end("Internal Server Error");
-      }
-    });
-  } else {
-    res.statusCode = 404;
-    res.end("Not Found");
-  }
-});
-
-const hostname = "127.0.0.1";
-const port = 3000;
-
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});

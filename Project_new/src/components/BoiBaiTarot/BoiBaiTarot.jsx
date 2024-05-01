@@ -8,14 +8,11 @@ function BoiBaiTarot() {
     const [selectedCard, setSelectedCard] = useState(null);
     const [summarizedMeaning, setSummarizedMeaning] = useState('');
 
+    // BoiBaiTarot.jsx
     useEffect(() => {
         const fetchTarotCards = async () => {
             try {
                 const response = await axios.post('http://localhost:5000/lat-bai-tarot');
-                setTarotCards(response.data);
-                if (iframeRef.current) {
-                    iframeRef.current.contentWindow.postMessage(response.data, '*');
-                }
                 summarizeCardMeanings(response.data);
             } catch (error) {
                 console.error('Error fetching Tarot cards:', error);
@@ -30,11 +27,13 @@ function BoiBaiTarot() {
             const response = await axios.post('http://localhost:3000/summarize', cards);
             const summarizedMeaning = response.data.summarizedMeaning;
             setSummarizedMeaning(summarizedMeaning);
+            setTarotCards(cards); // Set the cards here
             console.log('Summarized Meaning:', summarizedMeaning);
         } catch (error) {
             console.error('Error summarizing card meanings:', error);
         }
     };
+
 
     const flipCard = () => {
         setFlipped(!flipped);

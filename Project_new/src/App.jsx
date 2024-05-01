@@ -8,8 +8,11 @@ import BoiBai52La from './components/BoiBai52La';
 import BoiNgaySinh from './components/BoiNgaySinh';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
-import './App.css';
 import Call from './components/Call';
+import TaiKhoan from './components/TaiKhoan';
+import ProfilePage from './components/ProfilePage'
+import Logout from './components/Logout'
+import './App.css';
 
 function App() {
   return (

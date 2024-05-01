@@ -8,13 +8,11 @@ function BoiBai52La() {
     const [selectedCard, setSelectedCard] = useState(null);
     const [summarizedMeaning, setSummarizedMeaning] = useState('');
 
+    // BoiBai52La.jsx
     useEffect(() => {
         const fetchCards = async () => {
             try {
                 const response = await axios.post('http://localhost:5000/lat-bai-tay');
-                setCards(response.data);
-                console.log('cards loaded');
-                console.log(response.data);
                 summarizeCardMeanings(response.data);
             } catch (error) {
                 console.error('Error fetching cards:', error);
@@ -29,11 +27,13 @@ function BoiBai52La() {
             const response = await axios.post('http://localhost:3000/summarize', cards);
             const summarizedMeaning = response.data.summarizedMeaning;
             setSummarizedMeaning(summarizedMeaning);
+            setCards(cards); // Set the cards here
             console.log('Summarized Meaning:', summarizedMeaning);
         } catch (error) {
             console.error('Error summarizing card meanings:', error);
         }
     };
+
 
     const flipCard = () => {
         setFlipped(!flipped);
