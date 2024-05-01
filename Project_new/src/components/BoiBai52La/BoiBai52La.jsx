@@ -9,26 +9,27 @@ function BoiBai52La() {
     const [summarizedMeaning, setSummarizedMeaning] = useState('');
 
     useEffect(() => {
+        const fetchCards = async () => {
+            try {
+                const response = await axios.post('http://localhost:5000/lat-bai-tay');
+                setCards(response.data);
+                console.log('cards loaded');
+                console.log(response.data);
+                summarizeCardMeanings(response.data);
+            } catch (error) {
+                console.error('Error fetching cards:', error);
+            }
+        };
+
         fetchCards();
     }, []);
 
-    const fetchCards = async () => {
-        try {
-            const response = await axios.post('http://localhost:5000/lat-bai-tay');
-            setCards(response.data);
-            console.log('cards loaded');
-            console.log(response.data);
-            summarizeCardMeanings(response.data);
-        } catch (error) {
-            console.error('Error fetching cards:', error);
-        }
-    };
-
     const summarizeCardMeanings = async (cards) => {
         try {
-            const cardMeanings = cards.map((card) => card.Mean);
-            const response = await axios.post('http://localhost:3000/', cardMeanings);
-            setSummarizedMeaning(response.data.summarizedMeaning);
+            const response = await axios.post('http://localhost:3000/summarize', cards);
+            const summarizedMeaning = response.data.summarizedMeaning;
+            setSummarizedMeaning(summarizedMeaning);
+            console.log('Summarized Meaning:', summarizedMeaning);
         } catch (error) {
             console.error('Error summarizing card meanings:', error);
         }
@@ -72,6 +73,7 @@ function BoiBai52La() {
                     </div>
                 )}
             </div>
+
             {selectedCard && (
                 <div className={styles.fullscreen}>
                     <div className={styles.fullscreenContent}>

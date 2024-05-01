@@ -1,4 +1,3 @@
-// BoiBaiTarot.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './BoiBaiTarot.module.css';
@@ -7,20 +6,33 @@ function BoiBaiTarot() {
     const [flipped, setFlipped] = useState(true);
     const [tarotCards, setTarotCards] = useState([]);
     const [selectedCard, setSelectedCard] = useState(null);
+    const [summarizedMeaning, setSummarizedMeaning] = useState('');
 
     useEffect(() => {
+        const fetchTarotCards = async () => {
+            try {
+                const response = await axios.post('http://localhost:5000/lat-bai-tarot');
+                setTarotCards(response.data);
+                if (iframeRef.current) {
+                    iframeRef.current.contentWindow.postMessage(response.data, '*');
+                }
+                summarizeCardMeanings(response.data);
+            } catch (error) {
+                console.error('Error fetching Tarot cards:', error);
+            }
+        };
+
         fetchTarotCards();
     }, []);
 
-    const fetchTarotCards = async () => {
+    const summarizeCardMeanings = async (cards) => {
         try {
-            const response = await axios.post('http://localhost:5000/lat-bai-tarot');
-            setTarotCards(response.data);
-            if (iframeRef.current) {
-                iframeRef.current.contentWindow.postMessage(response.data, '*');
-            }
+            const response = await axios.post('http://localhost:3000/summarize', cards);
+            const summarizedMeaning = response.data.summarizedMeaning;
+            setSummarizedMeaning(summarizedMeaning);
+            console.log('Summarized Meaning:', summarizedMeaning);
         } catch (error) {
-            console.error('Error fetching Tarot cards:', error);
+            console.error('Error summarizing card meanings:', error);
         }
     };
 
@@ -57,6 +69,12 @@ function BoiBaiTarot() {
                     ))}
                 </div>
                 <p><button onClick={flipCard}>Lat Bai</button></p>
+                {summarizedMeaning && (
+                    <div className={styles.summarizedMeaning}>
+                        <h3>Summarized Meaning:</h3>
+                        <p>{summarizedMeaning}</p>
+                    </div>
+                )}
             </div>
             {selectedCard && (
                 <div className={styles.fullscreen}>
@@ -72,14 +90,6 @@ function BoiBaiTarot() {
                     </div>
                 </div>
             )}
-            <iframe
-                ref={iframeRef}
-                src="https://www.chatbase.co/chatbot-iframe/u8obNYlMMuzFeEr1Gt1eg"
-                title="Chatbot"
-                width="100%"
-                style={{ height: '100%', minHeight: '700px' }}
-                frameBorder="0"
-            />
         </>
     );
 }

@@ -1,27 +1,26 @@
-.Banner-Welcome{
+.Banner-Welcome {
     display: flex;
     margin-top: 80px;
     align-items: center;
     justify-content: space-between;
-
 }
 
-.Boi-Bai{
+.Boi-Bai {
     display: flex;
     font-size: 1cm;
     color: white;
     align-items: center;
     margin-left: 20px;
-
 }
-.text-Boi-Bai{
+
+.text-Boi-Bai {
     display: flex;
     color: white;
     align-items: center;
     margin-right: 30px;
 }
 
-.Boi-bai-area{
+.Boi-bai-area {
     align-items: center;
     justify-content: center;
     height: auto;
@@ -29,10 +28,11 @@
     margin-bottom: 50px;
 }
 
-.Card-area{
+.Card-area {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .Card {
@@ -69,22 +69,26 @@
 
 .fullscreenContent {
     display: flex;
+    flex-direction: column;
     align-items: center;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     position: relative;
+    max-width: 800px;
+    max-height: 80vh;
 }
 
 .fullscreenContent img {
-    max-width: 400px;
-    max-height: 600px;
-    margin-right: 20px;
+    max-width: 100%;
+    max-height: 400px;
+    margin-bottom: 20px;
 }
 
 .cardMeaning {
-    max-width: 400px;
+    max-height: calc(80vh - 480px);
+    overflow-y: auto;
 }
 
 .closeButton {
@@ -96,4 +100,35 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
+}
+
+.summarizedMeaning {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.summarizedMeaning h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.summarizedMeaning p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .Card-area {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding: 10px 0;
+    }
+
+    .Card {
+        flex: 0 0 auto;
+        margin: 0 10px;
+    }
 }

@@ -4,40 +4,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const session = require('express-session');
-const http = require('http');
-const querystring = require('querystring');
-const url = require('url');
 
-class MySummarizationPipeline {
-    static task = 'summarization';
-    static model = 'Xenova/distilbart-cnn-6-6';
-    static instance = null;
-
-    static async getInstance(progress_callback = null) {
-        if (this.instance === null) {
-            // Dynamically import the Transformers.js library
-            let { pipeline, env } = await import('@xenova/transformers');
-
-            // NOTE: Uncomment this to change the cache directory
-            // env.cacheDir = './.cache';
-
-            this.instance = pipeline(this.task, this.model, { progress_callback });
-        }
-
-        return this.instance;
-    }
-}
-
-const summarizeCardMeanings = async (cards) => {
-    const summarizationPipeline = await MySummarizationPipeline.getInstance();
-
-    const cardMeanings = cards.map(card => card.meaning);
-    const concatenatedMeanings = cardMeanings.join(' ');
-
-    const summarizedMeaning = await summarizationPipeline(concatenatedMeanings);
-
-    return summarizedMeaning;
-};
 
 // Parse request body
 app.use(express.json());
@@ -170,6 +137,43 @@ client.connect()
             }
         });
 
+        app.post('/boi-ngay-sinh', async (req, res) => {
+            const { day, month, year } = req.body;
+        
+            try {
+                const boiNgaySinhDb = client.db('BoiNgaySinh');
+        
+                // Get the zodiac sign
+                const zodiacSignsCollection = boiNgaySinhDb.collection('zodiacSigns');
+                const zodiacSign = await zodiacSignsCollection.findOne({
+                    'Range.start': { $lte: `${day}/${month}` },
+                    'Range.end': { $gte: `${day}/${month}` },
+                });
+        
+                // Get the month meaning
+                const monthMeaningsCollection = boiNgaySinhDb.collection('ThangSinh');
+                const monthMeaning = await monthMeaningsCollection.findOne({ month });
+        
+                // Get the year meaning
+                const yearMeaningsCollection = boiNgaySinhDb.collection('NamSinh');
+                const yearMeaning = await yearMeaningsCollection.findOne({ year });
+        
+                // Get the soChuDao
+                const soChuDaoCollection = boiNgaySinhDb.collection('SoChuDao');
+                const soChuDao = await soChuDaoCollection.findOne({ day, month, year });
+        
+                res.json({
+                    zodiacSign: zodiacSign.Name,
+                    monthMeaning: monthMeaning.meaning,
+                    yearMeaning: yearMeaning.meaning,
+                    soChuDao: soChuDao.meaning,
+                });
+            } catch (error) {
+                console.error('Error fetching birth date meanings:', error);
+                res.status(500).json({ error: 'Failed to fetch birth date meanings' });
+            }
+        });
+
         // Start the server
         app.listen(5000, () => {
             console.log('Server is running on port 5000');
@@ -179,35 +183,3 @@ client.connect()
         console.error('Failed to connect to MongoDB', err);
     });
 
-// Define the HTTP server
-const server = http.createServer(async (req, res) => {
-    if (req.method === 'POST' && req.url === '/summarize') {
-        let body = '';
-        req.on('data', (chunk) => {
-            body += chunk.toString();
-        });
-        req.on('end', async () => {
-            try {
-                const cards = JSON.parse(body);
-                const summarizedMeaning = await summarizeCardMeanings(cards);
-                res.statusCode = 200;
-                res.setHeader('Content-Type', 'application/json');
-                res.end(JSON.stringify({ summarizedMeaning }));
-            } catch (error) {
-                console.error('Error summarizing card meanings:', error);
-                res.statusCode = 500;
-                res.end('Internal Server Error');
-            }
-        });
-    } else {
-        res.statusCode = 404;
-        res.end('Not Found');
-    }
-});
-
-const hostname = '127.0.0.1';
-const port = 3000;
-
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
-});

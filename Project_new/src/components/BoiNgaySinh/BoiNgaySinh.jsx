@@ -2,12 +2,33 @@ import React, { useState } from 'react';
 import styles from './BoiNgaySinh.module.css';
 
 function BoiNgaySinh() {
-    const [flipped, setFlipped] = useState(false);
+    const [day, setDay] = useState('');
+    const [month, setMonth] = useState('');
+    const [year, setYear] = useState('');
+    const [zodiacSign, setZodiacSign] = useState('');
+    const [monthMeaning, setMonthMeaning] = useState('');
+    const [yearMeaning, setYearMeaning] = useState('');
+    const [soChuDao, setSoChuDao] = useState('');
 
-    const flipCard = () => {
-        setFlipped(!flipped);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:5000/boi-ngay-sinh', {
+                day,
+                month,
+                year,
+            });
+            const { zodiacSign, monthMeaning, yearMeaning, soChuDao } = response.data;
+            setZodiacSign(zodiacSign);
+            setMonthMeaning(monthMeaning);
+            setYearMeaning(yearMeaning);
+            setSoChuDao(soChuDao);
+        } catch (error) {
+            console.error('Error fetching birth date meanings:', error);
+        }
     };
-
+    
     return (
         <>
             <div className={styles['BoiNgaySinh']}>
