@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './BoiNgaySinh.module.css';
 
+
 function BoiNgaySinh() {
     const [day, setDay] = useState('');
     const [month, setMonth] = useState('');

@@ -1,27 +1,27 @@
-/* BoiBaiTarot.module.css */
-.Banner-Welcome {
+.Banner-Welcome{
     display: flex;
     margin-top: 80px;
     align-items: center;
     justify-content: space-between;
+
 }
 
-.Boi-Bai-Tarot {
+.Boi-Bai-Tarot{
     display: flex;
     font-size: 1cm;
     color: white;
     align-items: center;
     margin-left: 20px;
-}
 
-.text-Boi-Bai-Tarot {
+}
+.text-Boi-Bai-Tarot{
     display: flex;
     color: white;
     align-items: center;
     margin-right: 30px;
 }
 
-.Boi-bai-area {
+.Boi-bai-area{
     align-items: center;
     justify-content: center;
     height: auto;
@@ -29,7 +29,7 @@
     margin-bottom: 50px;
 }
 
-.Card-area {
+.Card-area{
     display: flex;
     justify-content: space-between;
     align-items: center;

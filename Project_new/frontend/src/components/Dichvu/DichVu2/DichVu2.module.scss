@@ -1,0 +1,83 @@
+.dichVu2 {
+    padding: 0 0 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .flexWrapperThree {
+    display: flex;
+    align-items: flex-start;
+    &:not(:last-of-type) {
+      margin-bottom: 20px;
+    }
+  }
+  .paintTall2 {
+    width: 31.78%;
+    align-self: stretch;
+    object-fit: cover;
+    &:not(:last-of-type) {
+      margin-right: 30px;
+    }
+  }
+  .flexWrapperFour {
+    margin-bottom: 21px;
+    display: flex;
+    align-items: flex-start;
+  }
+  .createAnything {
+    height: 58px;
+    width: 410px;
+    color: $light-pink;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    @include fjalla-one-34-regular;
+    &:not(:last-of-type) {
+      margin-right: 30px;
+    }
+  }
+  .navigatingLifesIntricateFabricChoi {
+    max-width: 410px;
+    width: 31.78%;
+    color: $light-pink;
+    align-self: stretch;
+    text-align: center;
+    @include libre-baskerville-18-regular;
+    &:not(:last-of-type) {
+      margin-right: 30px;
+    }
+  }
+  .flexWrapperOne {
+    background-color: $light-pink;
+    padding: 23px 0 22px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 110px;
+    bottom: -26px;
+  }
+  .hayBtDu {
+    color: $linen;
+    flex: 1;
+    align-self: stretch;
+    text-align: center;
+    @include libre-baskerville-20-regular;
+  }
+  .flexWrapperTwo {
+    background-color: $light-pink;
+    padding: 23px 0 22px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 550px;
+    bottom: -26px;
+  }
+  .group1 {
+    background-color: $light-pink;
+    padding: 23px 0 22px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 110px;
+    bottom: -26px;
+  }
