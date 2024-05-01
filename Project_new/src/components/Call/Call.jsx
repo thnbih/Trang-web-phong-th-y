@@ -5,8 +5,8 @@ import { VideoRoom } from './VideoRoom';
 function Call() {
         const [joined, setJoined] = useState(false);
         return (
-          <div className="App">
-            <h1>WDJ Virtual Call</h1>
+          <div className="Call">
+            <h1>Tại đây là nơi trò chuyện 1 - 1</h1>
       
             {!joined && (
               <button onClick={() => setJoined(true)}>
