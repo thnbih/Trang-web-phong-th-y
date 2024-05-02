@@ -218,33 +218,60 @@ client
     app.post('/boi-ngay-sinh', async (req, res) => {
       const { day, month, year } = req.body;
 
+      // Validate the required fields
+      if (!day || !month || !year) {
+        return res.status(400).json({ error: 'Missing required fields: day, month, year' });
+      }
+
       try {
         const boiNgaySinhDb = client.db('BoiNgaySinh');
 
         // Get the zodiac sign
-        const zodiacSignsCollection = boiNgaySinhDb.collection('zodiacSigns');
+        const zodiacSignsCollection = boiNgaySinhDb.collection('CungHoangDao');
+        const paddedDay = String(day);
+        const paddedMonth = String(month);
         const zodiacSign = await zodiacSignsCollection.findOne({
-          'Range.start': { $lte: `${day}/${month}` },
-          'Range.end': { $gte: `${day}/${month}` },
+          $expr: {
+            $and: [
+              {
+                $lte: [
+                  { $concat: [paddedDay, '/', paddedMonth] },
+                  '$Range.end'
+                ]
+              },
+              {
+                $gte: [
+                  { $concat: [paddedDay, '/', paddedMonth] },
+                  '$Range.start'
+                ]
+              }
+            ]
+          }
         });
 
         // Get the month meaning
         const monthMeaningsCollection = boiNgaySinhDb.collection('ThangSinh');
-        const monthMeaning = await monthMeaningsCollection.findOne({ month });
+        const monthMeaning = await monthMeaningsCollection.findOne({ Month: parseInt(month) });
 
         // Get the year meaning
         const yearMeaningsCollection = boiNgaySinhDb.collection('NamSinh');
-        const yearMeaning = await yearMeaningsCollection.findOne({ year });
+        const yearMeaning = await yearMeaningsCollection.findOne({ "Năm sinh": parseInt(year) });
 
-        // Get the soChuDao
+        // Calculate the soChuDao
+        const dateString = `${day}${month}${year}`;
+        const soChuDaoValue = dateString.split('').reduce((sum, digit) => sum + parseInt(digit), 0);
+
+        // Get the soChuDao meaning
         const soChuDaoCollection = boiNgaySinhDb.collection('SoChuDao');
-        const soChuDao = await soChuDaoCollection.findOne({ day, month, year });
+        const soChuDaoMeaning = await soChuDaoCollection.findOne({ Num: soChuDaoValue });
 
+        console.log(`${day}, ${month}, ${year}`);
+        console.log(`${zodiacSign}`);
         res.json({
-          zodiacSign: zodiacSign.Name,
-          monthMeaning: monthMeaning.meaning,
-          yearMeaning: yearMeaning.meaning,
-          soChuDao: soChuDao.meaning,
+          zodiacSign: zodiacSign ? zodiacSign.Value : null,
+          monthMeaning: monthMeaning ? monthMeaning.Mean : null,
+          yearMeaning: yearMeaning ? yearMeaning["Ý nghĩa tuổi"] : null,
+          soChuDao: soChuDaoMeaning ? soChuDaoMeaning.Mean : null,
         });
       } catch (error) {
         console.error('Error fetching birth date meanings:', error);

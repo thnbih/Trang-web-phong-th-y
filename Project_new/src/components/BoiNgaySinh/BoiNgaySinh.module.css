@@ -165,3 +165,25 @@
     }
 }
 /* End Body */
+
+.summarizedMeaning {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    text-align: center;
+    color: #FAACA8;
+    font-family: var(--wp--preset--font-family--libre-baskerville);
+}
+
+.summarizedMeaning h2 {
+    font-size: calc(16px + 1vw);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.summarizedMeaning p {
+    font-size: calc(12px + 0.8vw);
+    line-height: 1.5;
+}
