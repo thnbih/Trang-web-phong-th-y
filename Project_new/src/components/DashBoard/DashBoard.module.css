@@ -32,13 +32,19 @@
 
 .mini-container1{
     display: flex;
+    flex: 3;
     flex-direction: column;
-    color: white;
+    color: #FAACA8;
+}
+
+.content{
+    flex: 2;
+    color: #FAACA8;
 }
 .mini-container2{
     display: flex;
     flex-direction: column;
-    color: white;
+    color: #FAACA8;
 }
 
 .name-store{
@@ -73,7 +79,7 @@
 }
 
 h1{
-    color: white;
+    color: #FAACA8;
 }
 h2{
     margin-bottom: 0;

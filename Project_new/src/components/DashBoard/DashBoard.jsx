@@ -8,24 +8,10 @@ function DashBoard() {
                 <div className={styles['mini-container1']}>  
                     <h2>Lich am duong</h2>
                     <p>lich hom nay</p>              
-                    <img alt="" className={styles['img']} src="https://static.overlay-tech.com/assets/12a3b79e-74fd-48a9-b263-11ac85421bd8.png" />
+                    <img alt="" className={styles['img']} src="https://cdn.sforum.vn/sforum/wp-content/uploads/2024/02/lich-am-thang-5-nam-2024-2.png" />
                 </div>
-                <div className={styles['mini-container1']}>
-                    <h2>Lich am duong</h2>
-                    <p>lich hom nay</p>              
-                    <img alt="" className={styles['img']} src="https://static.overlay-tech.com/assets/12a3b79e-74fd-48a9-b263-11ac85421bd8.png" />
-                </div>
-
-                <div className={styles['mini-container1']}>
-                    <h2>Lich am duong</h2>
-                    <p>lich hom nay</p>              
-                    <img alt="" className={styles['img']} src="https://static.overlay-tech.com/assets/12a3b79e-74fd-48a9-b263-11ac85421bd8.png" />
-                </div>
-                
-                <div className={styles['mini-container1']}>                
-                    <h2>Lich am duong</h2>
-                    <p>lich hom nay</p>              
-                    <img alt="" className={styles['img']} src="https://static.overlay-tech.com/assets/12a3b79e-74fd-48a9-b263-11ac85421bd8.png" />
+                <div className={styles['content']}>
+                    <p>Ngày:</p>
                 </div>
             </div>
 
