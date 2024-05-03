@@ -28,14 +28,14 @@ function BoiNgaySinh() {
       setSoChuDao(soChuDao);
 
       // Send the meanings to the http-server to get the overall message
-      const cardMeanings = [
+      const dateOfBirthMeanings = [
         { Mean: zodiacSign },
         { Mean: monthMeaning },
         { Mean: yearMeaning },
         { Mean: soChuDao },
       ];
 
-      const summarizeResponse = await axios.post('http://localhost:3000/summarize', cardMeanings);
+      const summarizeResponse = await axios.post('http://localhost:3000/get-overall-message', dateOfBirthMeanings);
       const { summarizedMeaning } = summarizeResponse.data;
       setOverallMessage(summarizedMeaning);
       setShowResult(true);

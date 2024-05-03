@@ -228,26 +228,10 @@ client
 
         // Get the zodiac sign
         const zodiacSignsCollection = boiNgaySinhDb.collection('CungHoangDao');
-        const paddedDay = String(day);
-        const paddedMonth = String(month);
-        const zodiacSign = await zodiacSignsCollection.findOne({
-          $expr: {
-            $and: [
-              {
-                $lte: [
-                  { $concat: [paddedDay, '/', paddedMonth] },
-                  '$Range.end'
-                ]
-              },
-              {
-                $gte: [
-                  { $concat: [paddedDay, '/', paddedMonth] },
-                  '$Range.start'
-                ]
-              }
-            ]
-          }
-        });
+        const zodiacSign = await zodiacSignsCollection.findOne({Day: parseInt(day), Month: parseInt(month)});
+
+        const dayMeaningCollection = boiNgaySinhDb.collection('NgaySinh');
+        const dayMeaning = await dayMeaningCollection.findOne({Day: parseInt(day)});
 
         // Get the month meaning
         const monthMeaningsCollection = boiNgaySinhDb.collection('ThangSinh');
@@ -263,10 +247,8 @@ client
 
         // Get the soChuDao meaning
         const soChuDaoCollection = boiNgaySinhDb.collection('SoChuDao');
-        const soChuDaoMeaning = await soChuDaoCollection.findOne({ Num: soChuDaoValue });
+        const soChuDaoMeaning = await soChuDaoCollection.findOne({ Sum: soChuDaoValue });
 
-        console.log(`${day}, ${month}, ${year}`);
-        console.log(`${zodiacSign}`);
         res.json({
           zodiacSign: zodiacSign ? zodiacSign.Value : null,
           monthMeaning: monthMeaning ? monthMeaning.Mean : null,

@@ -17,6 +17,16 @@ const summarizeCardMeaningsWithGroq = async (cards) => {
     return chatCompletion.choices[0]?.message?.content || '';
 };
 
+const summarizeDOBMeaningsWithGroq = async (cards) => {
+    const cardMeanings = cards.map(card => card.Mean);
+    const concatenatedMeanings = cardMeanings.join(' ');
+
+    const prompt = `Act as a fortune teller for teenagers and middle age. You are an expert in your professional. Your answers should be straightforward and convincing. You must only talk about your profession, nothing else. Your primary language is Vietnamese and you must answer in Vietnamese. Your job is to summarize these meanings: ${concatenatedMeanings} and give the user the overall message. You must call the user as 'con'. Your name is 'Thầy Rùa'.`;
+
+    const chatCompletion = await getGroqChatCompletion(prompt);
+    return chatCompletion.choices[0]?.message?.content || '';
+};
+
 async function getGroqChatCompletion(prompt) {
     return groq.chat.completions.create({
         messages: [
@@ -67,6 +77,26 @@ server.on('request', async (req, res) => {
             try {
                 const cards = JSON.parse(body);
                 const summarizedMeaning = await summarizeCardMeaningsWithGroq(cards);
+
+                res.setHeader('Content-Type', 'application/json');
+                res.statusCode = 200;
+                res.end(JSON.stringify({ summarizedMeaning }));
+            } catch (error) {
+                console.error('Error summarizing card meanings:', error);
+                res.statusCode = 500;
+                res.end('Internal Server Error');
+            }
+        });
+    } else if (req.method === 'POST' && parsedUrl.pathname === '/get-overall-message') {
+        let body = '';
+        req.on('data', (chunk) => {
+            body += chunk.toString();
+        });
+
+        req.on('end', async () => {
+            try {
+                const meanings = JSON.parse(body);
+                const summarizedMeaning = await summarizeDOBMeaningsWithGroq(meanings);
 
                 res.setHeader('Content-Type', 'application/json');
                 res.statusCode = 200;
