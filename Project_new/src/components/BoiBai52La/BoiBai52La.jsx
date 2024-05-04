@@ -13,7 +13,7 @@ function BoiBai52La() {
     useEffect(() => {
         const fetchCards = async () => {
             try {
-                const response = await axios.post('https://coiboicuchay-be.vercel.app/api/lat-bai-tay');
+                const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/lat-bai-tay');
                 summarizeCardMeanings(response.data);
             } catch (error) {
                 console.error('Error fetching cards:', error);
@@ -25,7 +25,7 @@ function BoiBai52La() {
 
     const summarizeCardMeanings = async (cards) => {
         try {
-            const response = await axios.post('https://coiboicuchay-be.vercel.app/api/summarize', cards);
+            const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/summarize', cards);
             const summarizedMeaning = response.data.summarizedMeaning;
             setSummarizedMeaning(summarizedMeaning);
             setCards(cards); // Set the cards here

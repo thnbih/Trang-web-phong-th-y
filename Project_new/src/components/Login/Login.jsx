@@ -24,7 +24,7 @@ const Login = () => {
 
     try {
       // Send the login request to the backend
-      const response = await axios.post('https://coiboicuchay-be.vercel.app/api/login', {
+      const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/login', {
         username,
         password,
       });

@@ -33,7 +33,7 @@ function SignUp() {
 
         try {
             // Send form data to server-side API
-            const response = await axios.post('https://coiboicuchay-be.vercel.app/api/register', {
+            const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/register', {
                 username,
                 password
             });

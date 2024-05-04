@@ -18,7 +18,7 @@ function BoiNgaySinh() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://coiboicuchay-be.vercel.app/api/boi-ngay-sinh', {
+      const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/boi-ngay-sinh', {
         day: parseInt(day),
         month: parseInt(month),
         year: parseInt(year),
@@ -37,7 +37,7 @@ function BoiNgaySinh() {
         { Mean: soChuDao },
       ];
 
-      const summarizeResponse = await axios.post('https://coiboicuchay-be.vercel.app/api/get-overall-message', dateOfBirthMeanings);
+      const summarizeResponse = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/get-overall-message', dateOfBirthMeanings);
       const { summarizedMeaning } = summarizeResponse.data;
       setOverallMessage(summarizedMeaning);
       setShowResult(true);
