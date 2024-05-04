@@ -55,6 +55,8 @@ function BoiBai52La() {
                 <p className={styles['text-Boi-Bai']}>Bói bài Tây 52 lá - trò tiêu khiển tưởng chừng đơn giản nhưng lại là cả một nghệ thuật
                     đọc vị vận mệnh con người. Nếu bạn tò mò muốn biết tương lai của mình sẽ ra sao, hãy thử rút vài lá bài xem, biết đâu lại trúng giải độc đắc,
                     hoặc ít nhất cũng đỡ buồn ngủ lúc rảnh rỗi. Nhưng nhớ nha, kết quả chỉ mang tính chất tham khảo, đừng tin quá mà "đầu tư" hết cả vốn liếng đó!</p>
+                
+                <p className={styles['text-Boi-Bai']}>Hướng dẫn: Suy nghĩ về một vấn đề bạn cần tham khảo, ấn vào nút lật bài, xem thông điệp từng lá bài bằng cách chọn vào lá bài mà bạn muốn. Ngoài ra, có thể xem tóm tắt bên dưới</p>
             </div>
             <div className={styles['Boi-bai-area']}>
                 <div className={styles.buttonContainer}>
