@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './DashBoard.module.css'; 
 import { Analytics } from '@vercel/analytics/react';
 
@@ -6,6 +6,10 @@ import { Analytics } from '@vercel/analytics/react';
 function DashBoard() {
     return (
         <div className={styles['BigDashBoard']}>
+            <div className={styles['Welcomebanner']}>
+                <h1>Chào mừng bạn đến với An nhiên </h1>
+                <h2>Trang web tâm linh thỏa mãn mọi mong cầu về tương lai của bạn</h2>
+            </div>
             <div className={styles['DashBoard1']}>
                 <div className={styles['mini-container1']}>  
                     <h2>Lịch Âm Dương</h2>
@@ -64,3 +68,17 @@ function DashBoard() {
 }
 
 export default DashBoard;
+
+// const elDB1 = document.getElementById("dashboard1")
+
+// function isIntoView(el){
+//  const rect = el.getBoundingClientRect();
+//  return rect.bottom <= window.innerHeight;
+// }
+
+// isIntoView(elDB1);
+// window.addEventListener("scroll", () => {
+//     if(isIntoView(elDB1)){
+//         elDB1.classList.add("active")
+//     }
+// });
