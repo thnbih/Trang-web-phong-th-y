@@ -57,6 +57,9 @@ function BoiBai52La() {
                     hoặc ít nhất cũng đỡ buồn ngủ lúc rảnh rỗi. Nhưng nhớ nha, kết quả chỉ mang tính chất tham khảo, đừng tin quá mà "đầu tư" hết cả vốn liếng đó!</p>
             </div>
             <div className={styles['Boi-bai-area']}>
+                <div className={styles.buttonContainer}>
+                    <button className={styles.Button} onClick={flipCard}>Lật Bài</button>
+                </div>
                 <div className={styles['Card-area']}>
                     {cards.map((card, index) => (
                         <div
@@ -67,9 +70,6 @@ function BoiBai52La() {
                             <img src={card.img} alt={card.Name} />
                         </div>
                     ))}
-                </div>
-                <div className={styles.buttonContainer}>
-                    <button className={styles.Button} onClick={flipCard}>Lật Bài</button>
                 </div>
                 {summarizedMeaning && (
                     <div className={styles.summarizedMeaning}>

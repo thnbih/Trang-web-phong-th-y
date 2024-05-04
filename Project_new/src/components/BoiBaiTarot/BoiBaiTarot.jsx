@@ -60,6 +60,9 @@ function BoiBaiTarot() {
                     Nhưng xin lưu ý, nếu kết quả không như ý muốn, đừng vội buồn nhé, vì biết đâu bài nó "lẫy" bạn thôi!</p>
             </div>
             <div className={styles['Boi-bai-area']}>
+                <div className={styles.buttonContainer}>
+                    <button className={styles.Button} onClick={flipCard}>Lật Bài</button>
+                </div>
                 <div className={styles['Card-area']}>
                     {tarotCards.map((card, index) => (
                         <div
@@ -70,9 +73,6 @@ function BoiBaiTarot() {
                             <img src={card.img} alt={card.Name} />
                         </div>
                     ))}
-                </div>
-                <div className={styles.buttonContainer}>
-                    <button className={styles.Button} onClick={flipCard}>Lật Bài</button>
                 </div>
                 {summarizedMeaning && (
                     <div className={styles.summarizedMeaning}>
