@@ -1,5 +1,4 @@
 import http from 'http';
-import querystring from 'querystring';
 import url from 'url';
 import Groq from 'groq-sdk';
 
