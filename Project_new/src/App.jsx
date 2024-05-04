@@ -27,12 +27,12 @@ function App() {
           <Route path="/boi-bai-tarot" element={<BoiBaiTarot />} />
           <Route path="/boi-ngay-sinh" element={<BoiNgaySinh />} />
           <Route path="/livestream" element={<Call />} />
-          <Route path="/tai-khoan" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/tai-khoan" element={<TaiKhoan />} />
           <Route path="/profilepage" element={<ProfilePage />} />
           <Route path="/logout" element={<Logout />} />
+
         </Routes>
         <footer>
           <Footer />
