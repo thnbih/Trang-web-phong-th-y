@@ -8,8 +8,8 @@ function DashBoard() {
         <div className={styles['BigDashBoard']}>
             <div className={styles['DashBoard1']}>
                 <div className={styles['mini-container1']}>  
-                    <h2>Lich am duong</h2>
-                    <p>lich hom nay</p>              
+                    <h2>Lịch Âm Dương</h2>
+                    <p>Lịch hôm nay</p>              
                     <img alt="" className={styles['img']} src="https://cdn.sforum.vn/sforum/wp-content/uploads/2024/02/lich-am-thang-5-nam-2024-2.png" />
                 </div>
                 <div className={styles['content']}>
@@ -19,7 +19,7 @@ function DashBoard() {
 
             <div className={styles['DashBoard2']}>
                 <div className={styles['content']}>             
-                    <p>Lá bài hôm nay:</p> <br/>
+                    <h2>Lá bài hôm nay:</h2>
                     <p>Ý nghĩa:</p>
                 </div>
                 <div className={styles['mini-container1']}>                
@@ -39,7 +39,7 @@ function DashBoard() {
 
             <div className={styles['DashBoard4']}>
                 <div>
-                    <h1>Loi binh huu duyen</h1>
+                    <h1>Lời bình hữu duyên</h1>
                 </div>
                 <div className={styles['comment']}>
                     <div className={styles['mini-container1']}>  

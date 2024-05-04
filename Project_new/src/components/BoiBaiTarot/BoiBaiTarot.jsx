@@ -54,8 +54,10 @@ function BoiBaiTarot() {
     return (
         <>
             <div className={styles['Banner-Welcome']}>
-                <h1 className={styles['Boi-Bai-Tarot']}>Boi Bai Tarot</h1>
-                <p className={styles['text-Boi-Bai-Tarot']}>Tai day la noi boi bai tarot linh thien</p>
+                <h1 className={styles['Boi-Bai-Tarot']}>Bói bài Tarot</h1>
+                <p className={styles['text-Boi-Bai-Tarot']}>Bói bài Tarot - môn nghệ thuật đọc vị tương lai qua những lá bài huyền bí.
+                    Nếu bạn muốn biết số phận của mình trong tương lai gần, hãy thử rút một lá bài Tarot xem sao.
+                    Nhưng xin lưu ý, nếu kết quả không như ý muốn, đừng vội buồn nhé, vì biết đâu bài nó "lẫy" bạn thôi!</p>
             </div>
             <div className={styles['Boi-bai-area']}>
                 <div className={styles['Card-area']}>
@@ -69,7 +71,9 @@ function BoiBaiTarot() {
                         </div>
                     ))}
                 </div>
-                <p><button onClick={flipCard}>Lat Bai</button></p>
+                <div className={styles.buttonContainer}>
+                    <button className={styles.Button} onClick={flipCard}>Lật Bài</button>
+                </div>
                 {summarizedMeaning && (
                     <div className={styles.summarizedMeaning}>
                         <h3>Summarized Meaning:</h3>

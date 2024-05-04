@@ -51,8 +51,10 @@ function BoiBai52La() {
     return (
         <>
             <div className={styles['Banner-Welcome']}>
-                <h1 className={styles['Boi-Bai']}>Boi Bai 52 La</h1>
-                <p className={styles['text-Boi-Bai']}>Tai day la noi boi bai 52 la linh thien</p>
+                <h1 className={styles['Boi-Bai']}>Bói bài Tây</h1>
+                <p className={styles['text-Boi-Bai']}>Bói bài Tây 52 lá - trò tiêu khiển tưởng chừng đơn giản nhưng lại là cả một nghệ thuật
+                    đọc vị vận mệnh con người. Nếu bạn tò mò muốn biết tương lai của mình sẽ ra sao, hãy thử rút vài lá bài xem, biết đâu lại trúng giải độc đắc,
+                    hoặc ít nhất cũng đỡ buồn ngủ lúc rảnh rỗi. Nhưng nhớ nha, kết quả chỉ mang tính chất tham khảo, đừng tin quá mà "đầu tư" hết cả vốn liếng đó!</p>
             </div>
             <div className={styles['Boi-bai-area']}>
                 <div className={styles['Card-area']}>
@@ -66,7 +68,9 @@ function BoiBai52La() {
                         </div>
                     ))}
                 </div>
-                <p><button onClick={flipCard}>Lat Bai</button></p>
+                <div className={styles.buttonContainer}>
+                    <button className={styles.Button} onClick={flipCard}>Lật Bài</button>
+                </div>
                 {summarizedMeaning && (
                     <div className={styles.summarizedMeaning}>
                         <h3>Summarized Meaning:</h3>
