@@ -18,7 +18,7 @@ import { SpeedInsights } from '@vercel/speed-insights/react';
 function App() {
   return (
     <Router>
-      <div>
+      <div className='wrapper'>
         <header>
           <Header />
         </header>
@@ -35,7 +35,7 @@ function App() {
           <Route path="/logout" element={<Logout />} />
 
         </Routes>
-        <footer>
+        <footer className='footer'>
           <Footer />
         </footer>
         <SpeedInsights />

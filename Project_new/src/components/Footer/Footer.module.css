@@ -2,8 +2,9 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 20px;
-    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    flex-wrap: wrap;
+    font-size: 10px;
+    padding: 10px;
 }
 
 .Name-page,
@@ -11,31 +12,37 @@
 .Service,
 .Information,
 .Help {
-    flex: 1; /* Give each column equal width */
-    min-width: 200px; /* Set a minimum width for each column */
-    margin: 10px; /* Add some margin between columns */
+    min-width: 150px;
+    margin: 5px;
     color: white;
+    font-size: 10px;
 }
 
 .NamePage h3 {
     color: white;
+    font-size: 10px;
 }
 
 h3 {
     border: none;
-    margin-bottom: 10px; /* Add space below the heading */
+    margin-bottom: 5px;
+    font-size: 10px;
 }
 
 li {
-    padding-top: 5px;
+    padding-top: 2px;
     text-align: left;
+    font-size: 10px;
+    list-style-type: none;
 }
 
 /* Styles for smaller screens */
 @media (max-width: 768px) {
     .footer {
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row; /* Change to row direction */
+        justify-content: center; /* Center the items horizontally */
+        align-items: flex-start; /* Align items to the top */
+        padding: 5px;
     }
 
     .Name-page,
@@ -43,20 +50,24 @@ li {
     .Service,
     .Information,
     .Help {
-        flex: none; /* Remove flex grow on smaller screens */
-        width: 100%; /* Set the width to 100% for full-width columns */
-        text-align: center; /* Center the text for a better look on small screens */
+        flex: 1; /* Allow items to grow and fill the available space */
+        min-width: unset; /* Remove the minimum width */
+        text-align: center;
+        margin: 2px;
     }
 
     h3 {
-        text-align: center; /* Center the headings */
+        text-align: center;
+        margin-bottom: 2px;
     }
 
     ul {
-        padding: 0; /* Remove padding from the list */
+        padding-inline-start: 0;
     }
 
     li {
-        text-align: center; /* Center the list items */
+        text-align: center;
+        list-style-type: none;
+        padding-top: 0;
     }
 }

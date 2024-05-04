@@ -91,26 +91,34 @@
 
 .Body .Button-area {
     display: flex;
+    justify-content: center;
     margin-top: 40px;
     margin-bottom: 50px;
-    justify-content: center;
 }
 
-.Body .Button-area button{
-    background-color: #FAACA8;
-    width: 150px;
-    height: 45px;
-    text-align: center;
-    display: inline-block;
-    border-radius: 10px;
-    align-items: center;
+.Body .Button-area button {
+    padding: 10px 20px;
+    background: linear-gradient(to bottom right, #ff9966, #ff5e62);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    width: auto;
+    height: auto;
 }
 
-.Body .Button-area p{
-    color: #EFEFEB;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 20px;
-    font-weight: 300;
+.Body .Button-area button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 94, 98, 0.5);
+}
+
+.Body .Button-area p {
+    color: white;
+    font-family: var(--wp--preset--font-family--libre-baskerville);
+    font-size: 1.2rem;
+    font-weight: 500;
 }
 
 .Body .select {
@@ -178,12 +186,12 @@
 }
 
 .summarizedMeaning h2 {
-    font-size: calc(16px + 1vw);
+    font-size: 18px;
     font-weight: 600;
     margin-bottom: 10px;
 }
 
 .summarizedMeaning p {
-    font-size: calc(12px + 0.8vw);
+    font-size: 16px;
     line-height: 1.5;
 }

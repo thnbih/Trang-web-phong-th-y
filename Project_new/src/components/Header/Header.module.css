@@ -4,6 +4,7 @@
     flex-direction: row;
     align-items: flex-start;
     padding-top: 20px;
+    position: relative;
   }
 
   .Logo {
@@ -23,15 +24,26 @@
   /* Add a button to toggle the navigation menu */
   .navToggle {
     display: block;
-    background-color: coral;
-    color: white;
-    padding: 10px 20px;
+    padding: 8px 16px; /* Reduced padding */
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-bottom: 10px;
-    z-index: 10; /* Ensure the button is above the full-screen nav */
-  }
+    z-index: 10;
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    background: linear-gradient(to bottom right, #ff9966, #ff5e62);
+    color: white;
+    font-size: 1rem; /* Reduced font-size */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.navToggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 94, 98, 0.5);
+}
+
 
   /* Full-screen navigation overlay */
   .fullScreenNav {
@@ -40,29 +52,38 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9); /* semi-transparent black background */
+    background-color: rgba(0, 0, 0, 0.9);
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: opacity 0.5s ease-in-out;
-    z-index: 9; /* just below the toggle button */
-    opacity: 0; /* start fully transparent */
-    pointer-events: none; /* prevent interaction when not visible */
+    z-index: 9;
+    opacity: 0;
+    pointer-events: none;
   }
 
   .fullScreenNav.show {
-    opacity: 1; /* fully visible */
-    pointer-events: auto; /* allow interaction */
+    opacity: 1;
+    pointer-events: auto;
   }
 
-  .fullScreenNav a {
-    font-size: 2em; /* larger text size */
-    margin: 10px 0; /* add some vertical spacing */
-    color: white; /* ensure text is visible on the dark background */
+  .navLinksContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navLinksContainer a {
+    font-size: 2em;
+    margin: 10px 0;
+    color: white;
+    text-decoration: none;
+  }
+
+  .navLinksContainer a:hover {
+    color: coral;
   }
 }
-
 /* Styles for larger screens */
 @media (min-width: 888px) {
   .navToggle {
@@ -137,6 +158,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 10px;
   }
 
   nav a {
@@ -237,15 +259,3 @@
   pointer-events: auto;
 }
 /* ... existing styles ... */
-
-.closeButton {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: transparent;
-  color: white;
-  border: none;
-  font-size: 2em;
-  cursor: pointer;
-  z-index: 10;
-}

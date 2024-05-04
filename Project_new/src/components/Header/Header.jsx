@@ -1,13 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 
 function Header() {
   const [showNav, setShowNav] = useState(false);
+  const navRef = useRef(null);
 
   const toggleNav = () => {
     setShowNav(!showNav);
   };
+
+  const closeNav = (event) => {
+    if (navRef.current && !navRef.current.contains(event.target)) {
+      setShowNav(false);
+    }
+  };
+
+  const handleLinkClick = () => {
+    setShowNav(false);
+  };
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setShowNav(false);
+      }
+    };
+
+    if (showNav) {
+      document.addEventListener('mousedown', handleOutsideClick);
+    } else {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [showNav]);
 
   return (
     <>
@@ -34,13 +63,27 @@ function Header() {
         </nav>
       </div>
 
-      <div className={`${styles.fullScreenNav} ${showNav ? styles.show : ''}`}>
-        <button className={styles.closeButton} onClick={toggleNav}>X</button>
-        <Link to="/boi-bai-52-la">Bói Bài 52 Lá</Link>
-        <Link to="/boi-bai-tarot">Bói Bài Tarot</Link>
-        <Link to="/boi-ngay-sinh">Bói Ngày Sinh</Link>
-        <Link to="/livestream">LiveStream</Link>
-        <Link to="/tai-khoan">Tài khoản</Link>
+      <div
+        className={`${styles.fullScreenNav} ${showNav ? styles.show : ''}`}
+        onClick={closeNav}
+      >
+        <div ref={navRef} className={styles.navLinksContainer}>
+          <Link to="/boi-bai-52-la" onClick={handleLinkClick}>
+            Bói Bài 52 Lá
+          </Link>
+          <Link to="/boi-bai-tarot" onClick={handleLinkClick}>
+            Bói Bài Tarot
+          </Link>
+          <Link to="/boi-ngay-sinh" onClick={handleLinkClick}>
+            Bói Ngày Sinh
+          </Link>
+          <Link to="/livestream" onClick={handleLinkClick}>
+            LiveStream
+          </Link>
+          <Link to="/tai-khoan" onClick={handleLinkClick}>
+            Tài khoản
+          </Link>
+        </div>
       </div>
     </>
   );

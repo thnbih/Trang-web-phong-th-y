@@ -12,15 +12,17 @@ function Call() {
       <h1>Tại đây là nơi trò chuyện 1 - 1</h1>
 
       {!joined && (
-        <button onClick={() => setJoined(true)}>
-        Join Room
-      </button>
-    )}
+        <div className={styles.buttonContainer}>
+        <button className={styles.Button} onClick={() => setJoined(true)}>
+          Join Room
+        </button>
+        </div>
+      )}
 
-    {joined && <VideoRoom />}
-    <Analytics />
-  </div>
-);
+      {joined && <VideoRoom />}
+      <Analytics />
+    </div>
+  );
 }
 
 export default Call;
