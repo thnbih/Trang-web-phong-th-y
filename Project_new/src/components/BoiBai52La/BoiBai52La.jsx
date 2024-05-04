@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './BoiBai52La.module.css';
+import { Analytics } from '@vercel/analytics/react';
 
 function BoiBai52La() {
     const [flipped, setFlipped] = useState(true);
@@ -12,7 +13,7 @@ function BoiBai52La() {
     useEffect(() => {
         const fetchCards = async () => {
             try {
-                const response = await axios.post('http://localhost:5000/lat-bai-tay');
+                const response = await axios.post('https://coiboicuchay-be.vercel.app/api/lat-bai-tay');
                 summarizeCardMeanings(response.data);
             } catch (error) {
                 console.error('Error fetching cards:', error);
@@ -24,7 +25,7 @@ function BoiBai52La() {
 
     const summarizeCardMeanings = async (cards) => {
         try {
-            const response = await axios.post('http://localhost:3000/summarize', cards);
+            const response = await axios.post('https://coiboicuchay-be.vercel.app/api/summarize', cards);
             const summarizedMeaning = response.data.summarizedMeaning;
             setSummarizedMeaning(summarizedMeaning);
             setCards(cards); // Set the cards here
@@ -88,6 +89,7 @@ function BoiBai52La() {
                     </div>
                 </div>
             )}
+            <Analytics />
         </>
     );
 }

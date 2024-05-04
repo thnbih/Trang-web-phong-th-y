@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import styles from './Call.module.css';
 import { VideoRoom } from './VideoRoom';
+import { Analytics } from '@vercel/analytics/react';
+
 
 function Call() {
   const [joined, setJoined] = useState(false);
@@ -16,6 +18,7 @@ function Call() {
     )}
 
     {joined && <VideoRoom />}
+    <Analytics />
   </div>
 );
 }

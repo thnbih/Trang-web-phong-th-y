@@ -11,8 +11,9 @@ import Login from './components/Login';
 import Call from './components/Call';
 import TaiKhoan from './components/TaiKhoan';
 import ProfilePage from './components/ProfilePage'
-import Logout from './components/Logout'
+import Logout from './components/Logout';
 import './App.css';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <footer>
           <Footer />
         </footer>
+        <SpeedInsights />
       </div>
     </Router>
   );

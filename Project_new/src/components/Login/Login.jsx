@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { setCookie } from './cookie'
+import { setCookie } from './cookie';
+import { Analytics } from '@vercel/analytics/react';
+
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -22,7 +24,7 @@ const Login = () => {
 
     try {
       // Send the login request to the backend
-      const response = await axios.post('http://localhost:5000/api/login', {
+      const response = await axios.post('https://coiboicuchay-be.vercel.app/api/login', {
         username,
         password,
       });
@@ -74,6 +76,7 @@ const Login = () => {
             <button>Go to Signup</button>
         </Link>
       </form>
+      <Analytics />
     </div>
   );
 };

@@ -26,7 +26,7 @@ import {
     const fetchApi = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/detail-user",
+          "https://coiboicuchay-be.vercel.app/api/detail-user",
           {
             _id,
           }
@@ -46,7 +46,7 @@ import {
     const handleFinish = async (values) => {
       try {
         const response = await axios.patch(
-          "http://localhost:5000/api/detail-user",
+          "https://coiboicuchay-be.vercel.app/api/detail-user",
           {
             _id,
             values,

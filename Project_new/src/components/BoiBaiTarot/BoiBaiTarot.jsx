@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './BoiBaiTarot.module.css';
+import { Analytics } from '@vercel/analytics/react';
+
 
 function BoiBaiTarot() {
     const [flipped, setFlipped] = useState(true);
@@ -12,7 +14,7 @@ function BoiBaiTarot() {
     useEffect(() => {
         const fetchTarotCards = async () => {
             try {
-                const response = await axios.post('http://localhost:5000/lat-bai-tarot');
+                const response = await axios.post('https://coiboicuchay-be.vercel.app/api/lat-bai-tarot');
                 summarizeCardMeanings(response.data);
             } catch (error) {
                 console.error('Error fetching Tarot cards:', error);
@@ -24,7 +26,7 @@ function BoiBaiTarot() {
 
     const summarizeCardMeanings = async (cards) => {
         try {
-            const response = await axios.post('http://localhost:3000/summarize', cards);
+            const response = await axios.post('https://coiboicuchay-be.vercel.app/api/summarize', cards);
             const summarizedMeaning = response.data.summarizedMeaning;
             setSummarizedMeaning(summarizedMeaning);
             setTarotCards(cards); // Set the cards here
@@ -89,6 +91,7 @@ function BoiBaiTarot() {
                     </div>
                 </div>
             )}
+            <Analytics />
         </>
     );
 }

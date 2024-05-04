@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './DashBoard.module.css'; 
+import { Analytics } from '@vercel/analytics/react';
+
 
 function DashBoard() {
     return (
@@ -56,7 +58,7 @@ function DashBoard() {
                     </div>
                 </div>
             </div>
-
+            <Analytics />
         </div>
     );
 }

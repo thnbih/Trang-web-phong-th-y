@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styles from './BoiNgaySinh.module.css';
+import { Analytics } from '@vercel/analytics/react';
+
 
 function BoiNgaySinh() {
   const [day, setDay] = useState('');
@@ -16,7 +18,7 @@ function BoiNgaySinh() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/boi-ngay-sinh', {
+      const response = await axios.post('https://coiboicuchay-be.vercel.app/api/boi-ngay-sinh', {
         day: parseInt(day),
         month: parseInt(month),
         year: parseInt(year),
@@ -35,7 +37,7 @@ function BoiNgaySinh() {
         { Mean: soChuDao },
       ];
 
-      const summarizeResponse = await axios.post('http://localhost:3000/get-overall-message', dateOfBirthMeanings);
+      const summarizeResponse = await axios.post('https://coiboicuchay-be.vercel.app/api/get-overall-message', dateOfBirthMeanings);
       const { summarizedMeaning } = summarizeResponse.data;
       setOverallMessage(summarizedMeaning);
       setShowResult(true);
@@ -146,6 +148,7 @@ function BoiNgaySinh() {
           <p>Tổng quan: {overallMessage}</p>
         </div>
       )}
+      <Analytics />
     </div>
   );
 }
