@@ -14,11 +14,11 @@
     flex: 1; /* Give each column equal width */
     min-width: 200px; /* Set a minimum width for each column */
     margin: 10px; /* Add some margin between columns */
-    color: white;
+    color: #FAACA8;
 }
 
 .NamePage h3 {
-    color: white;
+    color: #FAACA8;
 }
 
 h3 {

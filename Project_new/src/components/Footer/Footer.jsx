@@ -7,17 +7,6 @@ function Footer() {
             <div className={styles.NamePage}>                  
                 <h3>An Nhiên</h3>
             </div>
-            <div className={styles.Product}> 
-                <h3 className={styles.VatPham}>Vật phẩm phong thủy</h3>
-                <div className={styles.listProduct}>              
-                    <ul>
-                        <li>Vòng ngọc phong thủy</li>
-                        <li>Giáp thiên nhiên</li>
-                        <li>Cuồng đao</li>
-                        <li>Mặt nạ Berich</li>
-                    </ul>
-                </div>
-            </div>
             <div className={styles.Service}>                  
                 <h3 className={styles.VatPham}>Dịch vụ</h3>
                 <div className={styles.listProduct}>              
@@ -25,7 +14,7 @@ function Footer() {
                         <li>Bói bài tây</li>
                         <li>Tarot</li>
                         <li>Xem ngày sinh</li>
-                        <li>Tư vấn phong thủy</li>
+                        <li>Bói bài Tarot</li>
                     </ul>
                 </div>
             </div>
@@ -45,8 +34,6 @@ function Footer() {
                 <div className={styles.listProduct}>              
                     <ul>
                         <li>Hỏi đáp</li>
-                        <li>Hướng dẫn mua hàng</li>
-                        <li>Phương thức thanh toán</li>
                         <li>Chăm sóc khách hàng</li>
                     </ul>
                 </div>
