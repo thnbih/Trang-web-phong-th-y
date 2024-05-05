@@ -113,7 +113,7 @@ function DashBoard() {
                     </div>
                 </div>
             )}
-            <Analytics />
+
 
             <div className={styles['DashBoard3']}>
                 <h2>Xem bói online</h2>
