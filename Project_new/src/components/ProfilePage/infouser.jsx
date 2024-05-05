@@ -80,56 +80,6 @@ function InfoUser() {
 
   return (
     <>
-      {/* <div className="container">
-        <div className="button-container">
-          <button onClick={handleLogout}>Logout</button>
-        </div>
-
-        {info && (
-          <div className="user-info-card">
-            <h2>Thông tin</h2>
-
-            <form id="userForm">
-              <div className="form-group">
-                <label for="fullname">Họ và tên:</label>
-                <input type="text" id="fullname" name="fullname" />
-              </div>
-
-              <div className="form-group">
-                <label for="username">Tên đăng nhập:</label>
-                <input type="text" id="username" name="username" />
-              </div>
-
-              <div className="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" />
-              </div>
-
-              <div className="form-group">
-                <label for="address">Địa chỉ:</label>
-                <input type="text" id="address" name="address" />
-              </div>
-
-              <div className="form-group">
-                <label for="history">Lịch sử truy cập:</label>
-                <textarea id="history" name="history" rows="10" disabled></textarea>
-              </div>
-
-              <div className="form-actions">
-                <button type="button" id="editButton" onClick={handleEdit}>
-                  Chỉnh sửa
-                </button>
-                <button type="button" id="cancelButton" disabled={!isEdit} onClick={handleCancel}>
-                  Hủy
-                </button>
-                <button type="submit" id="saveButton" disabled={!isEdit} onClick={handleFinish}>
-                  Cập nhật
-                </button>
-              </div>
-            </form>
-          </div>
-        )}
-      </div> */}
       {contextHolder}
         <Button onClick={handleLogout} className="button-logout">Logout</Button>
         {info && (
