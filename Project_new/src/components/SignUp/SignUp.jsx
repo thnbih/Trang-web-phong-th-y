@@ -5,7 +5,6 @@ import styles from './SignUp.module.css';
 import { Analytics } from '@vercel/analytics/react';
 
 
-
 function SignUp() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -33,7 +32,7 @@ function SignUp() {
 
         try {
             // Send form data to server-side API
-            const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/register', {
+            const response = await axios.post('http://localhost:5000/api/register', {
                 username,
                 password
             });
@@ -53,20 +52,70 @@ function SignUp() {
 
     return (
         <form onSubmit={handleSubmit} className={styles.label}>
-            <label htmlFor="username">Username:</label>
-            <input type="text" id="username" value={username} onChange={handleUsernameChange} required/><br/><br/>
-
-            <label htmlFor="password">Password:</label>
-            <input type="password" id="password" value={password} onChange={handlePasswordChange} required/><br/><br/>
-
-            <label htmlFor="confirmPassword">Confirm Password:</label>
-            <input type="password" id="confirmPassword" value={confirmPassword} onChange={handleConfirmPasswordChange} required/><br/><br/>
-
-            <input type="submit" value="Register"/>
-            <Link to="/login">
-                <button>Go to Login</button>
-            </Link>
-            <Analytics />
+            <div className={styles['container']}>
+                <div className={styles['title-container']}>
+                    <p>Register</p>
+                </div>
+                <div className={styles['input-container']}>
+                    <div className={styles['content-container']}>
+                        <div className={styles['content-text']}>
+                            <p>Username: </p>
+                        </div>
+                        <div className={styles['content-input']}>
+                            <input
+                                type="text"
+                                id="username"
+                                value={username}
+                                onChange={handleUsernameChange}
+                                required
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className={styles['input-container']}>
+                    <div className={styles['content-container']}>
+                        <div className={styles['content-text']}>
+                            <p>Password: </p>
+                        </div>
+                        <div className={styles['content-input']}>
+                            <input
+                                type="password"
+                                id="password"
+                                value={password}
+                                onChange={handlePasswordChange}
+                                required
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className={styles['input-container']}>
+                    <div className={styles['content-container']}>
+                        <div className={styles['content-text']}>
+                            <p>Confirm Password: </p>
+                        </div>
+                        <div className={styles['content-input']}>
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                value={confirmPassword}
+                                onChange={handleConfirmPasswordChange}
+                                required
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className={styles['button-container']}>
+                    <div className={styles['item-button']}>
+                        <button type="submit">Register</button>
+                    </div>
+                    <div className={styles['item-button']}>
+                        <Link to="/login">
+                            <button>Go to Login</button>
+                        </Link>
+                    </div>
+                </div>
+                <Analytics />
+            </div>
         </form>
     );
 }

@@ -1,0 +1,29 @@
+:where(.css-dev-only-do-not-override-1okl62o).ant-form-item .ant-form-item-label >label {
+    color: #FAACA8;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+:where(.css-dev-only-do-not-override-1okl62o).ant-input-outlined.ant-input-disabled, :where(.css-dev-only-do-not-override-1okl62o).ant-input-outlined[disabled] {
+    color: #FAACA8;
+}
+
+:where(.css-dev-only-do-not-override-1okl62o).ant-btn-default {
+    background-color: #FAACA8;
+}
+
+.button-logout{
+    width: 100px;
+    margin-bottom: 30px;
+}
+
+:where(.css-dev-only-do-not-override-1okl62o).ant-card .ant-card-head {
+    color: #FAACA8;
+    font-size: 30px;
+    font-weight: 800;
+    padding-left: 20px;
+}
+
+.button-logout {
+    margin-top: 25px;
+}

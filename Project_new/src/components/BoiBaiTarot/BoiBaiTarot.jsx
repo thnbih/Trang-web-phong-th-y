@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './BoiBaiTarot.module.css';
 import { Analytics } from '@vercel/analytics/react';
+import { getAccessToken, getUser } from '../auth/auth';
 
 
 function BoiBaiTarot() {
@@ -11,11 +12,36 @@ function BoiBaiTarot() {
     const [summarizedMeaning, setSummarizedMeaning] = useState('');
 
     // BoiBaiTarot.jsx
+    // boi-bai-tarot
     useEffect(() => {
         const fetchTarotCards = async () => {
             try {
-                const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/lat-bai-tarot');
-                summarizeCardMeanings(response.data);
+                const origin = window.location.origin;
+                const accessToken = getAccessToken(origin);
+                const userString = getUser(origin);
+                const user = JSON.parse(userString);
+                const userId = user._id;
+                if (!accessToken) {
+                    console.error('Access token not found');
+                    return;
+                }
+
+                const headers = {
+                    Authorization: `Bearer ${accessToken}`,
+                };
+                const requestBody = {
+                    userId: userId,
+                };
+
+                const response = await axios.post('http://localhost:5000/api/lat-bai-tarot', requestBody, { headers });
+                const { tarotCards, summarizedMeaning } = response.data;
+
+                if (summarizedMeaning) {
+                    setSummarizedMeaning(summarizedMeaning);
+                    setTarotCards(tarotCards);
+                } else {
+                    summarizeCardMeanings(tarotCards);
+                }
             } catch (error) {
                 console.error('Error fetching Tarot cards:', error);
             }
@@ -26,13 +52,39 @@ function BoiBaiTarot() {
 
     const summarizeCardMeanings = async (cards) => {
         try {
-            const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/summarize', cards);
+            const response = await axios.post('http://localhost:5000/api/summarize', cards);
             const summarizedMeaning = response.data.summarizedMeaning;
             setSummarizedMeaning(summarizedMeaning);
-            setTarotCards(cards); // Set the cards here
-            console.log('Summarized Meaning:', summarizedMeaning);
+            setTarotCards(cards);
+            saveApiResponse('lat-bai-tarot', { cards, summarizedMeaning });
         } catch (error) {
             console.error('Error summarizing card meanings:', error);
+        }
+    };
+
+    const saveApiResponse = async (type, result) => {
+        try {
+            const origin = window.location.origin;
+            const accessToken = getAccessToken(origin);
+            const headers = {
+                Authorization: `Bearer ${accessToken}`,
+            };
+
+            const userString = getUser(origin);
+            const user = JSON.parse(userString);
+            const userId = user._id;
+            const requestBody = {
+                userId: userId,
+                type,
+                result: {
+                    cards: result.cards,
+                    summarizedMeaning: result.summarizedMeaning,
+                },
+            };
+
+            await axios.post('http://localhost:5000/api/save-response', requestBody, { headers });
+        } catch (error) {
+            console.error('Error saving API response:', error);
         }
     };
 
