@@ -21,27 +21,21 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-      // Send the login request to the backend
       const response = await axios.post('http://localhost:5000/api/login', {
         username,
         password,
       });
-
-      // Handle successful login
-      console.log(response.data.message);
-      alert(JSON.stringify(response.data.message));
-
-      // set cookie
-      const time = 1;
-      setCookie("id", response.data.data.user._id, time);
-      setCookie("username", response.data.data.user.username, time);
-      setCookie("token", response.data.data.access_token, time);
+  
+      // Store user session information in localStorage or sessionStorage
+      const origin = window.location.origin;
+      localStorage.setItem(`${origin}_user`, JSON.stringify(response.data.data.user));
+      localStorage.setItem(`${origin}_access_token`, response.data.data.access_token);
+      localStorage.setItem(`${origin}_refresh_token`, response.data.data.refresh_token);
 
       navigate('/');
     } catch (error) {
-      // Handle login error
       console.error(error.response.data.error);
       alert(JSON.stringify(error.response.data.error));
     }
