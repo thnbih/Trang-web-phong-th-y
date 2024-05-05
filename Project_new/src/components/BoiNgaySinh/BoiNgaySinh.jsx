@@ -39,7 +39,7 @@ function BoiNgaySinh() {
         userId: userId,
       };
   
-      const response = await axios.post('http://localhost:5000/api/boi-ngay-sinh', requestBody, { headers });
+      const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/boi-ngay-sinh', requestBody, { headers });
       const { zodiacSign, monthMeaning, yearMeaning, soChuDao, summarizedMeaning } = response.data;
   
       if (summarizedMeaning) {
@@ -63,7 +63,7 @@ function BoiNgaySinh() {
           { Mean: soChuDao },
         ];
   
-        const summarizeResponse = await axios.post('http://localhost:5000/api/get-overall-message', dateOfBirthMeanings);
+        const summarizeResponse = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/get-overall-message', dateOfBirthMeanings);
         const { summarizedMeaning } = summarizeResponse.data;
         setOverallMessage(summarizedMeaning);
         setShowResult(true);
@@ -100,7 +100,7 @@ function BoiNgaySinh() {
         result,
       };
   
-      await axios.post('http://localhost:5000/api/save-response', requestBody, { headers });
+      await axios.post('https://coiboicuchay-be.azurewebsites.net/api/save-response', requestBody, { headers });
     } catch (error) {
       console.error('Error saving API response:', error);
     }

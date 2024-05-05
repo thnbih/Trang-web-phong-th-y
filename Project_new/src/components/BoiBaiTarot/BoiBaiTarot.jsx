@@ -33,7 +33,7 @@ function BoiBaiTarot() {
                     userId: userId,
                 };
 
-                const response = await axios.post('http://localhost:5000/api/lat-bai-tarot', requestBody, { headers });
+                const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/lat-bai-tarot', requestBody, { headers });
                 const { tarotCards, summarizedMeaning } = response.data;
 
                 if (summarizedMeaning) {
@@ -52,7 +52,7 @@ function BoiBaiTarot() {
 
     const summarizeCardMeanings = async (cards) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/summarize', cards);
+            const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/summarize', cards);
             const summarizedMeaning = response.data.summarizedMeaning;
             setSummarizedMeaning(summarizedMeaning);
             setTarotCards(cards);
@@ -82,7 +82,7 @@ function BoiBaiTarot() {
                 },
             };
 
-            await axios.post('http://localhost:5000/api/save-response', requestBody, { headers });
+            await axios.post('https://coiboicuchay-be.azurewebsites.net/api/save-response', requestBody, { headers });
         } catch (error) {
             console.error('Error saving API response:', error);
         }

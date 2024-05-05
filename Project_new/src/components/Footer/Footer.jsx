@@ -5,7 +5,7 @@ function Footer() {
     return (
         <div className={styles.footer}>
             <div className={styles.NamePage}>                  
-                <h3>An Nhiên</h3>
+                <h2>An Nhiên</h2>
             </div>
             <div className={styles.Service}>                  
                 <h3 className={styles.VatPham}>Dịch vụ</h3>

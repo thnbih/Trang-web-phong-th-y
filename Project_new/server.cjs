@@ -321,6 +321,49 @@ client.connect()
       }
     };
 
+    app.post("/api/lat-bai-tarot-dashboard", cors(), async (req, res) => {
+      try {
+        const db = client.db("tarot"); // Assuming you have a separate database for Tarot cards
+
+        // Get the 'tarotCards' collection
+        const tarotCardsCollection = db.collection("cards");
+
+        // Get 3 random Tarot cards from the collection
+        const tarotCards = await tarotCardsCollection
+          .aggregate([{ $sample: { size: 1 } }])
+          .toArray();
+
+        // Store the selected Tarot cards in the session
+        req.session.tarotCards = tarotCards;
+
+        // Send the Tarot cards as a response
+        res.json(tarotCards);
+      } catch (error) {
+        console.error("Error fetching Tarot cards:", error);
+        res.status(500).json({ error: "Failed to fetch Tarot cards" });
+      }
+    });
+
+    app.post("/api/loi-binh-dashboard", cors(), async (req, res) => {
+      try {
+        const db = client.db("LoiBinh"); // Using LoiBinh database now
+    
+        // Get the 'LoiBinh' collection
+        const loiBinhCollection = db.collection("LoiBinh");
+    
+        // Get 3 random documents from the LoiBinh collection
+        const loiBinhItems = await loiBinhCollection
+          .aggregate([{ $sample: { size: 3 } }]) // Adjust the size here if you want to get less or more documents
+          .toArray();
+    
+        // Send the LoiBinh items as a response
+        res.json(loiBinhItems);
+      } catch (error) {
+        console.error("Error fetching LoiBinh documents:", error);
+        res.status(500).json({ error: "Failed to fetch LoiBinh documents" });
+      }
+    });
+
     app.options('/api/lat-bai-tay', cors());
     app.post("/api/lat-bai-tay", cors(), async (req, res) => {
       try {
