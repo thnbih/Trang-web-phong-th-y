@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from './Login.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { setCookie } from './cookie';
@@ -48,10 +49,42 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className={styles['container']}>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className={styles['title-container']}>
+          <h1>Login</h1>
+        </div>
+        <div className={styles['input-container']}>
+          <div className={styles['content-container']}>
+            <div className={styles['content-text']}>
+              <p>Username: </p>
+            </div>
+            <div className={styles['content-input']}>
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={handleUsernameChange}
+                required
+              />
+            </div>
+          </div>
+          <div className={styles['content-container']}>
+            <div className={styles['content-text']}>
+              <p>Password: </p>
+            </div>
+            <div className={styles['content-input']}>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={handlePasswordChange}
+                required
+              />
+            </div>
+          </div>
+        </div>
+        {/* <div>
           <label htmlFor="username">Username:</label>
           <input
             type="text"
@@ -60,8 +93,8 @@ const Login = () => {
             onChange={handleUsernameChange}
             required
           />
-        </div>
-        <div>
+        </div> */}
+        {/* <div>
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -70,11 +103,17 @@ const Login = () => {
             onChange={handlePasswordChange}
             required
           />
+        </div> */}
+        <div className={styles['button-container']}>
+          <div className={styles['item-button']}>
+            <button type="submit">Login</button>
+          </div>
+          <div className={styles['item-button']}>
+            <Link to='/signUp'>
+              <button>Go to Signup</button>
+            </Link>
+          </div>
         </div>
-        <button type="submit">Login</button>
-        <Link to='/signUp'>
-            <button>Go to Signup</button>
-        </Link>
       </form>
       <Analytics />
     </div>
