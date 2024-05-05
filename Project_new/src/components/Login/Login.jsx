@@ -52,7 +52,7 @@ const Login = () => {
     <div className={styles['container']}>
       <form onSubmit={handleSubmit}>
         <div className={styles['title-container']}>
-          <h1>Login</h1>
+          <p>Login</p>
         </div>
         <div className={styles['input-container']}>
           <div className={styles['content-container']}>

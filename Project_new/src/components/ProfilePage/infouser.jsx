@@ -137,7 +137,7 @@ function InfoUser() {
             title="Thông tin"
             extra={
               !isEdit ? (
-                <Button onClick={handleEdit}>Chỉnh sửa</Button>
+                <Button className="button-edit" onClick={handleEdit}>Chỉnh sửa</Button>
               ) : (
                 <Button onClick={handleCancel}>Hủy</Button>
               )

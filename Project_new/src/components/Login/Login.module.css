@@ -9,9 +9,12 @@
     font-size: 24px;
 }
 
-.input-container {
-    display: block;
-    padding: 0px;
+.title-container p{
+    font-size: 50px;
+    font-family: 'Playfair Display', serif;
+    color: #FAACA8;
+    font-weight: 800;
+
 }
 
 .content-container {
@@ -61,4 +64,33 @@
     font-family: 'Playfair Display', serif;
     font-weight: bold;
     color: #FAFAFA;
+}
+
+@media (max-width: 485px) {
+    .title-container {
+        padding-bottom: 30px;
+    }
+
+    .title-container p{
+        font-size: 30px;
+        font-weight: 700; 
+    }
+
+    .content-text p {
+        font-size: 20px;
+        width: 130px;
+        height: 25px;
+    }
+    
+    .content-input input {
+        width: 250px;
+        height: 25px;
+        font-size: 18px;
+    }
+
+    .item-button button{
+        height: 35px;
+        width: 120px;
+        font-size: 15px;
+    }
 }

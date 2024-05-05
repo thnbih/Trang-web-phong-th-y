@@ -6,7 +6,13 @@
 .title-container {
     padding-top: 30px;
     padding-bottom: 50px;
-    font-size: 24px;
+}
+
+.title-container p{
+    font-size: 50px;
+    color: #FAACA8;
+    font-weight: 800;
+    font-family: 'Playfair Display', serif;
 }
 
 .input-container {
@@ -61,4 +67,31 @@
     font-family: 'Playfair Display', serif;
     font-weight: bold;
     color: #FAFAFA;
+}
+
+@media (max-width: 485px) {
+    .title-container p{
+        font-size: 35px;
+    }
+
+    .content-text p {
+        font-size: 18px;
+        width: 170px;
+        height: 20px;
+    }
+
+    .content-input input {
+        width: 220px;
+        height: 25px;
+    }
+
+    .item-button button{
+        height: 40px;
+        width: 120px;
+        font-size: 16px;
+    }
+
+    .button-container {
+        margin-top: 20px;
+    }
 }

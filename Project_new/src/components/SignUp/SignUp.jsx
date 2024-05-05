@@ -54,7 +54,7 @@ function SignUp() {
         <form onSubmit={handleSubmit} className={styles.label}>
             <div className={styles['container']}>
                 <div className={styles['title-container']}>
-                    <h1>Register</h1>
+                    <p>Register</p>
                 </div>
                 <div className={styles['input-container']}>
                     <div className={styles['content-container']}>
