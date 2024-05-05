@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { setCookie } from './cookie';
+import React from 'react';
 import { Analytics } from '@vercel/analytics/react';
+import {  Navigate } from "react-router-dom";
+import { getCookie } from './cookie';
+import Detail_Login  from './detail-login';
 
 
 const Login = () => {
@@ -40,39 +40,20 @@ const Login = () => {
       alert(JSON.stringify(error.response.data.error));
     }
   };
+  const token = getCookie("token");
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={handleUsernameChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={handlePasswordChange}
-            required
-          />
-        </div>
-        <button type="submit">Login</button>
-        <Link to='/signUp'>
-            <button>Go to Signup</button>
-        </Link>
-      </form>
+    <>
+      {token ? (
+        <Navigate to="/profilepage" />
+      ) : (
+        <Detail_Login />
+      )}
       <Analytics />
-    </div>
+    </>
   );
 };
+
+
 
 export default Login;
