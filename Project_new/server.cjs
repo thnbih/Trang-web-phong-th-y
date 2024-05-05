@@ -234,6 +234,26 @@ client.connect()
       }
     });
 
+    app.post("/api/loi-binh-dashboard", cors(), async (req, res) => {
+      try {
+        const db = client.db("LoiBinh"); // Using LoiBinh database now
+    
+        // Get the 'LoiBinh' collection
+        const loiBinhCollection = db.collection("LoiBinh");
+    
+        // Get 3 random documents from the LoiBinh collection
+        const loiBinhItems = await loiBinhCollection
+          .aggregate([{ $sample: { size: 3 } }]) // Adjust the size here if you want to get less or more documents
+          .toArray();
+    
+        // Send the LoiBinh items as a response
+        res.json(loiBinhItems);
+      } catch (error) {
+        console.error("Error fetching LoiBinh documents:", error);
+        res.status(500).json({ error: "Failed to fetch LoiBinh documents" });
+      }
+    });
+
     app.post("/api/boi-ngay-sinh", cors(), async (req, res) => {
       const { day, month, year } = req.body;
 

@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/react';
 
 
 function DashBoard() {
+    //dashboard3
     const [tarotCards, setTarotCards] = useState([]);
     const [selectedCard, setSelectedCard] = useState(null);
     const [summarizedMeaning, setSummarizedMeaning] = useState('');
@@ -41,6 +42,23 @@ function DashBoard() {
     const closeFullscreen = () => {
         setSelectedCard(null);
     };
+
+
+    // dashboard4
+    const [loiBinh, setLoiBinh] = useState([]);
+
+    useEffect(() => {
+        const fetchLoiBinh = async () => {
+            try {
+                const response = await axios.post('path to your api/loi-binh-dashboard');
+                setLoiBinh(response.data); // Assuming the API returns an array of LoiBinh items
+            } catch (error) {
+                console.error('Error fetching Loi Binh:', error);
+            }
+        };
+
+        fetchLoiBinh();
+    }, []);
 
     return (
         <div className={styles['BigDashBoard']}>
@@ -124,26 +142,18 @@ function DashBoard() {
             </div>
 
             <div className={styles['DashBoard4']}>
-                <div>
-                    <h1>Lời bình hữu duyên</h1>
-                </div>
-                <div className={styles['comment']}>
-                    <div className={styles['mini-container1']}>  
-                        <p>Trang web hay qua</p>
-                        <p>Kien</p>              
-                    </div>
-
-                    <div className={styles['mini-container1']}>
-                        <p>Trang web hay qua</p>
-                        <p>Kien</p>        
-                    </div>
-
-                    <div className={styles['mini-container1']}>
-                        <p>Trang web hay qua</p>
-                        <p>Kien</p>         
-                    </div>
-                </div>
+            <div>
+                <h1>Lời bình hữu duyên</h1>
             </div>
+            <div className={styles['comment']}>
+                {loiBinh.length > 0 && loiBinh.map((item, index) => (
+                    <div key={index} className={styles['mini-container1']}>
+                        <p>{item.value}</p>
+                        <p>{item.name}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
             <Analytics />
         </div>
     );
