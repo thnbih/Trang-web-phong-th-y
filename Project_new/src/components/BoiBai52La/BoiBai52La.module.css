@@ -153,3 +153,34 @@
     justify-content: center;
     margin-top: 20px; /* Adjust this value as needed */
 }
+
+/* Add this CSS rule */
+.Button::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ff5e62, #ff9966, #ff5e62, #ff9966);
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 7px;
+}
+
+/* Add this keyframe animation */
+@keyframes glowing {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}

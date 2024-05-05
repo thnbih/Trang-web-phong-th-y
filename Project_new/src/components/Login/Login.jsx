@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
-import {  Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { getCookie } from './cookie';
 import Detail_Login  from './detail-login';
-
+import { getUser } from '../auth/auth';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -40,7 +40,10 @@ const Login = () => {
       alert(JSON.stringify(error.response.data.error));
     }
   };
+  const origin = window.location.origin;
+  const user = getUser(origin);
   const token = getCookie("token");
+
 
   return (
     <>
@@ -53,7 +56,5 @@ const Login = () => {
     </>
   );
 };
-
-
 
 export default Login;

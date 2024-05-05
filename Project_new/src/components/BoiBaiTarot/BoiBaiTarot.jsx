@@ -110,7 +110,7 @@ function BoiBaiTarot() {
                 <p className={styles['text-Boi-Bai-Tarot']}>Bói bài Tarot - môn nghệ thuật đọc vị tương lai qua những lá bài huyền bí.
                     Nếu bạn muốn biết số phận của mình trong tương lai gần, hãy thử rút một lá bài Tarot xem sao.
                     Nhưng xin lưu ý, nếu kết quả không như ý muốn, đừng vội buồn nhé, vì biết đâu bài nó "lẫy" bạn thôi!</p>
-                <p className={styles['text-Boi-Bai']}>Hướng dẫn: Suy nghĩ về một vấn đề bạn cần tham khảo, ấn vào nút lật bài, xem thông điệp từng lá bài bằng cách chọn vào lá bài mà bạn muốn. Ngoài ra, có thể xem tóm tắt bên dưới</p>
+                <p className={styles['text-Boi-Bai-Tarot']}>Hướng dẫn: Suy nghĩ về một vấn đề bạn cần tham khảo, ấn vào nút lật bài, xem thông điệp từng lá bài bằng cách chọn vào lá bài mà bạn muốn. Ngoài ra, có thể xem tóm tắt bên dưới</p>
 
             </div>
             <div className={styles['Boi-bai-area']}>
