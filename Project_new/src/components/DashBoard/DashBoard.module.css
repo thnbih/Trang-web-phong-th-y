@@ -26,6 +26,7 @@
     margin-bottom: 100px;
     margin-top: 50px;
 }
+
 .DashBoard3{
     margin-top: 100px;
     background-size: 100% 100%;
@@ -99,6 +100,14 @@
     justify-content: space-between;
 }
 
+.Mean{
+    flex: 2;
+}
+
+.Card-area{
+    flex: 1;
+}
+
 h1{
     color: #FAACA8;
     margin-bottom: 0;
@@ -112,6 +121,7 @@ p{
     margin-top: 0;
     margin-bottom: 0;
     font-family: 'Lucida Sans';
+    color: #FAACA8;
 }
 
 .img{

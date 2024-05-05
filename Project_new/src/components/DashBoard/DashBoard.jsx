@@ -1,9 +1,47 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styles from './DashBoard.module.css'; 
 import { Analytics } from '@vercel/analytics/react';
 
 
 function DashBoard() {
+    const [tarotCards, setTarotCards] = useState([]);
+    const [selectedCard, setSelectedCard] = useState(null);
+    const [summarizedMeaning, setSummarizedMeaning] = useState('');
+
+    useEffect(() => {
+        const fetchTarotCards = async () => {
+            try {
+                const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/lat-bai-tarot-dashboard');
+                summarizeCardMeanings(response.data);
+            } catch (error) {
+                console.error('Error fetching Tarot cards:', error);
+            }
+        };
+
+        fetchTarotCards();
+    }, []);
+
+    const summarizeCardMeanings = async (cards) => {
+        try {
+            const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/summarize', cards);
+            const summarizedMeaning = response.data.summarizedMeaning;
+            setSummarizedMeaning(summarizedMeaning);
+            setTarotCards(cards); // Set the cards here
+            console.log('Summarized Meaning:', summarizedMeaning);
+        } catch (error) {
+            console.error('Error summarizing card meanings:', error);
+        }
+    };
+
+    const handleCardClick = (card) => {
+        setSelectedCard(card);
+    };
+
+    const closeFullscreen = () => {
+        setSelectedCard(null);
+    };
+
     return (
         <div className={styles['BigDashBoard']}>
             <div className={styles['Welcomebanner']}>
@@ -28,7 +66,30 @@ function DashBoard() {
             </div>
 
             <div className={styles['DashBoard2']}>
-                <div className={styles['content']}>             
+                <div className={styles['Mean']}>
+                    {summarizedMeaning && (
+                        <div className={styles.summarizedMeaning}>
+                            <h3>Ý nghĩa lá bài:</h3>
+                            <p>{summarizedMeaning}</p>
+                        </div>
+                    )}
+                </div>
+
+                <div className={styles['Card-area']}>
+                    {tarotCards.map((card, index) => (
+                        <div
+                            key={index}
+                            className={styles['Card']}
+                            onClick={() => handleCardClick(card)}
+                        >
+                            <img src={card.img} alt={card.Name} />
+                        </div>
+                    ))}
+                    <h2>Hữu duyên tarot</h2>
+                    <p>Quẻ tarot hữu duyên cho quý vị ghé thăm trang web</p> 
+                </div>
+
+                {/* <div className={styles['content']}>             
                     <h2>Lá bài hôm nay:</h2>
                     <p>Ý nghĩa:</p>
                 </div>
@@ -36,8 +97,23 @@ function DashBoard() {
                     <img alt="" className={styles['img']} src="https://static.overlay-tech.com/assets/12a3b79e-74fd-48a9-b263-11ac85421bd8.png" />
                     <h2>Hữu duyên tarot</h2>
                     <p>Quẻ tarot hữu duyên cho quý vị ghé thăm trang web</p> 
-                </div>
+                </div> */}
             </div>
+            {selectedCard && (
+                <div className={styles.fullscreen}>
+                    <div className={styles.fullscreenContent}>
+                        <img src={selectedCard.img} alt={selectedCard.Name} />
+                        <div className={styles.cardMeaning}>
+                            <h2>{selectedCard.Name}</h2>
+                            <p>{selectedCard.Mean}</p>
+                        </div>
+                        <button className={styles.closeButton} onClick={closeFullscreen}>
+                            X
+                        </button>
+                    </div>
+                </div>
+            )}
+            <Analytics />
 
             <div className={styles['DashBoard3']}>
                 <h2>Xem bói online</h2>
