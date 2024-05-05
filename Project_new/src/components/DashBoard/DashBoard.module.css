@@ -59,6 +59,8 @@
 .content{
     flex: 2;
     color: #FAACA8;
+    font-size: 20px;
+    line-height: 40px;
 }
 .mini-container2{
     display: flex;
@@ -109,6 +111,7 @@ h2{
 p{
     margin-top: 0;
     margin-bottom: 0;
+    font-family: 'Lucida Sans';
 }
 
 .img{

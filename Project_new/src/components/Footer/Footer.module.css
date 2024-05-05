@@ -34,14 +34,16 @@
 h3 {
     border: none;
     margin-bottom: 5px;
-    font-size: 10px;
+    font-size: 20px;
+    color: #FAACA8;
 }
 
 li {
     padding-top: 2px;
     text-align: left;
-    font-size: 10px;
+    font-size: 20px;
     list-style-type: none;
+    color: #FAACA8;
 }
 
 /* Styles for smaller screens */

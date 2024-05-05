@@ -17,7 +17,13 @@ function DashBoard() {
                     <img alt="" className={styles['img']} src="https://cdn.sforum.vn/sforum/wp-content/uploads/2024/02/lich-am-thang-5-nam-2024-2.png" />
                 </div>
                 <div className={styles['content']}>
-                    <p>Ngày:</p>
+                    <p><strong>- Ngày Dương lịch:</strong> 06-05-2024 (Thứ hai)</p>
+                    <p><strong>- Ngày Âm lịch:</strong> 28-03-2024 </p>
+                    <p>- Tiết: <strong>Lập hạ</strong></p>
+                    <p>- Ngày <strong>canh ngọ</strong> tháng <strong>mậu thìn</strong> năm <strong>giáp thìn</strong></p>
+                    <p><strong>- Ngày trong tuần:</strong> Thứ 2</p>
+                    <p>- Ngày <strong>Bạch Hổ Túc</strong>: cấm đi xa, làm việc gì cũng không thành công, rất xấu trong mọi việc</p>
+                    <p>- Giờ <strong>Hoàng Đạo</strong>: Tý (23-1), Sửu (1-3), Mão (5-7), Ngọ (11-13), Thân (15-17), Dậu (17-19)</p>
                 </div>
             </div>
 
