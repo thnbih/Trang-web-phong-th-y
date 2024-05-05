@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 const { ObjectId } = require("mongodb");
 dotenv.config();
+const Groq = require('groq-sdk');
 
 class MySummarizationPipeline {
   static task = "summarization";
@@ -28,26 +29,15 @@ class MySummarizationPipeline {
   }
 }
 
-const summarizeCardMeanings = async (cards) => {
-  const summarizationPipeline = await MySummarizationPipeline.getInstance();
-
-  const cardMeanings = cards.map((card) => card.meaning);
-  const concatenatedMeanings = cardMeanings.join(" ");
-
-  const summarizedMeaning = await summarizationPipeline(concatenatedMeanings);
-
-  return summarizedMeaning;
-};
-
 // Parse request body
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST", "OPTIONS", "PATCH"],
+    origin: 'https://coiboicuchay.vercel.app',
+    methods: ['GET', 'POST', 'OPTIONS', 'PATCH'],
   })
 );
-app.options("*", cors());
+app.options('*', cors());
 app.use(
   session({
     secret: "thong diep vu tru",
@@ -70,15 +60,19 @@ const client = new MongoClient(connectionString, {
   },
 });
 
-client
-  .connect()
+app.get('/', (req, res) => {
+  res.status(200).send('BE of An Nhien!');
+})
+
+
+client.connect()
   .then(() => {
     console.log("Connected to MongoDB");
 
     const db = client.db("user");
 
     // API endpoint for user registration
-    app.post("/api/register", async (req, res) => {
+    app.post("/api/register", cors(), async (req, res) => {
       const { username, password } = req.body;
 
       try {
@@ -109,7 +103,7 @@ client
     });
 
     // API endpoint for user login
-    app.post("/api/login", async (req, res) => {
+    app.post("/api/login", cors(), async (req, res) => {
       const { username, password } = req.body;
 
       try {
@@ -171,7 +165,7 @@ client
       }
     });
 
-    app.post("/lat-bai-tay", async (req, res) => {
+    app.post("/api/lat-bai-tay", cors(), async (req, res) => {
       try {
         const db = client.db("52la");
 
@@ -194,7 +188,7 @@ client
       }
     });
 
-    app.post("/lat-bai-tarot", async (req, res) => {
+    app.post("/api/lat-bai-tarot", cors(), async (req, res) => {
       try {
         const db = client.db("tarot"); // Assuming you have a separate database for Tarot cards
 
@@ -217,7 +211,7 @@ client
       }
     });
 
-    app.post("/boi-ngay-sinh", async (req, res) => {
+    app.post("/api/boi-ngay-sinh", cors(), async (req, res) => {
       const { day, month, year } = req.body;
 
       // Validate the required fields
@@ -279,7 +273,7 @@ client
     });
 
     //detail user
-    app.post("/api/detail-user", async (req, res) => {
+    app.post("/api/detail-user", cors(), async (req, res) => {
       const { _id } = req.body;
       try {
         const objectId = new ObjectId(_id);
@@ -298,7 +292,7 @@ client
       }
     });
 
-    app.patch("/api/detail-user", async (req, res) => {
+    app.patch("/api/detail-user", cors(), async (req, res) => {
       const { _id, values } = req.body;
       try {
         // Chuyển đổi chuỗi _id thành ObjectId
@@ -321,12 +315,73 @@ client
         res.status(500).json({ error: "Failed to update user" });
       }
     });
-
-    // Start the server
-    app.listen(5000, () => {
-      console.log("Server is running on port 5000");
+    const port = process.env.PORT || 5000;
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
     });
   })
   .catch((err) => {
     console.error("Failed to connect to MongoDB", err);
   });
+
+const groq = new Groq({
+  apiKey: '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'
+});
+
+const summarizeCardMeaningsWithGroq = async (cards) => {
+  const cardMeanings = cards.map(card => card.Mean);
+  const concatenatedMeanings = cardMeanings.join(' ');
+
+  const prompt = `Act as a fortune teller for teenagers and middle age. You are an expert in your professional. Your answers should be straightforward and convincing. You must only talk about your profession, nothing else. Your primary language is Vietnamese and you must answer in Vietnamese. Your job is to summarize the meanings of these cards: ${concatenatedMeanings} and give the user the message that the cards are trying to tell. You must call the user as 'con'. Your name is 'Thầy Rùa'.`;
+
+  const chatCompletion = await getGroqChatCompletion(prompt);
+  return chatCompletion.choices[0]?.message?.content || '';
+};
+
+const summarizeDOBMeaningsWithGroq = async (cards) => {
+  const cardMeanings = cards.map(card => card.Mean);
+  const concatenatedMeanings = cardMeanings.join(' ');
+
+  const prompt = `Act as a fortune teller for teenagers and middle age. You are an expert in your professional. Your answers should be straightforward and convincing. You must only talk about your profession, nothing else. Your primary language is Vietnamese and you must answer in Vietnamese. Your job is to summarize these meanings: ${concatenatedMeanings} and give the user the overall message. You must call the user as 'con'. Your name is 'Thầy Rùa'.`;
+
+  const chatCompletion = await getGroqChatCompletion(prompt);
+  return chatCompletion.choices[0]?.message?.content || '';
+};
+
+async function getGroqChatCompletion(prompt) {
+  return groq.chat.completions.create({
+    messages: [
+      {
+        role: 'user',
+        content: prompt,
+      },
+    ],
+    model: 'gemma-7b-it',
+  });
+}
+
+app.post('/api/summarize', cors(), async (req, res) => {
+  try {
+    const cards = req.body;
+    const summarizedMeaning = await summarizeCardMeaningsWithGroq(cards);
+
+    res.status(200).json({ summarizedMeaning });
+  } catch (error) {
+    console.error('Error summarizing card meanings:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.post('/api/get-overall-message', cors(), async (req, res) => {
+  try {
+    const meanings = req.body;
+    const summarizedMeaning = await summarizeDOBMeaningsWithGroq(meanings);
+
+    res.status(200).json({ summarizedMeaning });
+  } catch (error) {
+    console.error('Error summarizing card meanings:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+module.exports = app;
