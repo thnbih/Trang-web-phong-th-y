@@ -40,6 +40,11 @@ const Detail_Login = () => {
             setCookie("username", response.data.data.user.username, time);
             setCookie("token", response.data.data.access_token, time);
 
+            const origin = window.location.origin;
+            localStorage.setItem(`${origin}_user`, JSON.stringify(response.data.data.user));
+            localStorage.setItem(`${origin}_access_token`, response.data.data.access_token);
+            localStorage.setItem(`${origin}_refresh_token`, response.data.data.refresh_token);
+
             navigate('/');
         } catch (error) {
             // Handle login error
