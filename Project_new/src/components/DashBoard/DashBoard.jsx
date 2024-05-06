@@ -14,7 +14,7 @@ function DashBoard() {
     useEffect(() => {
         const fetchTarotCards = async () => {
             try {
-                const response = await axios.post('http://localhost:5000/api/lat-bai-tarot-dashboard');
+                const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/lat-bai-tarot-dashboard');
                 summarizeCardMeanings(response.data);
             } catch (error) {
                 console.error('Error fetching Tarot cards:', error);
@@ -26,7 +26,7 @@ function DashBoard() {
 
     const summarizeCardMeanings = async (cards) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/summarize', cards);
+            const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/summarize', cards);
             const summarizedMeaning = response.data.summarizedMeaning;
             setSummarizedMeaning(summarizedMeaning);
             setTarotCards(cards);
@@ -53,7 +53,7 @@ function DashBoard() {
     useEffect(() => {
         const fetchLoiBinh = async () => {
             try {
-                const response = await axios.post('http://localhost:5000/api/loi-binh-dashboard');
+                const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/loi-binh-dashboard');
                 setLoiBinh(response.data);
             } catch (error) {
                 console.error('Error fetching Loi Binh:', error);

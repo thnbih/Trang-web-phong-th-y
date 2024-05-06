@@ -28,7 +28,7 @@ function InfoUser() {
   const fetchApi = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/detail-user",
+        "https://coiboicuchay-be.azurewebsites.net/api/detail-user",
         {
           _id,
         }
@@ -48,7 +48,7 @@ function InfoUser() {
   const handleFinish = async (values) => {
     try {
       const response = await axios.patch(
-        "http://localhost:5000/api/detail-user",
+        "https://coiboicuchay-be.azurewebsites.net/api/detail-user",
         {
           _id,
           values,

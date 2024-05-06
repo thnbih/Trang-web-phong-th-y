@@ -25,7 +25,7 @@ const Detail_Login = () => {
 
         try {
             // Send the login request to the backend
-            const response = await axios.post('http://localhost:5000/api/login', {
+            const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/login', {
                 username,
                 password,
             });
@@ -39,11 +39,6 @@ const Detail_Login = () => {
             setCookie("id", response.data.data.user._id, time);
             setCookie("username", response.data.data.user.username, time);
             setCookie("token", response.data.data.access_token, time);
-
-            const origin = window.location.origin;
-            localStorage.setItem(`${origin}_user`, JSON.stringify(response.data.data.user));
-            localStorage.setItem(`${origin}_access_token`, response.data.data.access_token);
-            localStorage.setItem(`${origin}_refresh_token`, response.data.data.refresh_token);      
 
             navigate('/');
         } catch (error) {
