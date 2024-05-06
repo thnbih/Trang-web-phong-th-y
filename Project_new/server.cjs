@@ -14,7 +14,7 @@ const Groq = require('groq-sdk');
 app.use(express.json());
 app.use(
   cors({
-    origin: 'https://coiboicuchay.vercel.app',
+    origin: 'http://localhost:5173',
     methods: ['GET', 'POST', 'OPTIONS', 'PATCH'],
   })
 );
@@ -640,7 +640,7 @@ const summarizeCardMeaningsWithGroq = async (cards) => {
   const cardMeanings = cards.map(card => card.Mean);
   const concatenatedMeanings = cardMeanings.join(' ');
 
-  const prompt = `Act as a fortune teller for teenagers and middle age. You are an expert in your professional. Your answers should be straightforward and convincing. You must only talk about your profession, nothing else. Your primary language is Vietnamese and you must answer in Vietnamese. Your job is to summarize the meanings of these cards: ${concatenatedMeanings} and give the user the message that the cards are trying to tell. You must call the user as 'con' and call yourself 'ta'. Your name is 'Thầy Rùa'.`;
+  const prompt = `Act as a fortune teller for teenagers and middle age. You are an expert in your professional. Your answers should be straightforward and convincing. You must only talk about your profession, nothing else. Your primary language is Vietnamese and you must answer in Vietnamese. Your job is to summarize the meanings of these cards: ${concatenatedMeanings} and give the user the message that the cards are trying to tell. You must call the user as 'con' and call yourself 'ta'. Your name is 'Thầy Rùa'. Your answer should always be in plaintext, do not add styling.`;
 
   const chatCompletion = await getGroqChatCompletion(prompt);
   return chatCompletion.choices[0]?.message?.content || '';
@@ -650,7 +650,7 @@ const summarizeDOBMeaningsWithGroq = async (cards) => {
   const cardMeanings = cards.map(card => card.Mean);
   const concatenatedMeanings = cardMeanings.join(' ');
 
-  const prompt = `Act as a fortune teller for teenagers and middle age. You are an expert in your professional. Your answers should be straightforward and convincing. You must only talk about your profession, nothing else. Your primary language is Vietnamese and you must answer in Vietnamese. Your job is to summarize these meanings: ${concatenatedMeanings} and give the user the overall message. You must call the user as 'con' and call yourself 'ta'. Your name is 'Thầy Rùa'.`;
+  const prompt = `Act as a fortune teller for teenagers and middle age. You are an expert in your professional. Your answers should be straightforward and convincing. You must only talk about your profession, nothing else. Your primary language is Vietnamese and you must answer in Vietnamese. Your job is to summarize these meanings: ${concatenatedMeanings} and give the user the overall message. You must call the user as 'con' and call yourself 'ta'. Your name is 'Thầy Rùa'. Your answer should always be in plaintext, do not add styling.`;
 
   const chatCompletion = await getGroqChatCompletion(prompt);
   return chatCompletion.choices[0]?.message?.content || '';

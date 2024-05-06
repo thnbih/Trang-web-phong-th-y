@@ -3,7 +3,6 @@
     justify-content: space-between;
     align-items: flex-start;
     flex-wrap: wrap;
-    font-size: 10px;
     padding: 10px;
 }
 
@@ -49,9 +48,9 @@ li {
 /* Styles for smaller screens */
 @media (max-width: 768px) {
     .footer {
-        flex-direction: row; /* Change to row direction */
-        justify-content: center; /* Center the items horizontally */
-        align-items: flex-start; /* Align items to the top */
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center; 
         padding: 5px;
     }
 

@@ -25,7 +25,7 @@ const Detail_Login = () => {
 
         try {
             // Send the login request to the backend
-            const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/login', {
+            const response = await axios.post('http://localhost:5000/api/login', {
                 username,
                 password,
             });

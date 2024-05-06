@@ -1,3 +1,5 @@
+@import '../BoiBaiTarot/BoiBaiTarot.module.css';
+
 .BigDashBoard{
     padding-top: 10px;
 }
@@ -19,12 +21,13 @@
     margin-top: 50px;
 }
 .DashBoard2{
-    padding-top: 80px;
+    /* padding-top: 80px; */
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 100px;
     margin-top: 50px;
+    text-align: justify;
 }
 
 .DashBoard3{
@@ -32,7 +35,7 @@
     background-size: 100% 100%;
     background-position: center;
     background-image: url("https://static.overlay-tech.com/assets/06e9080b-50ea-4c25-982c-910257bd35a5.png");
-    padding: 100px 515px 76px;
+    padding: 100px 100px 76px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,12 +43,10 @@
     margin-top: 50px;
 }
 .DashBoard4{
-    padding-top: 80px;
+    /* padding-top: 80px; */
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 100px;
     margin-bottom: 200px;
-    margin-bottom: 100px;
     margin-top: 50px;
 }
 
@@ -96,9 +97,20 @@
 
 .comment{
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: space-between;
+    margin-top: 15px;
 }
+
+.comment p:first-child {
+    font-style: italic;
+}
+
+.comment p:last-child {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
 
 .Mean{
     flex: 2;
