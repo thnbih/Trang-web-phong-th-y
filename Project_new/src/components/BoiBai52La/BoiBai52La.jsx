@@ -31,7 +31,6 @@ function BoiBai52La() {
                 }
                 const response = await axios.post('http://localhost:5000/api/lat-bai-tay', requestBody, { headers });
                 const { cards, summarizedMeaning } = response.data;
-                console.log(cards);
                 if (summarizedMeaning) {
                     setSummarizedMeaning(summarizedMeaning);
                     setCards(cards);

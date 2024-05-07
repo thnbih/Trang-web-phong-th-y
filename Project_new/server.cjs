@@ -381,13 +381,14 @@ client.connect()
           const currentTime = new Date();
           const storedResponseTime = new Date(storedResponse.timestamp);
           const timeDiff = currentTime - storedResponseTime;
-          const oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+          const oneHour = 60 * 60 * 1000; // 1 hour in milliseconds
 
-          if (timeDiff < oneDay) {
-            // Stored response is within 24 hours, send it back to the client
+          if (timeDiff < oneHour) {
+            // Stored response is within 1 hour, send it back to the client
             res.json({
               cards: storedResponse.result,
-              summarizedMeaning: storedResponse.summarizedMeaning});
+              summarizedMeaning: storedResponse.summarizedMeaning
+            });
             return;
           }
         }
@@ -427,12 +428,12 @@ client.connect()
           const currentTime = new Date();
           const storedResponseTime = new Date(storedResponse.timestamp);
           const timeDiff = currentTime - storedResponseTime;
-          const oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+          const oneHour = 60 * 60 * 1000; // 1 hour in milliseconds
 
-          if (timeDiff < oneDay) {
-            // Stored response is within 24 hours, send it back to the client
+          if (timeDiff < oneHour) {
+            // Stored response is within 1 hour, send it back to the client
             res.json({
-              tarotCards: storedResponse.result,
+              cards: storedResponse.result,
               summarizedMeaning: storedResponse.summarizedMeaning
             });
             return;
@@ -474,34 +475,34 @@ client.connect()
       }
     
       try {
-        const userDB = client.db("user");
+        // const userDB = client.db("user");
     
-        // Check if the user has an existing session
-        const userSession = await userDB.collection("userSessions").findOne({ userId });
+        // // Check if the user has an existing session
+        // const userSession = await userDB.collection("userSessions").findOne({ userId });
     
-        if (userSession && userSession.history && userSession.history["boi-ngay-sinh"]) {
-          // User session exists, check if the same date of birth has been queried within the past 24 hours
-          const storedResponses = userSession.history["boi-ngay-sinh"];
-          const currentTime = new Date();
+        // if (userSession && userSession.history && userSession.history["boi-ngay-sinh"]) {
+        //   // User session exists, check if the same date of birth has been queried within the past 24 hours
+        //   const storedResponses = userSession.history["boi-ngay-sinh"];
+        //   const currentTime = new Date();
     
-          for (const storedResponse of storedResponses) {
-            if (
-              storedResponse.day === day &&
-              storedResponse.month === month &&
-              storedResponse.year === year
-            ) {
-              const storedResponseTime = new Date(storedResponse.timestamp);
-              const timeDiff = currentTime - storedResponseTime;
-              const oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+        //   for (const storedResponse of storedResponses) {
+        //     if (
+        //       storedResponse.day === day &&
+        //       storedResponse.month === month &&
+        //       storedResponse.year === year
+        //     ) {
+        //       const storedResponseTime = new Date(storedResponse.timestamp);
+        //       const timeDiff = currentTime - storedResponseTime;
+        //       const oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
     
-              if (timeDiff < oneDay) {
-                // The same date of birth has been queried within the past 24 hours
-                res.json({ message: "This date of birth has been queried before." });
-                return;
-              }
-            }
-          }
-        }
+        //       if (timeDiff < oneDay) {
+        //         // The same date of birth has been queried within the past 24 hours
+        //         res.json({ message: "This date of birth has been queried before." });
+        //         return;
+        //       }
+        //     }
+        //   }
+        // }
     
         // If no stored response or the stored response is older than 24 hours, generate a new response
         const boiNgaySinhDb = client.db("BoiNgaySinh");
@@ -547,16 +548,17 @@ client.connect()
           month: month,
           year: year,
           zodiacSign: zodiacSign ? zodiacSign.Value : null,
+          dayMeaning: dayMeaning ? dayMeaning.Mean : null,
           monthMeaning: monthMeaning ? monthMeaning.Mean : null,
           yearMeaning: yearMeaning ? yearMeaning["Ý nghĩa tuổi"] : null,
           soChuDao: soChuDaoMeaning ? soChuDaoMeaning.Mean : null,
         };
     
         // Save the new response in the user's session
-        await saveApiResponseInUserSession(userId, "boi-ngay-sinh", {
-          ...result,
-          timestamp: new Date(),
-        });
+        // await saveApiResponseInUserSession(userId, "boi-ngay-sinh", {
+        //   ...result,
+        //   timestamp: new Date(),
+        // });
     
         res.json(result);
       } catch (error) {
@@ -640,7 +642,7 @@ const summarizeCardMeaningsWithGroq = async (cards) => {
   const cardMeanings = cards.map(card => card.Mean);
   const concatenatedMeanings = cardMeanings.join(' ');
 
-  const prompt = `Act as a fortune teller for teenagers and middle age. You are an expert in your professional. Your answers should be straightforward and convincing. You must only talk about your profession, nothing else. Your primary language is Vietnamese and you must answer in Vietnamese. Your job is to summarize the meanings of these cards: ${concatenatedMeanings} and give the user the message that the cards are trying to tell. You must call the user as 'con' and call yourself 'ta'. Your name is 'Thầy Rùa'. Your answer should always be in plaintext, do not add styling.`;
+  const prompt = `Act as a fortune teller for teenagers and middle age. You are an expert in your professional. Your answers should be straightforward and convincing. You must only talk about your profession, nothing else. Your primary language is Vietnamese and you must answer in Vietnamese. Your job is to summarize the meanings of these cards: ${concatenatedMeanings} and give the user the message that the cards are trying to tell. You must call the user as 'con' and call yourself 'ta'. Your name is 'Thầy Rùa'. Your answer should always be in plaintext, do not add styling like bold text or anything like that. Try to be as funny as possible. Never call yourself 'tao'.`;
 
   const chatCompletion = await getGroqChatCompletion(prompt);
   return chatCompletion.choices[0]?.message?.content || '';
@@ -650,7 +652,7 @@ const summarizeDOBMeaningsWithGroq = async (cards) => {
   const cardMeanings = cards.map(card => card.Mean);
   const concatenatedMeanings = cardMeanings.join(' ');
 
-  const prompt = `Act as a fortune teller for teenagers and middle age. You are an expert in your professional. Your answers should be straightforward and convincing. You must only talk about your profession, nothing else. Your primary language is Vietnamese and you must answer in Vietnamese. Your job is to summarize these meanings: ${concatenatedMeanings} and give the user the overall message. You must call the user as 'con' and call yourself 'ta'. Your name is 'Thầy Rùa'. Your answer should always be in plaintext, do not add styling.`;
+  const prompt = `Act as a fortune teller for teenagers and middle age. You are an expert in your professional. Your answers should be straightforward and convincing. You must only talk about your profession, nothing else. Your primary language is Vietnamese and you must answer in Vietnamese. Your job is to summarize these meanings: ${concatenatedMeanings} and give the user the overall message. You must call the user as 'con' and call yourself 'ta'. Your name is 'Thầy Rùa'. Your answer should always be in plaintext, do not add styling like bold text or anything like that. Try to be as funny as possible. Never call yourself 'tao'.`;
 
   const chatCompletion = await getGroqChatCompletion(prompt);
   return chatCompletion.choices[0]?.message?.content || '';

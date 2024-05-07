@@ -46,6 +46,8 @@ function Header() {
             alt=""
             className={styles.logo}
             src="https://static.overlay-tech.com/assets/9b8f6e55-f5d0-42d0-b508-be81c2425e2f.png"
+            width={40}
+            height={35.56}
           />
           <Link className={styles.anNhien} to="/">
             An Nhiên

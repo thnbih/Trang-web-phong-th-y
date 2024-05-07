@@ -23,6 +23,7 @@
 .DashBoard2{
     /* padding-top: 80px; */
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 100px;
@@ -114,6 +115,7 @@
 
 .Mean{
     flex: 2;
+    text-align: center;
 }
 
 .Card-area{

@@ -11,8 +11,6 @@ function BoiBaiTarot() {
     const [selectedCard, setSelectedCard] = useState(null);
     const [summarizedMeaning, setSummarizedMeaning] = useState('');
 
-    // BoiBaiTarot.jsx
-    // boi-bai-tarot
     useEffect(() => {
         const fetchTarotCards = async () => {
             try {

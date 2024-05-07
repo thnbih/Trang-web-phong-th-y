@@ -30,7 +30,6 @@ function DashBoard() {
             const summarizedMeaning = response.data.summarizedMeaning;
             setSummarizedMeaning(summarizedMeaning);
             setTarotCards(cards);
-            console.log('Summarized Meaning:', summarizedMeaning);
         } catch (error) {
             console.error('Error summarizing card meanings:', error);
         }
@@ -39,11 +38,6 @@ function DashBoard() {
     const handleCardClick = (card) => {
         setSummarizedMeaning(card.Mean);
         setShowFullscreen(true);
-    };
-
-    const closeFullscreen = () => {
-        setSummarizedMeaning('');
-        setShowFullscreen(false);
     };
 
 
@@ -115,7 +109,7 @@ function DashBoard() {
                         <button
                             className={styles.closeButton}
                             onClick={() => {
-                                setSummarizedMeaning('');
+                                // setSummarizedMeaning('');
                                 setShowFullscreen(false);
                             }}
                         >
