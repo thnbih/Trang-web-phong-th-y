@@ -125,13 +125,19 @@ function DashBoard() {
                 <div className={styles.fullscreen}>
                     <div className={styles.fullscreenContent}>
                         <div className={styles.summarizedMeaning}>
-                            <h3>Ý nghĩa tổng hợp:</h3>
-                            <p>{summarizedMeaning}</p>
+                            <h2>Tóm tắt ý nghĩa</h2>
+                            <div className={styles['result-item']}>
+                                <div className={styles['result-label']}>Kết quả</div>
+                                <div className={styles['result-value']}>{summarizedMeaning}</div>
+                            </div>
+                            <div className={styles['overall-message']}>
+                                <h3>Lời nhắn</h3>
+                                <p>Ồ, quẻ bài này có vẻ thú vị đây! Nhưng đừng dừng lại ở đó, hãy khám phá thêm những điều bất ngờ đang chờ đón bạn trong các loại hình coi bói khác mà chúng tôi cung cấp. Biết đâu, bạn sẽ tìm thấy chìa khóa cho những bí ẩn trong cuộc sống của mình!</p>
+                            </div>
                         </div>
                         <button
                             className={styles.closeButton}
                             onClick={() => {
-                                // setSummarizedMeaning('');
                                 setShowFullscreen(false);
                             }}
                         >
