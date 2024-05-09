@@ -5,7 +5,7 @@
  * this copyright notice appears in all copies.
  */
 
-var ABOUT = "\u00C2m l\u1ECBch Vi\u1EC7t Nam - Version 0.8"+"\n\u00A9 2004 H\u1ED3 Ng\u1ECDc \u0110\u1EE9c [http://come.to/duc]";
+var ABOUT = "\u00C2m l\u1ECBch Vi\u1EC7t Nam - Version 0.8" + "\n\u00A9 2004 H\u1ED3 Ng\u1ECDc \u0110\u1EE9c [http://come.to/duc]";
 var TK19 = new Array(
 	0x30baa3, 0x56ab50, 0x422ba0, 0x2cab61, 0x52a370, 0x3c51e8, 0x60d160, 0x4ae4b0, 0x376926, 0x58daa0,
 	0x445b50, 0x3116d2, 0x562ae0, 0x3ea2e0, 0x28e2d2, 0x4ec950, 0x38d556, 0x5cb520, 0x46b690, 0x325da4,
@@ -46,16 +46,16 @@ var TK21 = new Array(
 ); /* Years 2000-2099 */
 
 var TK22 = new Array(
-		0x4eb520, 0x38d727, 0x5eada0, 0x4a55b0, 0x362db5, 0x5a45b0, 0x44a2b0, 0x2eb2b4, 0x54a950, 0x3cb559,
-		0x626b20, 0x4cad50, 0x385766, 0x5c5370, 0x484570, 0x326574, 0x5852b0, 0x406950, 0x2a7953, 0x505aa0,
-		0x3baaa7, 0x5ea6d0, 0x4a4ae0, 0x35a2e5, 0x5aa550, 0x42d2a0, 0x2de2a4, 0x52d550, 0x3e5abb, 0x6256a0,
-		0x4c96d0, 0x3949b6, 0x5e4ab0, 0x46a8d0, 0x30d4b5, 0x56b290, 0x40b550, 0x2a6d52, 0x504da0, 0x3b9567,
-		0x609570, 0x4a49b0, 0x34a975, 0x5a64b0, 0x446a90, 0x2cba94, 0x526b50, 0x3e2b60, 0x28ab61, 0x4c9570,
-		0x384ae6, 0x5cd160, 0x46e4a0, 0x2eed25, 0x54da90, 0x405b50, 0x2c36d3, 0x502ae0, 0x3a93d7, 0x6092d0,
-		0x4ac950, 0x32d556, 0x58b4a0, 0x42b690, 0x2e5d94, 0x5255b0, 0x3e25fa, 0x6425b0, 0x4e92b0, 0x36aab6,
-		0x5c6950, 0x4674a0, 0x31b2a5, 0x54ad50, 0x4055a0, 0x2aab73, 0x522570, 0x3a5377, 0x6052b0, 0x4a6950,
-		0x346d56, 0x585aa0, 0x42ab50, 0x2e56d4, 0x544ae0, 0x3ca570, 0x2864d2, 0x4cd260, 0x36eaa6, 0x5ad550,
-		0x465aa0, 0x30ada5, 0x5695d0, 0x404ad0, 0x2aa9b3, 0x50a4d0, 0x3ad2b7, 0x5eb250, 0x48b540, 0x33d556
+	0x4eb520, 0x38d727, 0x5eada0, 0x4a55b0, 0x362db5, 0x5a45b0, 0x44a2b0, 0x2eb2b4, 0x54a950, 0x3cb559,
+	0x626b20, 0x4cad50, 0x385766, 0x5c5370, 0x484570, 0x326574, 0x5852b0, 0x406950, 0x2a7953, 0x505aa0,
+	0x3baaa7, 0x5ea6d0, 0x4a4ae0, 0x35a2e5, 0x5aa550, 0x42d2a0, 0x2de2a4, 0x52d550, 0x3e5abb, 0x6256a0,
+	0x4c96d0, 0x3949b6, 0x5e4ab0, 0x46a8d0, 0x30d4b5, 0x56b290, 0x40b550, 0x2a6d52, 0x504da0, 0x3b9567,
+	0x609570, 0x4a49b0, 0x34a975, 0x5a64b0, 0x446a90, 0x2cba94, 0x526b50, 0x3e2b60, 0x28ab61, 0x4c9570,
+	0x384ae6, 0x5cd160, 0x46e4a0, 0x2eed25, 0x54da90, 0x405b50, 0x2c36d3, 0x502ae0, 0x3a93d7, 0x6092d0,
+	0x4ac950, 0x32d556, 0x58b4a0, 0x42b690, 0x2e5d94, 0x5255b0, 0x3e25fa, 0x6425b0, 0x4e92b0, 0x36aab6,
+	0x5c6950, 0x4674a0, 0x31b2a5, 0x54ad50, 0x4055a0, 0x2aab73, 0x522570, 0x3a5377, 0x6052b0, 0x4a6950,
+	0x346d56, 0x585aa0, 0x42ab50, 0x2e56d4, 0x544ae0, 0x3ca570, 0x2864d2, 0x4cd260, 0x36eaa6, 0x5ad550,
+	0x465aa0, 0x30ada5, 0x5695d0, 0x404ad0, 0x2aa9b3, 0x50a4d0, 0x3ad2b7, 0x5eb250, 0x48b540, 0x33d556
 ); /* Years 2100-2199 */
 
 var CAN = new Array("Gi\341p", "\u1EA4t", "B\355nh", "\u0110inh", "M\u1EADu", "K\u1EF7", "Canh", "T\342n", "Nh\342m", "Qu\375");
@@ -86,9 +86,9 @@ function INT(d) {
 
 function jdn(dd, mm, yy) {
 	var a = INT((14 - mm) / 12);
-	var y = yy+4800-a;
-	var m = mm+12*a-3;
-	var jd = dd + INT((153*m+2)/5) + 365*y + INT(y/4) - INT(y/100) + INT(y/400) - 32045;
+	var y = yy + 4800 - a;
+	var m = mm + 12 * a - 3;
+	var jd = dd + INT((153 * m + 2) / 5) + 365 * y + INT(y / 4) - INT(y / 100) + INT(y / 400) - 32045;
 	return jd;
 	//return 367*yy - INT(7*(yy+INT((mm+9)/12))/4) - INT(3*(INT((yy+(mm-9)/7)/100)+1)/4) + INT(275*mm/9)+dd+1721029;
 }
@@ -97,25 +97,25 @@ function jdn2date(jd) {
 	var Z, A, alpha, B, C, D, E, dd, mm, yyyy, F;
 	Z = jd;
 	if (Z < 2299161) {
-	  A = Z;
+		A = Z;
 	} else {
-	  alpha = INT((Z-1867216.25)/36524.25);
-	  A = Z + 1 + alpha - INT(alpha/4);
+		alpha = INT((Z - 1867216.25) / 36524.25);
+		A = Z + 1 + alpha - INT(alpha / 4);
 	}
 	B = A + 1524;
-	C = INT( (B-122.1)/365.25);
-	D = INT( 365.25*C );
-	E = INT( (B-D)/30.6001 );
-	dd = INT(B - D - INT(30.6001*E));
+	C = INT((B - 122.1) / 365.25);
+	D = INT(365.25 * C);
+	E = INT((B - D) / 30.6001);
+	dd = INT(B - D - INT(30.6001 * E));
 	if (E < 14) {
-	  mm = E - 1;
+		mm = E - 1;
 	} else {
-	  mm = E - 13;
+		mm = E - 13;
 	}
 	if (mm < 3) {
-	  yyyy = C - 4715;
+		yyyy = C - 4715;
 	} else {
-	  yyyy = C - 4716;
+		yyyy = C - 4716;
 	}
 	return new Array(dd, mm, yyyy);
 }
@@ -129,27 +129,27 @@ function decodeLunarYear(yy, k) {
 	leapMonth = k & 0xf;
 	leapMonthLength = monthLengths[k >> 16 & 0x1];
 	solarNY = jdn(1, 1, yy);
-	currentJD = solarNY+offsetOfTet;
+	currentJD = solarNY + offsetOfTet;
 	j = k >> 4;
-	for(i = 0; i < 12; i++) {
+	for (i = 0; i < 12; i++) {
 		regularMonths[12 - i - 1] = monthLengths[j & 0x1];
 		j >>= 1;
 	}
 	if (leapMonth == 0) {
-		for(mm = 1; mm <= 12; mm++) {
+		for (mm = 1; mm <= 12; mm++) {
 			ly.push(new LunarDate(1, mm, yy, 0, currentJD));
-			currentJD += regularMonths[mm-1];
+			currentJD += regularMonths[mm - 1];
 		}
 	} else {
-		for(mm = 1; mm <= leapMonth; mm++) {
+		for (mm = 1; mm <= leapMonth; mm++) {
 			ly.push(new LunarDate(1, mm, yy, 0, currentJD));
-			currentJD += regularMonths[mm-1];
+			currentJD += regularMonths[mm - 1];
 		}
 		ly.push(new LunarDate(1, leapMonth, yy, 1, currentJD));
 		currentJD += leapMonthLength;
-		for(mm = leapMonth+1; mm <= 12; mm++) {
+		for (mm = leapMonth + 1; mm <= 12; mm++) {
 			ly.push(new LunarDate(1, mm, yy, 0, currentJD));
-			currentJD += regularMonths[mm-1];
+			currentJD += regularMonths[mm - 1];
 		}
 	}
 	return ly;
@@ -176,12 +176,12 @@ function findLunarDate(jd, ly) {
 	if (jd > LAST_DAY || jd < FIRST_DAY || ly[0].jd > jd) {
 		return new LunarDate(0, 0, 0, 0, jd);
 	}
-	var i = ly.length-1;
+	var i = ly.length - 1;
 	while (jd < ly[i].jd) {
 		i--;
 	}
 	var off = jd - ly[i].jd;
-	ret = new LunarDate(ly[i].day+off, ly[i].month, ly[i].year, ly[i].leap, jd);
+	ret = new LunarDate(ly[i].day + off, ly[i].month, ly[i].year, ly[i].leap, jd);
 	return ret;
 }
 
@@ -204,16 +204,16 @@ function getLunarDate(dd, mm, yyyy) {
  */
 function SunLongitude(jdn) {
 	var T, T2, dr, M, L0, DL, L;
-	T = (jdn - 2451545.0 ) / 36525; // Time in Julian centuries from 2000-01-01 12:00:00 GMT
-	T2 = T*T;
-	dr = PI/180; // degree to radian
-	M = 357.52910 + 35999.05030*T - 0.0001559*T2 - 0.00000048*T*T2; // mean anomaly, degree
-	L0 = 280.46645 + 36000.76983*T + 0.0003032*T2; // mean longitude, degree
-	DL = (1.914600 - 0.004817*T - 0.000014*T2)*Math.sin(dr*M);
-	DL = DL + (0.019993 - 0.000101*T)*Math.sin(dr*2*M) + 0.000290*Math.sin(dr*3*M);
+	T = (jdn - 2451545.0) / 36525; // Time in Julian centuries from 2000-01-01 12:00:00 GMT
+	T2 = T * T;
+	dr = PI / 180; // degree to radian
+	M = 357.52910 + 35999.05030 * T - 0.0001559 * T2 - 0.00000048 * T * T2; // mean anomaly, degree
+	L0 = 280.46645 + 36000.76983 * T + 0.0003032 * T2; // mean longitude, degree
+	DL = (1.914600 - 0.004817 * T - 0.000014 * T2) * Math.sin(dr * M);
+	DL = DL + (0.019993 - 0.000101 * T) * Math.sin(dr * 2 * M) + 0.000290 * Math.sin(dr * 3 * M);
 	L = L0 + DL; // true longitude, degree
-	L = L*dr;
-	L = L - PI*2*(INT(L/(PI*2))); // Normalize to (0, 2*PI)
+	L = L * dr;
+	L = L - PI * 2 * (INT(L / (PI * 2))); // Normalize to (0, 2*PI)
 	return L;
 }
 
@@ -224,13 +224,13 @@ function SunLongitude(jdn) {
  * After that, return 1, 2, 3 ...
  */
 function getSunLongitude(dayNumber, timeZone) {
-	return INT(SunLongitude(dayNumber - 0.5 - timeZone/24.0) / PI * 12);
+	return INT(SunLongitude(dayNumber - 0.5 - timeZone / 24.0) / PI * 12);
 }
 
 var today = new Date();
 //var currentLunarYear = getYearInfo(today.getFullYear());
-var currentLunarDate = getLunarDate(today.getDate(), today.getMonth()+1, today.getFullYear());
-var currentMonth = today.getMonth()+1;
+var currentLunarDate = getLunarDate(today.getDate(), today.getMonth() + 1, today.getFullYear());
+var currentMonth = today.getMonth() + 1;
 var currentYear = today.getFullYear();
 
 function parseQuery(q) {
@@ -254,9 +254,9 @@ function getSelectedMonth() {
 	var idx;
 	for (idx = 0; idx < arr.length; idx++) {
 		if (arr[idx] == "mm") {
-			currentMonth = parseInt(arr[idx+1]);
+			currentMonth = parseInt(arr[idx + 1]);
 		} else if (arr[idx] == "yy") {
-			currentYear = parseInt(arr[idx+1]);
+			currentYear = parseInt(arr[idx + 1]);
 		}
 	}
 }
@@ -302,25 +302,25 @@ function getDayName(lunarDate) {
 		return "";
 	}
 	var cc = getCanChi(lunarDate);
-	var s = "Ng\u00E0y " + cc[0] +", th\341ng "+cc[1] + ", n\u0103m " + cc[2];
+	var s = "Ng\u00E0y " + cc[0] +", th\341ng " + cc[1] + ", n\u0103m " + cc[2];
 	return s;
 }
 
 function getYearCanChi(year) {
-	return CAN[(year+6) % 10] + " " + CHI[(year+8) % 12];
+	return CAN[(year + 6) % 10] + " " + CHI[(year + 8) % 12];
 }
 
 /*
  * Can cua gio Chinh Ty (00:00) cua ngay voi JDN nay
  */
 function getCanHour0(jdn) {
-	return CAN[(jdn-1)*2 % 10];
+	return CAN[(jdn - 1) * 2 % 10];
 }
 
 function getCanChi(lunar) {
 	var dayName, monthName, yearName;
-	dayName = CAN[(lunar.jd + 9) % 10] + " " + CHI[(lunar.jd+1)%12];
-	monthName = CAN[(lunar.year*12+lunar.month+3) % 10] + " " + CHI[(lunar.month+1)%12];
+	dayName = CAN[(lunar.jd + 9) % 10] + " " + CHI[(lunar.jd + 1) % 12];
+	monthName = CAN[(lunar.year * 12 + lunar.month + 3) % 10] + " " + CHI[(lunar.month + 1) % 12];
 	if (lunar.leap == 1) {
 		monthName += " (nhu\u1EADn)";
 	}
@@ -333,7 +333,7 @@ function getDayString(lunar, solarDay, solarMonth, solarYear) {
 	var dayOfWeek = TUAN[(lunar.jd + 1) % 7];
 	s = dayOfWeek + " " + solarDay + "/" + solarMonth + "/" + solarYear;
 	s += " -+- ";
-	s = s + "Ng\u00E0y " + lunar.day+" th\341ng "+lunar.month;
+	s = s + "Ng\u00E0y " + lunar.day +" th\341ng " + lunar.month;
 	if (lunar.leap == 1) {
 		s = s + " nhu\u1EADn";
 	}
@@ -341,7 +341,7 @@ function getDayString(lunar, solarDay, solarMonth, solarYear) {
 }
 
 function getTodayString() {
-	var s = getDayString(currentLunarDate, today.getDate(), today.getMonth()+1, today.getFullYear());
+	var s = getDayString(currentLunarDate, today.getDate(), today.getMonth() + 1, today.getFullYear());
 	s += " n\u0103m " + getYearCanChi(currentLunarDate.year);
 	return s;
 }
@@ -351,22 +351,22 @@ function getCurrentTime() {
 	var Std = today.getHours();
 	var Min = today.getMinutes();
 	var Sec = today.getSeconds();
-	var s1  = ((Std < 10) ? "0" + Std : Std);
-	var s2  = ((Min < 10) ? "0" + Min : Min);
+	var s1 = ((Std < 10) ? "0" + Std : Std);
+	var s2 = ((Min < 10) ? "0" + Min : Min);
 	//var s3  = ((Sec < 10) ? "0" + Sec : Sec);
 	//return s1 + ":" + s2 + ":" + s3;
 	return s1 + ":" + s2;
 }
 
 function getGioHoangDao(jd) {
-	var chiOfDay = (jd+1) % 12;
+	var chiOfDay = (jd + 1) % 12;
 	var gioHD = GIO_HD[chiOfDay % 6]; // same values for Ty' (1) and Ngo. (6), for Suu and Mui etc.
 	var ret = "";
 	var count = 0;
 	for (var i = 0; i < 12; i++) {
 		if (gioHD.charAt(i) == '1') {
 			ret += CHI[i];
-			ret += ' ('+(i*2+23)%24+'-'+(i*2+1)%24+')';
+			ret += ' (' + (i * 2 + 23) % 24 + '-' + (i * 2 + 1) % 24 + ')';
 			if (count++ < 5) ret += ', ';
 			if (count == 3) ret += '\n';
 		}
@@ -415,8 +415,8 @@ function printYear(yy) {
 	var res = "";
 	res += printStyle();
 	res += '<table align=center>\n';
-	res += ('<tr><td colspan="3" class="tennam" onClick="showYearSelect();">'+yearName+'</td></tr>\n');
-	for (var i = 1; i<= 12; i++) {
+	res += ('<tr><td colspan="3" class="tennam" onClick="showYearSelect();">' + yearName + '</td></tr>\n');
+	for (var i = 1; i <= 12; i++) {
 		if (i % 3 == 1) res += '<tr>\n';
 		res += '<td>\n';
 		res += printTable(i, yy);
@@ -440,7 +440,7 @@ function printStyle() {
 	res += '<!--\n';
 	//res += '  body {margin:0}\n';
 	res += '  .tennam {text-align:center; font-size:150%; line-height:120%; font-weight:bold; color:#000000; background-color: #CCCCCC}\n';
-	res += '  .thang {font-size: '+fontSize+'; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed}\n';
+	res += '  .thang {font-size: ' + fontSize + '; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed}\n';
 	res += '  .tenthang {text-align:center; font-size:125%; line-height:100%; font-weight:bold; color:#330033; background-color: #CCFFCC}\n';
 	res += '  .navi-l {text-align:center; font-size:75%; line-height:100%; font-family:Verdana,Times New Roman,Arial; font-weight:bold; color:red; background-color: #CCFFCC}\n';
 	res += '  .navi-r {text-align:center; font-size:75%; line-height:100%; font-family:Verdana,Arial,Times New Roman; font-weight:bold; color:#330033; background-color: #CCFFCC}\n';
@@ -467,7 +467,7 @@ function printTable(mm, yy) {
 	var MonthHead = mm + "/" + yy;
 	var LunarHead = getYearCanChi(ld1.year);
 	var res = "";
-	res += ('<table class="thang" border="2" cellpadding="1" cellspacing="1" width="'+PRINT_OPTS.tableWidth+'">\n');
+	res += ('<table class="thang" border="2" cellpadding="1" cellspacing="1" width="' + PRINT_OPTS.tableWidth + '">\n');
 	res += printHead(mm, yy);
 	for (i = 0; i < 6; i++) {
 		res += ("<tr>\n");
@@ -488,49 +488,49 @@ function printTable(mm, yy) {
 }
 
 function getPrevMonthLink(mm, yy) {
-	var mm1 = mm > 1 ? mm-1 : 12;
-	var yy1 = mm > 1 ? yy : yy-1;
+	var mm1 = mm > 1 ? mm - 1 : 12;
+	var yy1 = mm > 1 ? yy : yy - 1;
 	//return '<a href="'+window.location.pathname+'?yy='+yy1+'&mm='+mm1+'"><img src="left1.gif" width=8 height=12 alt="PrevMonth" border=0></a>';
-	return '<a href="'+window.location.pathname+'?yy='+yy1+'&mm='+mm1+'">&lt;</a>';
+	return '<a href="' + window.location.pathname + '?yy=' + yy1 + '&mm=' + mm1 + '">&lt;</a>';
 }
 
 function getNextMonthLink(mm, yy) {
-	var mm1 = mm < 12 ? mm+1 : 1;
-	var yy1 = mm < 12 ? yy : yy+1;
+	var mm1 = mm < 12 ? mm + 1 : 1;
+	var yy1 = mm < 12 ? yy : yy + 1;
 	//return '<a href="'+window.location.pathname+'?yy='+yy1+'&mm='+mm1+'"><img src="right1.gif" width=8 height=12 alt="NextMonth" border=0></a>';
-	return '<a href="'+window.location.pathname+'?yy='+yy1+'&mm='+mm1+'">&gt;</a>';
+	return '<a href="' + window.location.pathname + '?yy=' + yy1 + '&mm=' + mm1 + '">&gt;</a>';
 }
 
 function getPrevYearLink(mm, yy) {
 	//return '<a href="'+window.location.pathname+'?yy='+(yy-1)+'&mm='+mm+'"><img src="left2.gif" width=16 height=12 alt="PrevYear" border=0></a>';
-	return '<a href="'+window.location.pathname+'?yy='+(yy-1)+'&mm='+mm+'">&lt;&lt;</a>';
+	return '<a href="' + window.location.pathname + '?yy=' + (yy - 1) + '&mm=' + mm + '">&lt;&lt;</a>';
 }
 
 function getNextYearLink(mm, yy) {
 	//return '<a href="'+window.location.pathname+'?yy='+(yy+1)+'&mm='+mm+'"><img src="right2.gif" width=16 height=12 alt="NextYear" border=0></a>';
-	return '<a href="'+window.location.pathname+'?yy='+(yy+1)+'&mm='+mm+'">&gt;&gt;</a>';
+	return '<a href="' + window.location.pathname + '?yy=' + (yy + 1) + '&mm=' + mm + '">&gt;&gt;</a>';
 }
 
 function printHead(mm, yy) {
 	var res = "";
-	var monthName = mm+"/"+yy;
+	var monthName = mm + "/" + yy;
 	//res += ('<tr><td colspan="7" class="tenthang" onClick="showMonthSelect();">'+monthName+'</td></tr>\n');
-	res += ('<tr><td colspan="2" class="navi-l">'+getPrevYearLink(mm, yy)+' &nbsp;'+getPrevMonthLink(mm, yy)+'</td>\n');
+	res += ('<tr><td colspan="2" class="navi-l">' + getPrevYearLink(mm, yy) + ' &nbsp;' + getPrevMonthLink(mm, yy) + '</td>\n');
 	//res += ('<td colspan="1" class="navig"><a href="'+getPrevMonthLink(mm, yy)+'"><img src="left1.gif" alt="Prev"></a></td>\n');
-	res += ('<td colspan="3" class="tenthang" onClick="showMonthSelect();">'+monthName+'</td>\n');
+	res += ('<td colspan="3" class="tenthang" onClick="showMonthSelect();">' + monthName + '</td>\n');
 	//res += ('<td colspan="1" class="navi-r"><a href="'+getNextMonthLink(mm, yy)+'"><img src="right1.gif" alt="Next"></a></td>\n');
-	res += ('<td colspan="2" class="navi-r">'+getNextMonthLink(mm, yy)+' &nbsp;'+getNextYearLink(mm, yy)+'</td></tr>\n');
+	res += ('<td colspan="2" class="navi-r">' + getNextMonthLink(mm, yy) + ' &nbsp;' + getNextYearLink(mm, yy) + '</td></tr>\n');
 	//res += ('<tr><td colspan="7" class="tenthang"><a href="'+getNextMonthLink(mm, yy)+'"><img src="right.gif" alt="Next"></a></td></tr>\n');
 	res += ('<tr onClick="alertAbout();">\n');
-	for(var i=0;i<=6;i++) {
-		res += ('<td class=ngaytuan>'+DAYNAMES[i]+'</td>\n');
+	for (var i = 0; i <= 6; i++) {
+		res += ('<td class=ngaytuan>' + DAYNAMES[i] + '</td>\n');
 	}
 	res += ('<\/tr>\n');
 	return res;
 }
 
 function printEmptyCell() {
-		return '<td class=ngaythang><div class=cn>&nbsp;</div> <div class=am>&nbsp;</div></td>\n';
+	return '<td class=ngaythang><div class=cn>&nbsp;</div> <div class=am>&nbsp;</div></td>\n';
 }
 
 function printCell(lunarDate, solarDate, solarMonth, solarYear) {
@@ -547,7 +547,7 @@ function printCell(lunarDate, solarDate, solarMonth, solarYear) {
 		solarClass = "t7";
 		solarColor = "green";
 	}
-	if (solarDate == today.getDate() && solarMonth == today.getMonth()+1 && solarYear == today.getFullYear()) {
+	if (solarDate == today.getDate() && solarMonth == today.getMonth() + 1 && solarYear == today.getFullYear()) {
 		cellClass = "homnay";
 	}
 	if (lunarDate.day == 1 && lunarDate.month == 1) {
@@ -563,9 +563,9 @@ function printCell(lunarDate, solarDate, solarMonth, solarYear) {
 	var res = "";
 	var args = lunarDate.day + "," + lunarDate.month + "," + lunarDate.year + "," + lunarDate.leap;
 	args += ("," + lunarDate.jd + "," + solarDate + "," + solarMonth + "," + solarYear);
-	res += ('<td class="'+cellClass+'"');
-	if (lunarDate != null) res += (' title="'+getDayName(lunarDate)+'" onClick="alertDayInfo('+args+');"');
-	res += (' <div style=color:'+solarColor+' class="'+solarClass+'">'+solarDate+'</div> <div class="'+lunarClass+'">'+lunar+'</div></td>\n');
+	res += ('<td class="' + cellClass + '"');
+	if (lunarDate != null) res += (' title="' + getDayName(lunarDate) + '" onClick="alertDayInfo(' + args + ');"');
+	res += (' <div style=color:' + solarColor + ' class="' + solarClass + '">' + solarDate + '</div> <div class="' + lunarClass + '">' + lunar + '</div></td>\n');
 	return res;
 }
 
@@ -597,17 +597,17 @@ function alertDayInfo(dd, mm, yy, leap, jd, sday, smonth, syear) {
 	var s = getDayString(lunar, sday, smonth, syear);
 	s += " \u00E2m l\u1ECBch<br>";
 	s += getDayName(lunar);
-	s += "<br>Gi\u1EDD \u0111\u1EA7u ng\u00E0y: "+getCanHour0(jd)+" "+CHI[0];
-	s += "<br>Ti\u1EBFt: "+TIETKHI[getSunLongitude(jd+1, 7.0)];
-	s += "<br>Gi\u1EDD ho\u00E0ng \u0111\u1EA1o: "+getGioHoangDao(jd);
+	s += "<br>Gi\u1EDD \u0111\u1EA7u ng\u00E0y: " + getCanHour0(jd) + " " + CHI[0];
+	s += "<br>Ti\u1EBFt: " + TIETKHI[getSunLongitude(jd + 1, 7.0)];
+	s += "<br>Gi\u1EDD ho\u00E0ng \u0111\u1EA1o: " + getGioHoangDao(jd);
 
 	window.parent.postMessage({ type: 'showContent', content: s }, '*');
 }
-  
+
 
 function showVietCal() {
 	window.status = getCurrentTime() + " -+- " + getTodayString();
-	window.window.setTimeout("showVietCal()",5000);
+	window.window.setTimeout("showVietCal()", 5000);
 }
 
 //showVietCal();

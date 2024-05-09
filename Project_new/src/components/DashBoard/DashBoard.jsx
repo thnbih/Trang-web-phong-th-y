@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './DashBoard.module.css';
 import { Analytics } from '@vercel/analytics/react';
-
+import { ReadAloudButton } from '../readAloud/ReadAloudButton';
 
 function DashBoard() {
     //dashboard3
@@ -61,21 +61,21 @@ function DashBoard() {
     const [content, setContent] = useState('');
 
     useEffect(() => {
-      // Lắng nghe sự kiện message từ window
-      const handleMessage = (event) => {
-        // Kiểm tra nếu là loại thông điệp mà chúng ta mong muốn
-        if (event.data && event.data.type === 'showContent') {
-          setContent(event.data.content);
-        }
-      };
-  
-      // Đăng ký lắng nghe sự kiện
-      window.addEventListener('message', handleMessage);
-  
-      // Đảm bảo huỷ lắng nghe sự kiện khi component bị unmount
-      return () => {
-        window.removeEventListener('message', handleMessage);
-      };
+        // Lắng nghe sự kiện message từ window
+        const handleMessage = (event) => {
+            // Kiểm tra nếu là loại thông điệp mà chúng ta mong muốn
+            if (event.data && event.data.type === 'showContent') {
+                setContent(event.data.content);
+            }
+        };
+
+        // Đăng ký lắng nghe sự kiện
+        window.addEventListener('message', handleMessage);
+
+        // Đảm bảo huỷ lắng nghe sự kiện khi component bị unmount
+        return () => {
+            window.removeEventListener('message', handleMessage);
+        };
     }, []);
 
 
@@ -92,13 +92,6 @@ function DashBoard() {
                     <iframe src="src\components\DashBoard\lich\index.html" width="100%" height="500px" frameBorder="0" title="Lịch Âm Dương"></iframe>
                 </div>
                 <div className={styles['content']} dangerouslySetInnerHTML={{ __html: content }}>
-                    {/* <p><strong>- Ngày Dương lịch:</strong> 06-05-2024 (Thứ hai)</p>
-                    <p><strong>- Ngày Âm lịch:</strong> 28-03-2024 </p>
-                    <p>- Tiết: <strong>Lập hạ</strong></p>
-                    <p>- Ngày <strong>canh ngọ</strong> tháng <strong>mậu thìn</strong> năm <strong>giáp thìn</strong></p>
-                    <p><strong>- Ngày trong tuần:</strong> Thứ 2</p>
-                    <p>- Ngày <strong>Bạch Hổ Túc</strong>: cấm đi xa, làm việc gì cũng không thành công, rất xấu trong mọi việc</p>
-                    <p>- Giờ <strong>Hoàng Đạo</strong>: Tý (23-1), Sửu (1-3), Mão (5-7), Ngọ (11-13), Thân (15-17), Dậu (17-19)</p> */}
                 </div>
             </div>
 
@@ -134,6 +127,7 @@ function DashBoard() {
                                 <h3>Lời nhắn</h3>
                                 <p>Ồ, quẻ bài này có vẻ thú vị đây! Nhưng đừng dừng lại ở đó, hãy khám phá thêm những điều bất ngờ đang chờ đón bạn trong các loại hình coi bói khác mà chúng tôi cung cấp. Biết đâu, bạn sẽ tìm thấy chìa khóa cho những bí ẩn trong cuộc sống của mình!</p>
                             </div>
+                            <ReadAloudButton text={summarizedMeaning} />
                         </div>
                         <button
                             className={styles.closeButton}
