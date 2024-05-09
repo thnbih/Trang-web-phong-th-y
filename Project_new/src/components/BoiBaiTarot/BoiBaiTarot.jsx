@@ -3,6 +3,7 @@ import axios from 'axios';
 import styles from './BoiBaiTarot.module.css';
 import { Analytics } from '@vercel/analytics/react';
 import { getAccessToken, getUser } from '../auth/auth';
+import { ReadAloudButton } from '../readAloud/ReadAloudButton';
 
 
 function BoiBaiTarot() {
@@ -33,7 +34,6 @@ function BoiBaiTarot() {
 
                 const response = await axios.post('http://localhost:5000/api/lat-bai-tarot', requestBody, { headers });
                 const { tarotCards, summarizedMeaning } = response.data;
-
                 if (summarizedMeaning) {
                     setSummarizedMeaning(summarizedMeaning);
                     setTarotCards(tarotCards);
@@ -116,7 +116,7 @@ function BoiBaiTarot() {
                     <button className={styles.Button} onClick={flipCard}>Lật Bài</button>
                 </div>
                 <div className={styles['Card-area']}>
-                    {tarotCards.map((card, index) => (
+                    {tarotCards && tarotCards.map((card, index) => (
                         <div
                             key={index}
                             className={`${styles['Card']} ${flipped ? styles.flipped : ''}`}
@@ -128,8 +128,16 @@ function BoiBaiTarot() {
                 </div>
                 {summarizedMeaning && (
                     <div className={styles.summarizedMeaning}>
-                        <h3>Summarized Meaning:</h3>
-                        <p>{summarizedMeaning}</p>
+                        <h2>Tóm tắt ý nghĩa</h2>
+                        <div className={styles['result-item']}>
+                            <div className={styles['result-label']}>Kết quả</div>
+                            <div className={styles['result-value']}>{summarizedMeaning}</div>
+                        </div>
+                        <div className={styles['overall-message']}>
+                            <h3>Lời nhắn</h3>
+                            <p>Ồ, những lá bài Tarot này hé lộ một khía cạnh thú vị trong tâm hồn bạn đấy! Nhưng đó chỉ là khởi đầu thôi. Hãy đào sâu hơn vào trí tuệ cổ xưa của Tarot và khám phá những bí mật còn ẩn giấu. Biết đâu, bạn sẽ tìm thấy con đường dẫn đến sự thấu hiểu bản thân và thế giới xung quanh!</p>
+                        </div>
+                        <ReadAloudButton text={summarizedMeaning} />
                     </div>
                 )}
             </div>

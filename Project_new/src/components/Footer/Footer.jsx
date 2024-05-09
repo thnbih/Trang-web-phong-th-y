@@ -9,7 +9,7 @@ function Footer() {
                 <h1>An Nhiên</h1>
             </div>
             <div className={styles.Service}>
-                <h3 className={styles.VatPham}>Dịch vụ</h3>
+                <h2 className={styles.VatPham}>Dịch vụ</h2>
                 <div className={styles.listProduct}>
                     <ul>
                         <li>
@@ -28,7 +28,7 @@ function Footer() {
                 </div>
             </div>
             <div className={styles.Information}>
-                <h3 className={styles.VatPham}>Thông tin</h3>
+                <h2 className={styles.VatPham}>Thông tin</h2>
                 <div className={styles.listProduct}>
                     <ul>
                         <li>Giới thiệu</li>
@@ -39,7 +39,7 @@ function Footer() {
                 </div>
             </div>
             <div className={styles.Help}>                  
-                <h3 className={styles.VatPham}>Trợ giúp</h3>
+                <h2 className={styles.VatPham}>Trợ giúp</h2>
                 <div className={styles.listProduct}>              
                     <ul>
                         <li>Hỏi đáp</li>
