@@ -108,7 +108,7 @@ function DashBoard() {
                             className={styles['Card']}
                             onClick={() => handleCardClick(card)}
                         >
-                            <img src={card.img} alt={card.Name} />
+                            <img src={`data:image/webp;base64, ${card.img}`} alt={card.Name} />
                         </div>
                     ))}
                 </div>
