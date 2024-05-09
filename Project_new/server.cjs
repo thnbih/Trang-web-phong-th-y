@@ -9,6 +9,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 const { ObjectId } = require("mongodb");
 const Groq = require('groq-sdk');
+const sharp = require('sharp');
+const sdk = require('microsoft-cognitiveservices-speech-sdk');
 
 // Parse request body
 app.use(express.json());
@@ -36,6 +38,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(express.json());
 // MongoDB connection string
 const connectionString =
   "mongodb+srv://keandk:keandk12@cluster0.y4i0459.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
@@ -116,7 +119,7 @@ client.connect()
         const genneralAccessToken = (payload, secret) => {
           // console.log(`${payload}`);
           const access_token = jwt.sign(payload, secret, {
-            expiresIn: "1d",
+            expiresIn: "7d",
           });
 
           return access_token;
@@ -124,7 +127,7 @@ client.connect()
 
         const genneralRefreshToken = (payload, secret) => {
           const refresh_token = jwt.sign(payload, secret, {
-            expiresIn: "1d",
+            expiresIn: "30d",
           });
 
           return refresh_token;
@@ -166,51 +169,6 @@ client.connect()
       }
     });
 
-    // Middleware to save the API response in the user's session and write to the 'history' collection
-    const saveApiResponse = async (req, res, next) => {
-      try {
-        const { type, result } = req.body;
-
-        // Check if the user is authenticated
-        if (!req.session.user) {
-          // User is not authenticated, skip saving the response
-          next();
-          return;
-        }
-
-        const userId = req.session.user._id;
-
-        // Save the response in the user's session
-        if (!req.session.history) {
-          req.session.history = {};
-        }
-        if (!req.session.history[type]) {
-          req.session.history[type] = [];
-        }
-        req.session.history[type].unshift(result);
-
-        // Write to the 'history' collection in the database
-        const historyCollection = db.collection('history');
-        const existingHistory = await historyCollection.findOne({ userId });
-
-        if (existingHistory) {
-          const updatedHistory = {
-            ...existingHistory,
-            [type]: [...result, ...existingHistory[type].slice(0, 4)],
-          };
-          await historyCollection.updateOne({ userId }, { $set: updatedHistory });
-        } else {
-          const newHistory = { userId, [type]: [result] };
-          await historyCollection.insertOne(newHistory);
-        }
-
-        next();
-      } catch (error) {
-        console.error('Error saving API response:', error);
-        res.status(500).json({ error: 'Failed to save API response' });
-      }
-    };
-
     // Middleware to verify the access token
     const verifyToken = (req, res, next) => {
       const authHeader = req.headers.authorization;
@@ -249,21 +207,22 @@ client.connect()
       try {
         const db = client.db("user");
         const userSession = await db.collection("userSessions").findOne({ userId });
-    
+        // console.log(result);
+
         if (userSession) {
           // User session exists, update the history
           const updatedHistory = {
             ...userSession.history,
             [type]: [
               {
-                result: result.cards,
-                summarizedMeaning: result.summarizedMeaning,
+                cardsId: result.cardsId || [],
+                summarizedMeaning: result.summarizedMeaning || '',
                 timestamp: new Date(),
               },
               ...(userSession.history[type] || []),
             ],
           };
-    
+
           await db
             .collection("userSessions")
             .updateOne({ userId }, { $set: { history: updatedHistory } });
@@ -274,14 +233,14 @@ client.connect()
             history: {
               [type]: [
                 {
-                  result: result.cards,
-                  summarizedMeaning: result.summarizedMeaning,
+                  cardsId: result.cardsId || [],
+                  summarizedMeaning: result.summarizedMeaning || '',
                   timestamp: new Date(),
                 },
               ],
             },
           };
-    
+
           await db.collection("userSessions").insertOne(newUserSession);
         }
       } catch (error) {
@@ -333,11 +292,17 @@ client.connect()
           .aggregate([{ $sample: { size: 1 } }])
           .toArray();
 
-        // Store the selected Tarot cards in the session
-        req.session.tarotCards = tarotCards;
+        const convertedCard = await Promise.all(tarotCards.map(async (card) => {
+          const webpBase64 = await convertToWebP(card.img);
+          return {
+            ...card,
+            img: webpBase64,
+          };
+        }));
+        // console.log(convertedCard)
 
         // Send the Tarot cards as a response
-        res.json(tarotCards);
+        res.json({convertedCard: convertedCard});
       } catch (error) {
         console.error("Error fetching Tarot cards:", error);
         res.status(500).json({ error: "Failed to fetch Tarot cards" });
@@ -347,15 +312,15 @@ client.connect()
     app.post("/api/loi-binh-dashboard", cors(), async (req, res) => {
       try {
         const db = client.db("LoiBinh"); // Using LoiBinh database now
-    
+
         // Get the 'LoiBinh' collection
         const loiBinhCollection = db.collection("LoiBinh");
-    
+
         // Get 3 random documents from the LoiBinh collection
         const loiBinhItems = await loiBinhCollection
           .aggregate([{ $sample: { size: 3 } }]) // Adjust the size here if you want to get less or more documents
           .toArray();
-    
+
         // Send the LoiBinh items as a response
         res.json(loiBinhItems);
       } catch (error) {
@@ -363,6 +328,50 @@ client.connect()
         res.status(500).json({ error: "Failed to fetch LoiBinh documents" });
       }
     });
+
+    const { ObjectId } = require('mongodb');
+
+    async function getCardInfoByCardsIds(cardsIds, queryDB) {
+      try {
+
+        const db = client.db(queryDB);
+        const cardsCollection = db.collection("cards");
+
+        // Convert the input array to a Set to remove duplicates
+        const uniqueCardsIds = Array.from(new Set(cardsIds.map(id => new ObjectId(id))));
+
+        // Find cards in the collection with IDs in the uniqueCardsIds set
+        const cards = await cardsCollection.find({ _id: { $in: uniqueCardsIds } }).toArray();
+
+        // Map over the cards and convert img to webp
+        const cardInfoArray = await Promise.all(
+          cards.map(async (card) => {
+            const { Name, Mean, img } = card;
+            const webpBase64 = await convertToWebP(img);
+            return { Name, Mean, img: webpBase64 };
+          })
+        );
+
+        return cardInfoArray;
+      } catch (error) {
+        console.error("Error fetching card info:", error);
+        throw error;
+      }
+    }
+
+    async function convertToWebP(imageBinary) {
+      const imageBase64 = imageBinary.buffer.toString('base64');
+
+      if (!imageBase64 || typeof imageBase64 !== 'string' || !imageBase64.trim()) {
+        console.warn("Invalid image data");
+        return null;
+      }
+
+      const imageBuffer = Buffer.from(imageBase64, 'base64');
+      const webpBuffer = await sharp(imageBuffer).webp().toBuffer();
+      const webpBase64 = webpBuffer.toString('base64');
+      return webpBase64;
+    }
 
     app.options('/api/lat-bai-tay', cors());
     app.post("/api/lat-bai-tay", cors(), async (req, res) => {
@@ -381,13 +390,17 @@ client.connect()
           const currentTime = new Date();
           const storedResponseTime = new Date(storedResponse.timestamp);
           const timeDiff = currentTime - storedResponseTime;
-          const oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+          const oneHour = 60 * 60 * 1000; // 1 hour in milliseconds
 
-          if (timeDiff < oneDay) {
-            // Stored response is within 24 hours, send it back to the client
+          if (timeDiff < oneHour) {
+            // Stored response is within 1 hour, send it back to the client
+            const uniqueCardsId = [...new Set(storedResponse.cardsId)];
+            const firstCardsId = uniqueCardsId.slice(0, 5);
+            const cardsInfo = await getCardInfoByCardsIds(firstCardsId, "52la");
             res.json({
-              cards: storedResponse.result,
-              summarizedMeaning: storedResponse.summarizedMeaning});
+              cards: cardsInfo,
+              summarizedMeaning: storedResponse.summarizedMeaning
+            });
             return;
           }
         }
@@ -398,13 +411,23 @@ client.connect()
         const cards = await cardsCollection
           .aggregate([{ $sample: { size: 5 } }])
           .toArray();
-          
+
+        const convertedCards = await Promise.all(cards.map(async (card) => {
+          const webpBase64 = await convertToWebP(card.img);
+          return {
+            ...card,
+            img: webpBase64,
+          };
+        }));
+
         // Save the new response in the user's session
         await saveApiResponseInUserSession(userId, "lat-bai-tay", {
-          result: cards,
+          result: convertedCards,
+          // cardsId: convertedCards.map(card => card._id),
           timestamp: new Date(),
         });
-        res.json({ cards: cards, summarizedMeaning: "" });
+
+        res.json({ cards: convertedCards, summarizedMeaning: "" });
       } catch (error) {
         console.error("Error fetching cards:", error);
         res.status(500).json({ error: "Failed to fetch cards" });
@@ -427,12 +450,17 @@ client.connect()
           const currentTime = new Date();
           const storedResponseTime = new Date(storedResponse.timestamp);
           const timeDiff = currentTime - storedResponseTime;
-          const oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+          const oneHour = 60 * 60 * 1000; // 1 hour in milliseconds
 
-          if (timeDiff < oneDay) {
-            // Stored response is within 24 hours, send it back to the client
+          if (timeDiff < oneHour) {
+            // Stored response is within 1 hour, send it back to the client
+            const uniqueCardsId = [...new Set(storedResponse.cardsId)];
+            const firstCardsId = uniqueCardsId.slice(0, 3);
+            const cardsInfo = await getCardInfoByCardsIds(firstCardsId, "tarot");
+            console.log(cardsInfo);
+            console.log(firstCardsId);
             res.json({
-              tarotCards: storedResponse.result,
+              tarotCards: cardsInfo,
               summarizedMeaning: storedResponse.summarizedMeaning
             });
             return;
@@ -449,13 +477,21 @@ client.connect()
           .aggregate([{ $sample: { size: 3 } }])
           .toArray();
 
+        const convertedCards = await Promise.all(tarotCards.map(async (card) => {
+          const webpBase64 = await convertToWebP(card.img);
+          return {
+            ...card,
+            img: webpBase64,
+          };
+        }));
+
         // Save the new response in the user's session
         await saveApiResponseInUserSession(userId, "lat-bai-tarot", {
-          result: tarotCards,
+          result: convertedCards,
           timestamp: new Date(),
         });
 
-        res.json({ tarotCards: tarotCards, summarizedMeaning: "" });
+        res.json({ tarotCards: convertedCards, summarizedMeaning: "" });
       } catch (error) {
         console.error("Error fetching Tarot cards:", error);
         res.status(500).json({ error: "Failed to fetch Tarot cards" });
@@ -465,99 +501,64 @@ client.connect()
     app.options('/api/boi-ngay-sinh', cors());
     app.post("/api/boi-ngay-sinh", cors(), async (req, res) => {
       const { day, month, year, userId } = req.body;
-    
+
       // Validate the required fields
       if (!day || !month || !year || !userId) {
         return res
           .status(400)
           .json({ error: "Missing required fields: day, month, year, userId" });
       }
-    
+
       try {
-        const userDB = client.db("user");
-    
-        // Check if the user has an existing session
-        const userSession = await userDB.collection("userSessions").findOne({ userId });
-    
-        if (userSession && userSession.history && userSession.history["boi-ngay-sinh"]) {
-          // User session exists, check if the same date of birth has been queried within the past 24 hours
-          const storedResponses = userSession.history["boi-ngay-sinh"];
-          const currentTime = new Date();
-    
-          for (const storedResponse of storedResponses) {
-            if (
-              storedResponse.day === day &&
-              storedResponse.month === month &&
-              storedResponse.year === year
-            ) {
-              const storedResponseTime = new Date(storedResponse.timestamp);
-              const timeDiff = currentTime - storedResponseTime;
-              const oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-    
-              if (timeDiff < oneDay) {
-                // The same date of birth has been queried within the past 24 hours
-                res.json({ message: "This date of birth has been queried before." });
-                return;
-              }
-            }
-          }
-        }
-    
-        // If no stored response or the stored response is older than 24 hours, generate a new response
         const boiNgaySinhDb = client.db("BoiNgaySinh");
-    
+
         // Get the zodiac sign
         const zodiacSignsCollection = boiNgaySinhDb.collection("CungHoangDao");
         const zodiacSign = await zodiacSignsCollection.findOne({
           Day: parseInt(day),
           Month: parseInt(month),
         });
-    
+
         const dayMeaningCollection = boiNgaySinhDb.collection("NgaySinh");
         const dayMeaning = await dayMeaningCollection.findOne({
           Day: parseInt(day),
         });
-    
+
         // Get the month meaning
         const monthMeaningsCollection = boiNgaySinhDb.collection("ThangSinh");
         const monthMeaning = await monthMeaningsCollection.findOne({
           Month: parseInt(month),
         });
-    
+
         // Get the year meaning
         const yearMeaningsCollection = boiNgaySinhDb.collection("NamSinh");
         const yearMeaning = await yearMeaningsCollection.findOne({
           "Năm sinh": parseInt(year),
         });
-    
+
         // Calculate the soChuDao
         const dateString = `${day}${month}${year}`;
         const soChuDaoValue = dateString
           .split("")
           .reduce((sum, digit) => sum + parseInt(digit), 0);
-    
+
         // Get the soChuDao meaning
         const soChuDaoCollection = boiNgaySinhDb.collection("SoChuDao");
         const soChuDaoMeaning = await soChuDaoCollection.findOne({
           Sum: soChuDaoValue,
         });
-    
+
         const result = {
           day: day,
           month: month,
           year: year,
           zodiacSign: zodiacSign ? zodiacSign.Value : null,
+          dayMeaning: dayMeaning ? dayMeaning.Mean : null,
           monthMeaning: monthMeaning ? monthMeaning.Mean : null,
           yearMeaning: yearMeaning ? yearMeaning["Ý nghĩa tuổi"] : null,
           soChuDao: soChuDaoMeaning ? soChuDaoMeaning.Mean : null,
         };
-    
-        // Save the new response in the user's session
-        await saveApiResponseInUserSession(userId, "boi-ngay-sinh", {
-          ...result,
-          timestamp: new Date(),
-        });
-    
+
         res.json(result);
       } catch (error) {
         console.error("Error fetching birth date meanings:", error);
@@ -623,11 +624,51 @@ client.connect()
         res.status(500).json({ error: "Failed to update user" });
       }
     });
+
+    app.options("/api/synthesize", cors());
+    app.post('/api/synthesize', async (req, res) => {
+      try {
+        const { text } = req.body;
+
+        const speechConfig = sdk.SpeechConfig.fromSubscription(process.env.SPEECH_KEY, process.env.SPEECH_REGION);
+        const audioConfig = sdk.AudioConfig.fromDefaultSpeakerOutput();
+
+        speechConfig.speechSynthesisVoiceName = 'vi-VN-NamMinhNeural';
+
+        const synthesizer = new sdk.SpeechSynthesizer(speechConfig, audioConfig);
+
+        const ssml = `<speak version='1.0' xml:lang='en-US'><voice xml:lang='vi-VN' xml:gender='Female' name='vi-VN-NamMinhNeural'>${text}</voice></speak>`;
+
+        synthesizer.speakSsmlAsync(ssml, (result) => {
+          if (result.reason === sdk.ResultReason.SynthesizingAudioCompleted) {
+            const audioData = result.audioData;
+            res.set({
+              'Content-Type': 'audio/wav',
+              'Content-Disposition': 'attachment; filename="audio.wav"',
+              'Content-Length': audioData.byteLength,
+            });
+            res.send(Buffer.from(audioData));
+          } else {
+            console.error('Speech synthesis canceled, ' + result.errorDetails);
+            res.status(500).send('Speech synthesis failed.');
+          }
+          synthesizer.close();
+        }, (error) => {
+          console.error(error);
+          synthesizer.close();
+        });
+      } catch (error) {
+        console.error('Error synthesizing speech:', error);
+        res.status(500).json({ error: 'Error synthesizing speech' });
+      }
+    });
+
     const port = process.env.PORT || 5000;
     app.listen(port, () => {
       console.log(`Server is running on port ${port}`);
     });
   })
+
   .catch((err) => {
     console.error("Failed to connect to MongoDB", err);
   });
@@ -637,10 +678,12 @@ const groq = new Groq({
 });
 
 const summarizeCardMeaningsWithGroq = async (cards) => {
-  const cardMeanings = cards.map(card => card.Mean);
-  const concatenatedMeanings = cardMeanings.join(' ');
+  // const cardMeanings = cards.map(card => card.Mean);
+  // const concatenatedMeanings = cardMeanings.join(' ');
 
-  const prompt = `Act as a fortune teller for teenagers and middle age. You are an expert in your professional. Your answers should be straightforward and convincing. You must only talk about your profession, nothing else. Your primary language is Vietnamese and you must answer in Vietnamese. Your job is to summarize the meanings of these cards: ${concatenatedMeanings} and give the user the message that the cards are trying to tell. You must call the user as 'con' and call yourself 'ta'. Your name is 'Thầy Rùa'. Your answer should always be in plaintext, do not add styling.`;
+  const prompt = `Act as a professional fortune teller with extensive experience in Tarot readings for teenagers and middle-aged individuals. Your name is Thầy Rùa (Master Turtle), and you are known for your wisdom and credibility. Always provide straightforward, clear, and convincing answers to questions. Focus solely on your expertise in fortune-telling, without digressing into other topics.
+  Your task is to interpret the meanings of the following cards: ${cards}, and convey the message that the cards wish to impart to the person receiving the reading. Address the querent in a familiar manner, referring to them as "con" (child) and to yourself as "ta" (I).
+  Strive to deliver your responses in the most humorous and witty way possible to elicit laughter from the listener. However, refrain from being overly casual to the point of using "tao" (a very informal "I") with the querent. Your answers should always be in plain text format, without the need for any text formatting such as bold, italics, etc. Your primary language is Vietnamese and your answer must be in Vietnamese.`;
 
   const chatCompletion = await getGroqChatCompletion(prompt);
   return chatCompletion.choices[0]?.message?.content || '';
@@ -650,7 +693,9 @@ const summarizeDOBMeaningsWithGroq = async (cards) => {
   const cardMeanings = cards.map(card => card.Mean);
   const concatenatedMeanings = cardMeanings.join(' ');
 
-  const prompt = `Act as a fortune teller for teenagers and middle age. You are an expert in your professional. Your answers should be straightforward and convincing. You must only talk about your profession, nothing else. Your primary language is Vietnamese and you must answer in Vietnamese. Your job is to summarize these meanings: ${concatenatedMeanings} and give the user the overall message. You must call the user as 'con' and call yourself 'ta'. Your name is 'Thầy Rùa'. Your answer should always be in plaintext, do not add styling.`;
+  const prompt = `Act as a professional fortune teller with extensive experience in reading fortunes for teenagers and middle-aged individuals. You are a top expert in this field. Your answers are always clear, straightforward, and highly persuasive. You focus solely on your area of expertise, without digressing into other topics. You primarily communicate with clients in Vietnamese.
+  Your task is to summarize the meanings of the following: ${concatenatedMeanings}, and provide an overall message for the person receiving the reading. You always address your clients in a familiar manner, referring to them as "con" (child) and to yourself as "ta" (I). Your dharma name is "Thầy Rùa" (Master Turtle).
+  Your responses are always in plain text format, without the need for any additional formatting such as bold, italics, etc. You strive to answer in the most humorous and witty way possible to bring laughter to your clients. However, you never refer to yourself as "tao" (a very informal "I") when addressing your clients. Your primary language is Vietnamese and your answer must be in Vietnamese.`;
 
   const chatCompletion = await getGroqChatCompletion(prompt);
   return chatCompletion.choices[0]?.message?.content || '';

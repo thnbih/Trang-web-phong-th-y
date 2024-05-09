@@ -3,6 +3,8 @@ import axios from 'axios';
 import styles from './BoiNgaySinh.module.css';
 import { Analytics } from '@vercel/analytics/react';
 import { getAccessToken, getUser } from '../auth/auth';
+import { ReadAloudButton } from '../readAloud/ReadAloudButton';
+
 
 
 function BoiNgaySinh() {
@@ -10,6 +12,7 @@ function BoiNgaySinh() {
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
   const [zodiacSign, setZodiacSign] = useState('');
+  const [dayMeaning, setdayMeaning] = useState('');
   const [monthMeaning, setMonthMeaning] = useState('');
   const [yearMeaning, setYearMeaning] = useState('');
   const [soChuDao, setSoChuDao] = useState('');
@@ -28,7 +31,7 @@ function BoiNgaySinh() {
         console.error('Access token not found');
         return;
       }
-  
+
       const headers = {
         Authorization: `Bearer ${accessToken}`,
       };
@@ -38,12 +41,13 @@ function BoiNgaySinh() {
         year: parseInt(year),
         userId: userId,
       };
-  
+
       const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/boi-ngay-sinh', requestBody, { headers });
-      const { zodiacSign, monthMeaning, yearMeaning, soChuDao, summarizedMeaning } = response.data;
-  
+      const { zodiacSign, dayMeaning, monthMeaning, yearMeaning, soChuDao, summarizedMeaning } = response.data;
+
       if (summarizedMeaning) {
         setZodiacSign(zodiacSign);
+        setdayMeaning(dayMeaning);
         setMonthMeaning(monthMeaning);
         setYearMeaning(yearMeaning);
         setSoChuDao(soChuDao);
@@ -51,75 +55,50 @@ function BoiNgaySinh() {
         setShowResult(true);
       } else {
         setZodiacSign(zodiacSign);
+        setdayMeaning(dayMeaning);
         setMonthMeaning(monthMeaning);
         setYearMeaning(yearMeaning);
         setSoChuDao(soChuDao);
-  
+
         // Send the meanings to the http-server to get the overall message
         const dateOfBirthMeanings = [
           { Mean: zodiacSign },
+          { Mean: dayMeaning },
           { Mean: monthMeaning },
           { Mean: yearMeaning },
           { Mean: soChuDao },
         ];
-  
+
         const summarizeResponse = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/get-overall-message', dateOfBirthMeanings);
         const { summarizedMeaning } = summarizeResponse.data;
         setOverallMessage(summarizedMeaning);
         setShowResult(true);
-  
-        // Save the API response
-        const result = {
-          zodiacSign,
-          monthMeaning,
-          yearMeaning,
-          soChuDao,
-          summarizedMeaning,
-        };
-        saveApiResponse('boi-ngay-sinh', result);
       }
     } catch (error) {
       console.error('Error fetching birth date meanings:', error);
     }
   };
-  
-  const saveApiResponse = async (type, result) => {
-    try {
-      const origin = window.location.origin;
-      const accessToken = getAccessToken(origin);
-      const headers = {
-        Authorization: `Bearer ${accessToken}`,
-      };
-  
-      const userString = getUser(origin);
-      const user = JSON.parse(userString);
-      const userId = user._id;
-      const requestBody = {
-        userId: userId,
-        type,
-        result,
-      };
-  
-      await axios.post('https://coiboicuchay-be.azurewebsites.net/api/save-response', requestBody, { headers });
-    } catch (error) {
-      console.error('Error saving API response:', error);
-    }
-  };
-  
+
   const handleDayChange = (e) => {
     setDay(e.target.value);
   };
-  
+
   const handleMonthChange = (e) => {
     setMonth(e.target.value);
   };
-  
+
   const handleYearChange = (e) => {
     setYear(e.target.value);
   };
 
   return (
     <div className={styles['BoiNgaySinh']}>
+      <div className={styles['Banner-Welcome']}>
+        <h1 className={styles['Boi-Ngay-Sinh']}>Bói ngày sinh</h1>
+        <p className={styles['text-Boi-Ngay-Sinh']}>
+          Bói ngày sinh - khám phá ý nghĩa và tiềm năng của bản thân qua ngày tháng năm sinh. Hãy nhập thông tin của bạn và để chúng tôi giải mã những bí ẩn của cuộc đời bạn!
+        </p>
+      </div>
       <form className={styles['Body']} onSubmit={handleSubmit}>
         <div className={styles['Input-area']}>
           <ul>
@@ -201,11 +180,48 @@ function BoiNgaySinh() {
       {showResult && (
         <div className={styles['summarizedMeaning']}>
           <h2>Kết quả:</h2>
-          <p>Cung hoàng đạo: {zodiacSign}</p>
-          <p>Ý nghĩa tháng sinh: {monthMeaning}</p>
-          <p>Ý nghĩa năm sinh: {yearMeaning}</p>
-          <p>Số chủ đạo: {soChuDao}</p>
-          <p>Tổng quan: {overallMessage}</p>
+          <div className={styles['overall-message']}>
+            <h3>Tổng quan:</h3>
+            <p>{overallMessage}</p>
+            <ReadAloudButton text={overallMessage} />
+          </div>
+          <div className={styles['result-items-container']}>
+            <div className={styles['result-item']}>
+              <div className={styles['result-content']}>
+                <span className={styles['result-label']}>Cung hoàng đạo</span>
+                <span className={styles['result-value']}>{zodiacSign}</span>
+              </div>
+              <ReadAloudButton text={zodiacSign} />
+            </div>
+            <div className={styles['result-item']}>
+              <div className={styles['result-content']}>
+                <span className={styles['result-label']}>Ý nghĩa ngày sinh</span>
+                <span className={styles['result-value']}>{dayMeaning}</span>
+              </div>
+              <ReadAloudButton text={dayMeaning} />
+            </div>
+            <div className={styles['result-item']}>
+              <div className={styles['result-content']}>
+                <span className={styles['result-label']}>Ý nghĩa tháng sinh</span>
+                <span className={styles['result-value']}>{monthMeaning}</span>
+              </div>
+              <ReadAloudButton text={monthMeaning} />
+            </div>
+            <div className={styles['result-item']}>
+              <div className={styles['result-content']}>
+                <span className={styles['result-label']}>Ý nghĩa năm sinh</span>
+                <span className={styles['result-value']}>{yearMeaning}</span>
+              </div>
+              <ReadAloudButton text={yearMeaning} />
+            </div>
+            <div className={styles['result-item']}>
+              <div className={styles['result-content']}>
+                <span className={styles['result-label']}>Số chủ đạo</span>
+                <span className={styles['result-value']}>{soChuDao}</span>
+              </div>
+              <ReadAloudButton text={soChuDao} />
+            </div>
+          </div>
         </div>
       )}
       <Analytics />

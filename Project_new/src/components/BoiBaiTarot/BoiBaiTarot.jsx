@@ -3,6 +3,7 @@ import axios from 'axios';
 import styles from './BoiBaiTarot.module.css';
 import { Analytics } from '@vercel/analytics/react';
 import { getAccessToken, getUser } from '../auth/auth';
+import { ReadAloudButton } from '../readAloud/ReadAloudButton';
 
 
 function BoiBaiTarot() {
@@ -10,9 +11,8 @@ function BoiBaiTarot() {
     const [tarotCards, setTarotCards] = useState([]);
     const [selectedCard, setSelectedCard] = useState(null);
     const [summarizedMeaning, setSummarizedMeaning] = useState('');
+    const [cardsId, setCardsId] = useState([]);
 
-    // BoiBaiTarot.jsx
-    // boi-bai-tarot
     useEffect(() => {
         const fetchTarotCards = async () => {
             try {
@@ -35,28 +35,37 @@ function BoiBaiTarot() {
 
                 const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/lat-bai-tarot', requestBody, { headers });
                 const { tarotCards, summarizedMeaning } = response.data;
-
-                if (summarizedMeaning) {
-                    setSummarizedMeaning(summarizedMeaning);
+                console.log(tarotCards);
+                if (tarotCards && tarotCards.length > 0) {
                     setTarotCards(tarotCards);
+                    const cardsId = tarotCards.map((tarotCard) => tarotCard._id);
+                    const cardMeanings = tarotCards.map((tarotCard) => tarotCard.Mean);
+                    setCardsId(cardsId);
+                    if (summarizedMeaning) {
+                        setSummarizedMeaning(summarizedMeaning);
+                    } else {
+                        summarizeCardMeanings(cardMeanings, cardsId);
+                    }
                 } else {
-                    summarizeCardMeanings(tarotCards);
+                    setTarotCards([]);
+                    setSummarizedMeaning(summarizedMeaning || '');
                 }
             } catch (error) {
                 console.error('Error fetching Tarot cards:', error);
+                setTarotCards([]);
+                setSummarizedMeaning('');
             }
         };
 
         fetchTarotCards();
     }, []);
 
-    const summarizeCardMeanings = async (cards) => {
+    const summarizeCardMeanings = async (cardMeanings, cardsId) => {
         try {
-            const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/summarize', cards);
+            const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/summarize', cardMeanings);
             const summarizedMeaning = response.data.summarizedMeaning;
             setSummarizedMeaning(summarizedMeaning);
-            setTarotCards(cards);
-            saveApiResponse('lat-bai-tarot', { cards, summarizedMeaning });
+            saveApiResponse('lat-bai-tarot', { cardsId, summarizedMeaning });
         } catch (error) {
             console.error('Error summarizing card meanings:', error);
         }
@@ -77,7 +86,7 @@ function BoiBaiTarot() {
                 userId: userId,
                 type,
                 result: {
-                    cards: result.cards,
+                    cardsId: result.cardsId,
                     summarizedMeaning: result.summarizedMeaning,
                 },
             };
@@ -118,27 +127,45 @@ function BoiBaiTarot() {
                     <button className={styles.Button} onClick={flipCard}>Lật Bài</button>
                 </div>
                 <div className={styles['Card-area']}>
-                    {tarotCards.map((card, index) => (
-                        <div
-                            key={index}
-                            className={`${styles['Card']} ${flipped ? styles.flipped : ''}`}
-                            onClick={() => handleCardClick(card)}
-                        >
-                            <img src={card.img} alt={card.Name} />
-                        </div>
-                    ))}
+                    {tarotCards.length > 0 ? (
+                        tarotCards.map((card, index) => (
+                            <div
+                                key={index}
+                                className={`${styles['Card']} ${flipped ? styles.flipped : ''}`}
+                                onClick={() => handleCardClick(card)}
+                            >
+                                <img
+                                    src={`data:image/webp;base64,${card.img}`}
+                                    alt={card.Name}
+                                />
+                            </div>
+                        ))
+                    ) : (
+                        <p>Loading cards...</p>
+                    )}
                 </div>
                 {summarizedMeaning && (
                     <div className={styles.summarizedMeaning}>
-                        <h3>Summarized Meaning:</h3>
-                        <p>{summarizedMeaning}</p>
+                        <h2>Tóm tắt ý nghĩa</h2>
+                        <div className={styles['result-item']}>
+                            <div className={styles['result-label']}>Kết quả</div>
+                            <div className={styles['result-value']}>{summarizedMeaning}</div>
+                        </div>
+                        <div className={styles['overall-message']}>
+                            <h3>Lời nhắn</h3>
+                            <p>Ồ, những lá bài Tarot này hé lộ một khía cạnh thú vị trong tâm hồn bạn đấy! Nhưng đó chỉ là khởi đầu thôi. Hãy đào sâu hơn vào trí tuệ cổ xưa của Tarot và khám phá những bí mật còn ẩn giấu. Biết đâu, bạn sẽ tìm thấy con đường dẫn đến sự thấu hiểu bản thân và thế giới xung quanh!</p>
+                        </div>
+                        <ReadAloudButton text={summarizedMeaning} />
                     </div>
                 )}
             </div>
             {selectedCard && (
                 <div className={styles.fullscreen}>
                     <div className={styles.fullscreenContent}>
-                        <img src={selectedCard.img} alt={selectedCard.Name} />
+                        <img
+                            src={`data:image/webp;base64,${selectedCard.img}`}
+                            alt={selectedCard.Name}
+                        />
                         <div className={styles.cardMeaning}>
                             <h2>{selectedCard.Name}</h2>
                             <p>{selectedCard.Mean}</p>
