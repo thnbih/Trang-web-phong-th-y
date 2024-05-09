@@ -11,6 +11,7 @@ function BoiBaiTarot() {
     const [tarotCards, setTarotCards] = useState([]);
     const [selectedCard, setSelectedCard] = useState(null);
     const [summarizedMeaning, setSummarizedMeaning] = useState('');
+    const [cardsId, setCardsId] = useState([]);
 
     useEffect(() => {
         const fetchTarotCards = async () => {
@@ -34,27 +35,37 @@ function BoiBaiTarot() {
 
                 const response = await axios.post('http://localhost:5000/api/lat-bai-tarot', requestBody, { headers });
                 const { tarotCards, summarizedMeaning } = response.data;
-                if (summarizedMeaning) {
-                    setSummarizedMeaning(summarizedMeaning);
+                console.log(tarotCards);
+                if (tarotCards && tarotCards.length > 0) {
                     setTarotCards(tarotCards);
+                    const cardsId = tarotCards.map((tarotCard) => tarotCard._id);
+                    const cardMeanings = tarotCards.map((tarotCard) => tarotCard.Mean);
+                    setCardsId(cardsId);
+                    if (summarizedMeaning) {
+                        setSummarizedMeaning(summarizedMeaning);
+                    } else {
+                        summarizeCardMeanings(cardMeanings, cardsId);
+                    }
                 } else {
-                    summarizeCardMeanings(tarotCards);
+                    setTarotCards([]);
+                    setSummarizedMeaning(summarizedMeaning || '');
                 }
             } catch (error) {
                 console.error('Error fetching Tarot cards:', error);
+                setTarotCards([]);
+                setSummarizedMeaning('');
             }
         };
 
         fetchTarotCards();
     }, []);
 
-    const summarizeCardMeanings = async (cards) => {
+    const summarizeCardMeanings = async (cardMeanings, cardsId) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/summarize', cards);
+            const response = await axios.post('http://localhost:5000/api/summarize', cardMeanings);
             const summarizedMeaning = response.data.summarizedMeaning;
             setSummarizedMeaning(summarizedMeaning);
-            setTarotCards(cards);
-            saveApiResponse('lat-bai-tarot', { cards, summarizedMeaning });
+            saveApiResponse('lat-bai-tarot', { cardsId, summarizedMeaning });
         } catch (error) {
             console.error('Error summarizing card meanings:', error);
         }
@@ -75,7 +86,7 @@ function BoiBaiTarot() {
                 userId: userId,
                 type,
                 result: {
-                    cards: result.cards,
+                    cardsId: result.cardsId,
                     summarizedMeaning: result.summarizedMeaning,
                 },
             };
@@ -116,15 +127,22 @@ function BoiBaiTarot() {
                     <button className={styles.Button} onClick={flipCard}>Lật Bài</button>
                 </div>
                 <div className={styles['Card-area']}>
-                    {tarotCards && tarotCards.map((card, index) => (
-                        <div
-                            key={index}
-                            className={`${styles['Card']} ${flipped ? styles.flipped : ''}`}
-                            onClick={() => handleCardClick(card)}
-                        >
-                            <img src={card.img} alt={card.Name} />
-                        </div>
-                    ))}
+                    {tarotCards.length > 0 ? (
+                        tarotCards.map((card, index) => (
+                            <div
+                                key={index}
+                                className={`${styles['Card']} ${flipped ? styles.flipped : ''}`}
+                                onClick={() => handleCardClick(card)}
+                            >
+                                <img
+                                    src={`data:image/webp;base64,${card.img}`}
+                                    alt={card.Name}
+                                />
+                            </div>
+                        ))
+                    ) : (
+                        <p>Loading cards...</p>
+                    )}
                 </div>
                 {summarizedMeaning && (
                     <div className={styles.summarizedMeaning}>
@@ -144,7 +162,10 @@ function BoiBaiTarot() {
             {selectedCard && (
                 <div className={styles.fullscreen}>
                     <div className={styles.fullscreenContent}>
-                        <img src={selectedCard.img} alt={selectedCard.Name} />
+                        <img
+                            src={`data:image/webp;base64,${selectedCard.img}`}
+                            alt={selectedCard.Name}
+                        />
                         <div className={styles.cardMeaning}>
                             <h2>{selectedCard.Name}</h2>
                             <p>{selectedCard.Mean}</p>

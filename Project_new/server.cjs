@@ -169,51 +169,6 @@ client.connect()
       }
     });
 
-    // Middleware to save the API response in the user's session and write to the 'history' collection
-    const saveApiResponse = async (req, res, next) => {
-      try {
-        const { type, result } = req.body;
-
-        // Check if the user is authenticated
-        if (!req.session.user) {
-          // User is not authenticated, skip saving the response
-          next();
-          return;
-        }
-
-        const userId = req.session.user._id;
-
-        // Save the response in the user's session
-        if (!req.session.history) {
-          req.session.history = {};
-        }
-        if (!req.session.history[type]) {
-          req.session.history[type] = [];
-        }
-        req.session.history[type].unshift(result);
-
-        // Write to the 'history' collection in the database
-        const historyCollection = db.collection('history');
-        const existingHistory = await historyCollection.findOne({ userId });
-
-        if (existingHistory) {
-          const updatedHistory = {
-            ...existingHistory,
-            [type]: [...result, ...existingHistory[type].slice(0, 4)],
-          };
-          await historyCollection.updateOne({ userId }, { $set: updatedHistory });
-        } else {
-          const newHistory = { userId, [type]: [result] };
-          await historyCollection.insertOne(newHistory);
-        }
-
-        next();
-      } catch (error) {
-        console.error('Error saving API response:', error);
-        res.status(500).json({ error: 'Failed to save API response' });
-      }
-    };
-
     // Middleware to verify the access token
     const verifyToken = (req, res, next) => {
       const authHeader = req.headers.authorization;
@@ -337,11 +292,17 @@ client.connect()
           .aggregate([{ $sample: { size: 1 } }])
           .toArray();
 
-        // Store the selected Tarot cards in the session
-        req.session.tarotCards = tarotCards;
+        const convertedCard = await Promise.all(tarotCards.map(async (card) => {
+          const webpBase64 = await convertToWebP(card.img);
+          return {
+            ...card,
+            img: webpBase64,
+          };
+        }));
+        // console.log(convertedCard)
 
         // Send the Tarot cards as a response
-        res.json(tarotCards);
+        res.json({convertedCard: convertedCard});
       } catch (error) {
         console.error("Error fetching Tarot cards:", error);
         res.status(500).json({ error: "Failed to fetch Tarot cards" });
@@ -370,9 +331,10 @@ client.connect()
 
     const { ObjectId } = require('mongodb');
 
-    async function getCardInfoByCardsIds(cardsIds) {
+    async function getCardInfoByCardsIds(cardsIds, queryDB) {
       try {
-        const db = client.db("52la");
+
+        const db = client.db(queryDB);
         const cardsCollection = db.collection("cards");
 
         // Convert the input array to a Set to remove duplicates
@@ -434,7 +396,7 @@ client.connect()
             // Stored response is within 1 hour, send it back to the client
             const uniqueCardsId = [...new Set(storedResponse.cardsId)];
             const firstCardsId = uniqueCardsId.slice(0, 5);
-            const cardsInfo = await getCardInfoByCardsIds(firstCardsId);
+            const cardsInfo = await getCardInfoByCardsIds(firstCardsId, "52la");
             res.json({
               cards: cardsInfo,
               summarizedMeaning: storedResponse.summarizedMeaning
@@ -492,8 +454,13 @@ client.connect()
 
           if (timeDiff < oneHour) {
             // Stored response is within 1 hour, send it back to the client
+            const uniqueCardsId = [...new Set(storedResponse.cardsId)];
+            const firstCardsId = uniqueCardsId.slice(0, 3);
+            const cardsInfo = await getCardInfoByCardsIds(firstCardsId, "tarot");
+            console.log(cardsInfo);
+            console.log(firstCardsId);
             res.json({
-              tarotCards: storedResponse.result,
+              tarotCards: cardsInfo,
               summarizedMeaning: storedResponse.summarizedMeaning
             });
             return;
@@ -510,13 +477,21 @@ client.connect()
           .aggregate([{ $sample: { size: 3 } }])
           .toArray();
 
+        const convertedCards = await Promise.all(tarotCards.map(async (card) => {
+          const webpBase64 = await convertToWebP(card.img);
+          return {
+            ...card,
+            img: webpBase64,
+          };
+        }));
+
         // Save the new response in the user's session
         await saveApiResponseInUserSession(userId, "lat-bai-tarot", {
-          result: tarotCards,
+          result: convertedCards,
           timestamp: new Date(),
         });
 
-        res.json({ tarotCards: tarotCards, summarizedMeaning: "" });
+        res.json({ tarotCards: convertedCards, summarizedMeaning: "" });
       } catch (error) {
         console.error("Error fetching Tarot cards:", error);
         res.status(500).json({ error: "Failed to fetch Tarot cards" });
@@ -706,7 +681,9 @@ const summarizeCardMeaningsWithGroq = async (cards) => {
   // const cardMeanings = cards.map(card => card.Mean);
   // const concatenatedMeanings = cardMeanings.join(' ');
 
-  const prompt = `Act as a fortune teller for teenagers and middle age. You are an expert in your professional. Your answers should be straightforward and convincing. You must only talk about your profession, nothing else. Your primary language is Vietnamese and you must answer in Vietnamese. Your job is to summarize the meanings of these cards: ${cards} and give the user the message that the cards are trying to tell. You must call the user as 'con' and call yourself 'ta'. Your name is 'Thầy Rùa'. Your answer should always be in plaintext, do not add styling like bold text or anything like that. Try to be as funny as possible. Never call yourself 'tao'.`;
+  const prompt = `Act as a professional fortune teller with extensive experience in Tarot readings for teenagers and middle-aged individuals. Your name is Thầy Rùa (Master Turtle), and you are known for your wisdom and credibility. Always provide straightforward, clear, and convincing answers to questions. Focus solely on your expertise in fortune-telling, without digressing into other topics.
+  Your task is to interpret the meanings of the following cards: ${cards}, and convey the message that the cards wish to impart to the person receiving the reading. Address the querent in a familiar manner, referring to them as "con" (child) and to yourself as "ta" (I).
+  Strive to deliver your responses in the most humorous and witty way possible to elicit laughter from the listener. However, refrain from being overly casual to the point of using "tao" (a very informal "I") with the querent. Your answers should always be in plain text format, without the need for any text formatting such as bold, italics, etc. Your primary language is Vietnamese and your answer must be in Vietnamese.`;
 
   const chatCompletion = await getGroqChatCompletion(prompt);
   return chatCompletion.choices[0]?.message?.content || '';
@@ -716,7 +693,9 @@ const summarizeDOBMeaningsWithGroq = async (cards) => {
   const cardMeanings = cards.map(card => card.Mean);
   const concatenatedMeanings = cardMeanings.join(' ');
 
-  const prompt = `Act as a fortune teller for teenagers and middle age. You are an expert in your professional. Your answers should be straightforward and convincing. You must only talk about your profession, nothing else. Your primary language is Vietnamese and you must answer in Vietnamese. Your job is to summarize these meanings: ${concatenatedMeanings} and give the user the overall message. You must call the user as 'con' and call yourself 'ta'. Your name is 'Thầy Rùa'. Your answer should always be in plaintext, do not add styling like bold text or anything like that. Try to be as funny as possible. Never call yourself 'tao'.`;
+  const prompt = `Act as a professional fortune teller with extensive experience in reading fortunes for teenagers and middle-aged individuals. You are a top expert in this field. Your answers are always clear, straightforward, and highly persuasive. You focus solely on your area of expertise, without digressing into other topics. You primarily communicate with clients in Vietnamese.
+  Your task is to summarize the meanings of the following: ${concatenatedMeanings}, and provide an overall message for the person receiving the reading. You always address your clients in a familiar manner, referring to them as "con" (child) and to yourself as "ta" (I). Your dharma name is "Thầy Rùa" (Master Turtle).
+  Your responses are always in plain text format, without the need for any additional formatting such as bold, italics, etc. You strive to answer in the most humorous and witty way possible to bring laughter to your clients. However, you never refer to yourself as "tao" (a very informal "I") when addressing your clients. Your primary language is Vietnamese and your answer must be in Vietnamese.`;
 
   const chatCompletion = await getGroqChatCompletion(prompt);
   return chatCompletion.choices[0]?.message?.content || '';
