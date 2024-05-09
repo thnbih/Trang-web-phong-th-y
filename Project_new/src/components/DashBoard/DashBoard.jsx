@@ -57,6 +57,28 @@ function DashBoard() {
         fetchLoiBinh();
     }, []);
 
+    //calendar
+    const [content, setContent] = useState('');
+
+    useEffect(() => {
+      // Lắng nghe sự kiện message từ window
+      const handleMessage = (event) => {
+        // Kiểm tra nếu là loại thông điệp mà chúng ta mong muốn
+        if (event.data && event.data.type === 'showContent') {
+          setContent(event.data.content);
+        }
+      };
+  
+      // Đăng ký lắng nghe sự kiện
+      window.addEventListener('message', handleMessage);
+  
+      // Đảm bảo huỷ lắng nghe sự kiện khi component bị unmount
+      return () => {
+        window.removeEventListener('message', handleMessage);
+      };
+    }, []);
+
+
     return (
         <div className={styles['BigDashBoard']}>
             <div className={styles['Welcomebanner']}>
@@ -67,16 +89,16 @@ function DashBoard() {
                 <div className={styles['mini-container1']}>
                     <h2>Lịch Âm Dương</h2>
                     <p>Lịch hôm nay</p>
-                    <img alt="" className={styles['img']} src="https://cdn.sforum.vn/sforum/wp-content/uploads/2024/02/lich-am-thang-5-nam-2024-2.png" />
+                    <iframe src="src\components\DashBoard\lich\index.html" width="100%" height="500px" frameBorder="0" title="Lịch Âm Dương"></iframe>
                 </div>
-                <div className={styles['content']}>
-                    <p><strong>- Ngày Dương lịch:</strong> 06-05-2024 (Thứ hai)</p>
+                <div className={styles['content']} dangerouslySetInnerHTML={{ __html: content }}>
+                    {/* <p><strong>- Ngày Dương lịch:</strong> 06-05-2024 (Thứ hai)</p>
                     <p><strong>- Ngày Âm lịch:</strong> 28-03-2024 </p>
                     <p>- Tiết: <strong>Lập hạ</strong></p>
                     <p>- Ngày <strong>canh ngọ</strong> tháng <strong>mậu thìn</strong> năm <strong>giáp thìn</strong></p>
                     <p><strong>- Ngày trong tuần:</strong> Thứ 2</p>
                     <p>- Ngày <strong>Bạch Hổ Túc</strong>: cấm đi xa, làm việc gì cũng không thành công, rất xấu trong mọi việc</p>
-                    <p>- Giờ <strong>Hoàng Đạo</strong>: Tý (23-1), Sửu (1-3), Mão (5-7), Ngọ (11-13), Thân (15-17), Dậu (17-19)</p>
+                    <p>- Giờ <strong>Hoàng Đạo</strong>: Tý (23-1), Sửu (1-3), Mão (5-7), Ngọ (11-13), Thân (15-17), Dậu (17-19)</p> */}
                 </div>
             </div>
 
