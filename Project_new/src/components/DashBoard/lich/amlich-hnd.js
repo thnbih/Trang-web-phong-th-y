@@ -302,7 +302,7 @@ function getDayName(lunarDate) {
 		return "";
 	}
 	var cc = getCanChi(lunarDate);
-	var s = "Ng\u00E0y " + cc[0] +", th\341ng "+cc[1] + ", n\u0103m " + cc[2];
+	var s = "- Ng\u00E0y <strong>" + cc[0] +"</strong>, th\341ng <strong>"+cc[1] + "</strong>, n\u0103m <strong>" + cc[2] + "</strong>";
 	return s;
 }
 
@@ -331,7 +331,7 @@ function getCanChi(lunar) {
 function getDayString(lunar, solarDay, solarMonth, solarYear) {
 	var s;
 	var dayOfWeek = TUAN[(lunar.jd + 1) % 7];
-	s = dayOfWeek + " " + solarDay + "/" + solarMonth + "/" + solarYear;
+	s = "- " + dayOfWeek + " " + solarDay + "/" + solarMonth + "/" + solarYear;
 	s += " -+- ";
 	s = s + "Ng\u00E0y " + lunar.day+" th\341ng "+lunar.month;
 	if (lunar.leap == 1) {
@@ -439,18 +439,18 @@ function printStyle() {
 	res += '<style type="text/css">\n';
 	res += '<!--\n';
 	//res += '  body {margin:0}\n';
-	res += '  .tennam {text-align:center; font-size:150%; line-height:120%; font-weight:bold; color:#000000; background-color: #CCCCCC}\n';
+	res += '  .tennam {text-align:center; font-size:150%; line-height:120%; font-weight:bold; color:#FAACA8}\n';
 	res += '  .thang {font-size: '+fontSize+'; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed}\n';
-	res += '  .tenthang {text-align:center; font-size:125%; line-height:100%; font-weight:bold; color:#330033; background-color: #CCFFCC}\n';
-	res += '  .navi-l {text-align:center; font-size:75%; line-height:100%; font-family:Verdana,Times New Roman,Arial; font-weight:bold; color:red; background-color: #CCFFCC}\n';
-	res += '  .navi-r {text-align:center; font-size:75%; line-height:100%; font-family:Verdana,Arial,Times New Roman; font-weight:bold; color:#330033; background-color: #CCFFCC}\n';
-	res += '  .ngaytuan {width:14%; text-align:center; font-size:125%; line-height:100%; color:#330033; background-color: #FFFFCC}\n';
-	res += '  .ngaythang {background-color:#FDFDF0}\n';
-	res += '  .homnay {background-color:#FFF000}\n';
+	res += '  .tenthang {text-align:center; font-size:125%; line-height:100%; font-weight:bold; color:#FAACA8; background-color: rgba(248, 180, 194, 0.1)}\n';
+	res += '  .navi-l {text-align:center; font-size:75%; line-height:100%; font-family:Verdana,Times New Roman,Arial; font-weight:bold; color:red,; background-color: rgba(248, 180, 194, 0.1)}\n';
+	res += '  .navi-r {text-align:center; font-size:75%; line-height:100%; font-family:Verdana,Arial,Times New Roman; font-weight:bold; color:#FAACA8,; background-color: rgba(248, 180, 194, 0.1)}\n';
+	res += '  .ngaytuan {width:14%; text-align:center; font-size:125%; line-height:100%; color:#FAACA8; background-color: rgba(248, 180, 194, 0.1)}\n';
+	res += '  .ngaythang {color: #FAACA8; background-color: rgba(248, 180, 194, 0.1)}\n';
+	res += '  .homnay {background-color:#d6827e}\n';
 	res += '  .tet {background-color:#FFCC99}\n';
-	res += '  .am {text-align:right;font-size:75%;line-height:100%;color:blue}\n';
-	res += '  .am2 {text-align:right;font-size:75%;line-height:100%;color:#004080}\n';
-	res += '  .t2t6 {text-align:left;font-size:125%;color:black}\n';
+	res += '  .am {text-align:right;font-size:75%;line-height:100%;color:yellow}\n';
+	res += '  .am2 {text-align:right;font-size:75%;line-height:100%;color:#004080; background-color: rgba(248, 180, 194, 0.1)}\n';
+	res += '  .t2t6 {text-align:left;font-size:125%;color:#FAACA8; background-color: rgba(248, 180, 194, 0.1)}\n';
 	res += '  .t7 {text-align:left;font-size:125%;line-height:100%;color:green}\n';
 	res += '  .cn {text-align:left;font-size:125%;line-height:100%;color:red}\n';
 	res += '-->\n';
@@ -467,7 +467,7 @@ function printTable(mm, yy) {
 	var MonthHead = mm + "/" + yy;
 	var LunarHead = getYearCanChi(ld1.year);
 	var res = "";
-	res += ('<table class="thang" border="2" cellpadding="1" cellspacing="1" width="'+PRINT_OPTS.tableWidth+'">\n');
+	res += ('<table class="thang" style="border: 2px solid #FAACA8" border="2" cellpadding="1" cellspacing="1" width="'+PRINT_OPTS.tableWidth+'">\n');
 	res += printHead(mm, yy);
 	for (i = 0; i < 6; i++) {
 		res += ("<tr>\n");
@@ -491,24 +491,24 @@ function getPrevMonthLink(mm, yy) {
 	var mm1 = mm > 1 ? mm-1 : 12;
 	var yy1 = mm > 1 ? yy : yy-1;
 	//return '<a href="'+window.location.pathname+'?yy='+yy1+'&mm='+mm1+'"><img src="left1.gif" width=8 height=12 alt="PrevMonth" border=0></a>';
-	return '<a href="'+window.location.pathname+'?yy='+yy1+'&mm='+mm1+'">&lt;</a>';
+	return '<a style="color: #FAACA8; text-decoration: none;" href="'+window.location.pathname+'?yy='+yy1+'&mm='+mm1+'">&lt;</a>';
 }
 
 function getNextMonthLink(mm, yy) {
 	var mm1 = mm < 12 ? mm+1 : 1;
 	var yy1 = mm < 12 ? yy : yy+1;
 	//return '<a href="'+window.location.pathname+'?yy='+yy1+'&mm='+mm1+'"><img src="right1.gif" width=8 height=12 alt="NextMonth" border=0></a>';
-	return '<a href="'+window.location.pathname+'?yy='+yy1+'&mm='+mm1+'">&gt;</a>';
+	return '<a style="color: #FAACA8; text-decoration: none;" href="'+window.location.pathname+'?yy='+yy1+'&mm='+mm1+'">&gt;</a>';
 }
 
 function getPrevYearLink(mm, yy) {
 	//return '<a href="'+window.location.pathname+'?yy='+(yy-1)+'&mm='+mm+'"><img src="left2.gif" width=16 height=12 alt="PrevYear" border=0></a>';
-	return '<a href="'+window.location.pathname+'?yy='+(yy-1)+'&mm='+mm+'">&lt;&lt;</a>';
+	return '<a style="color: #FAACA8; text-decoration: none;" href="'+window.location.pathname+'?yy='+(yy-1)+'&mm='+mm+'">&lt;&lt;</a>';
 }
 
 function getNextYearLink(mm, yy) {
 	//return '<a href="'+window.location.pathname+'?yy='+(yy+1)+'&mm='+mm+'"><img src="right2.gif" width=16 height=12 alt="NextYear" border=0></a>';
-	return '<a href="'+window.location.pathname+'?yy='+(yy+1)+'&mm='+mm+'">&gt;&gt;</a>';
+	return '<a style="color: #FAACA8; text-decoration: none;" href="'+window.location.pathname+'?yy='+(yy+1)+'&mm='+mm+'">&gt;&gt;</a>';
 }
 
 function printHead(mm, yy) {
@@ -538,7 +538,7 @@ function printCell(lunarDate, solarDate, solarMonth, solarYear) {
 	cellClass = "ngaythang";
 	solarClass = "t2t6";
 	lunarClass = "am";
-	solarColor = "black";
+	solarColor = "#";
 	var dow = (lunarDate.jd + 1) % 7;
 	if (dow == 0) {
 		solarClass = "cn";
@@ -597,9 +597,9 @@ function alertDayInfo(dd, mm, yy, leap, jd, sday, smonth, syear) {
 	var s = getDayString(lunar, sday, smonth, syear);
 	s += " \u00E2m l\u1ECBch<br>";
 	s += getDayName(lunar);
-	s += "<br>Gi\u1EDD \u0111\u1EA7u ng\u00E0y: "+getCanHour0(jd)+" "+CHI[0];
-	s += "<br>Ti\u1EBFt: "+TIETKHI[getSunLongitude(jd+1, 7.0)];
-	s += "<br>Gi\u1EDD ho\u00E0ng \u0111\u1EA1o: "+getGioHoangDao(jd);
+	s += "<br>- <strong>Gi\u1EDD \u0111\u1EA7u ng\u00E0y</strong>: "+getCanHour0(jd)+" "+CHI[0];
+	s += "<br>- <strong>Ti\u1EBFt</strong>: "+TIETKHI[getSunLongitude(jd+1, 7.0)];
+	s += "<br>- <strong>Gi\u1EDD ho\u00E0ng \u0111\u1EA1o</strong>: "+getGioHoangDao(jd);
 
 	window.parent.postMessage({ type: 'showContent', content: s }, '*');
 }

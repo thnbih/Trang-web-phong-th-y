@@ -54,13 +54,14 @@
 
 .mini-container1{
     display: flex;
-    flex: 3;
+    flex: 1;
     flex-direction: column;
     color: #FAACA8;
+    height: 400px;
 }
 
 .content{
-    flex: 2;
+    flex: 1;
     color: #FAACA8;
     font-size: 20px;
     line-height: 40px;
