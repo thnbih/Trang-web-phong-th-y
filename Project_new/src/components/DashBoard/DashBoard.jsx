@@ -100,9 +100,14 @@ function DashBoard() {
                     <div className={styles['mini-container1']}>
                         <h2>Lịch Âm Dương</h2>
                         <p>Lịch hôm nay</p>
-                        <iframe src="./lich/index.html" width="100%" height="500px" frameBorder="0" title="Lịch Âm Dương"></iframe>
+                        <iframe src="/lich/index.html" width="100%" height="500px" frameBorder="0" title="Lịch Âm Dương"></iframe>
                     </div>
-                    <div className={styles['content']} dangerouslySetInnerHTML={{ __html: content }}>
+                    <div className={styles['content']}>
+                        {content ? (
+                            <div dangerouslySetInnerHTML={{ __html: content }} />
+                        ) : (
+                            <p>Chọn một ngày để xem thông tin chi tiết</p>
+                        )}
                     </div>
                 </section>
 
