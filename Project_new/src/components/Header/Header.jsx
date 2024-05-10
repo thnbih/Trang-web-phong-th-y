@@ -41,9 +41,9 @@ function Header() {
 
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <meta name="robots" content="noindex, nofollow" />
-      </Helmet>
+      </Helmet> */}
       <div className={styles.header}>
         <div className={styles.Logo}>
           <img

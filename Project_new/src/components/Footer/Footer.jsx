@@ -6,9 +6,9 @@ import { Helmet } from 'react-helmet';
 function Footer() {
     return (
         <div>
-            <Helmet>
+            {/* <Helmet>
                 <meta name="robots" content="noindex, nofollow" />
-            </Helmet>
+            </Helmet> */}
             <div className={styles.footer}>
                 <div className={styles.NamePage}>
                     <h1>An Nhiên</h1>
