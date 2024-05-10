@@ -110,8 +110,6 @@ function BoiBaiTarot() {
         setSelectedCard(null);
     };
 
-    const iframeRef = React.useRef(null);
-
     return (
         <>
             <div className={styles['Banner-Welcome']}>
