@@ -10,7 +10,7 @@ export function ReadAloudButton({ text }) {
     const handleClick = async () => {
         try {
             setIsPlaying(true);
-            const response = await axios.post('http://localhost:5000/api/synthesize', { text }, {
+            const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/synthesize', { text }, {
                 responseType: 'blob',
             });
             const audioBlob = new Blob([response.data], { type: 'audio/wav' });
