@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
+import { Helmet } from 'react-helmet';
 
 function Header() {
   const [showNav, setShowNav] = useState(false);
@@ -40,6 +41,9 @@ function Header() {
 
   return (
     <>
+      <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       <div className={styles.header}>
         <div className={styles.Logo}>
           <img

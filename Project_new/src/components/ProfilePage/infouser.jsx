@@ -16,7 +16,8 @@ import { useEffect, useState } from "react";
 const { TextArea } = Input;
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import './style.css'
+import './style.css';
+import { Helmet } from 'react-helmet';
 
 function InfoUser() {
   const _id = getCookie("id");
@@ -80,69 +81,75 @@ function InfoUser() {
 
   return (
     <>
-      {contextHolder}
-        <Button onClick={handleLogout} className="button-logout">Logout</Button>
-        {info && (
-          <Card
-            title="Thông tin"
-            extra={
-              !isEdit ? (
-                <Button className="button-edit" onClick={handleEdit}>Chỉnh sửa</Button>
-              ) : (
-                <Button onClick={handleCancel}>Hủy</Button>
-              )
-            }
-            style={{backgroundColor: 'transparent'}}
-          >
-            <Form
-              layout="vertical"
-              onFinish={handleFinish}
-              initialValues={info.data}
-              form={form}
-              disabled={!isEdit}
+      <Helmet>
+        <title>Thông Tin Người Dùng</title>
+        <meta name="description" content="Xem và chỉnh sửa thông tin người dùng của bạn." />
+      </Helmet>
+      <main>
+        {contextHolder}
+          <Button onClick={handleLogout} className="button-logout">Logout</Button>
+          {info && (
+            <Card
+              title="Thông tin"
+              extra={
+                !isEdit ? (
+                  <Button className="button-edit" onClick={handleEdit}>Chỉnh sửa</Button>
+                ) : (
+                  <Button onClick={handleCancel}>Hủy</Button>
+                )
+              }
+              style={{backgroundColor: 'transparent'}}
             >
-              <Row gutter={20}>
-                <Col span={12}>
-                  <Form.Item label="Họ và tên" name="fullname" rules={rules}>
-                    <Input />
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <Form.Item label="Tên đăng nhập" name="username" rules={rules}>
-                    <Input />
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <Form.Item label="Email" name="email" rules={rules}>
-                    <Input />
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <Form.Item label="Địa chỉ" name="address">
-                    <Input />
-                  </Form.Item>
-                </Col>
-                <Col span={24}>
-                  <Form.Item label="Lịch sử truy cập" name="history">
-                    <TextArea rows={16} disabled={true}/>
-                  </Form.Item>
-                </Col>
-                {isEdit && (
-                  <Col span={24}>
-                    <Form.Item>
-                      <Button type="primary" htmlType="submit">
-                        Cập nhật
-                      </Button>
-                      <Button onClick={handleCancel} className="ml-10">
-                        Hủy
-                      </Button>
+              <Form
+                layout="vertical"
+                onFinish={handleFinish}
+                initialValues={info.data}
+                form={form}
+                disabled={!isEdit}
+              >
+                <Row gutter={20}>
+                  <Col span={12}>
+                    <Form.Item label="Họ và tên" name="fullname" rules={rules}>
+                      <Input />
                     </Form.Item>
                   </Col>
-                )}
-              </Row>
-            </Form>
-          </Card>
-        )}
+                  <Col span={12}>
+                    <Form.Item label="Tên đăng nhập" name="username" rules={rules}>
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item label="Email" name="email" rules={rules}>
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item label="Địa chỉ" name="address">
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                  <Col span={24}>
+                    <Form.Item label="Lịch sử truy cập" name="history">
+                      <TextArea rows={16} disabled={true}/>
+                    </Form.Item>
+                  </Col>
+                  {isEdit && (
+                    <Col span={24}>
+                      <Form.Item>
+                        <Button type="primary" htmlType="submit">
+                          Cập nhật
+                        </Button>
+                        <Button onClick={handleCancel} className="ml-10">
+                          Hủy
+                        </Button>
+                      </Form.Item>
+                    </Col>
+                  )}
+                </Row>
+              </Form>
+            </Card>
+          )}
+      </main>
     </>
   );
 }

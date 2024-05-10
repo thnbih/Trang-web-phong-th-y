@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { setCookie } from './cookie';
 import { Analytics } from '@vercel/analytics/react';
-
+import { Helmet } from 'react-helmet';
 
 const Detail_Login = () => {
     const [username, setUsername] = useState('');
@@ -55,56 +55,62 @@ const Detail_Login = () => {
 
     return (
         <>
-            <div>
-                <div className={styles['container']}>
-                    <form onSubmit={handleSubmit}>
-                        <div className={styles['title-container']}>
-                            <p>Login</p>
-                        </div>
-                        <div className={styles['input-container']}>
-                            <div className={styles['content-container']}>
-                                <div className={styles['content-text']}>
-                                    <p>Username: </p>
+            <Helmet>
+                <title>Đăng Nhập</title>
+                <meta name="description" content="Đăng nhập để truy cập các tính năng và dịch vụ của chúng tôi." />
+            </Helmet>
+            <main>
+                <section>
+                    <div className={styles['container']}>
+                        <form onSubmit={handleSubmit}>
+                            <div className={styles['title-container']}>
+                                <p>Login</p>
+                            </div>
+                            <div className={styles['input-container']}>
+                                <div className={styles['content-container']}>
+                                    <div className={styles['content-text']}>
+                                        <p>Username: </p>
+                                    </div>
+                                    <div className={styles['content-input']}>
+                                        <input
+                                            type="text"
+                                            id="username"
+                                            value={username}
+                                            onChange={handleUsernameChange}
+                                            required
+                                        />
+                                    </div>
                                 </div>
-                                <div className={styles['content-input']}>
-                                    <input
-                                        type="text"
-                                        id="username"
-                                        value={username}
-                                        onChange={handleUsernameChange}
-                                        required
-                                    />
+                                <div className={styles['content-container']}>
+                                    <div className={styles['content-text']}>
+                                        <p>Password: </p>
+                                    </div>
+                                    <div className={styles['content-input']}>
+                                        <input
+                                            type="password"
+                                            id="password"
+                                            value={password}
+                                            onChange={handlePasswordChange}
+                                            required
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                            <div className={styles['content-container']}>
-                                <div className={styles['content-text']}>
-                                    <p>Password: </p>
+                            <div className={styles['button-container']}>
+                                <div className={styles['item-button']}>
+                                    <button type="submit">Login</button>
                                 </div>
-                                <div className={styles['content-input']}>
-                                    <input
-                                        type="password"
-                                        id="password"
-                                        value={password}
-                                        onChange={handlePasswordChange}
-                                        required
-                                    />
+                                <div className={styles['item-button']}>
+                                    <Link to='/signUp'>
+                                        <button>Go to Signup</button>
+                                    </Link>
                                 </div>
                             </div>
-                        </div>
-                        <div className={styles['button-container']}>
-                            <div className={styles['item-button']}>
-                                <button type="submit">Login</button>
-                            </div>
-                            <div className={styles['item-button']}>
-                                <Link to='/signUp'>
-                                    <button>Go to Signup</button>
-                                </Link>
-                            </div>
-                        </div>
-                    </form>
-                    <Analytics />
-                </div>
-            </div>
+                        </form>
+                        <Analytics />
+                    </div>
+                </section>
+            </main>
         </>
     )
 }

@@ -19,7 +19,7 @@ function DashBoard() {
                 const { convertedCard } = response.data;
                 console.log(response.data);
                 const cardMeaning = convertedCard.Mean;
-                summarizeCardMeanings(cardMeaning);
+                // summarizeCardMeanings(cardMeaning);
                 setTarotCards(convertedCard);
             } catch (error) {
                 console.error('Error fetching Tarot cards:', error);
@@ -29,18 +29,18 @@ function DashBoard() {
         fetchTarotCards();
     }, []);
 
-    const summarizeCardMeanings = async (cards) => {
-        try {
-            const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/summarize', cards);
-            const summarizedMeaning = response.data.summarizedMeaning;
-            setSummarizedMeaning(summarizedMeaning);
-        } catch (error) {
-            console.error('Error summarizing card meanings:', error);
-        }
-    };
+    // const summarizeCardMeanings = async (cards) => {
+    //     try {
+    //         const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/summarize', cards);
+    //         const summarizedMeaning = response.data.summarizedMeaning;
+    //         setSummarizedMeaning(summarizedMeaning);
+    //     } catch (error) {
+    //         console.error('Error summarizing card meanings:', error);
+    //     }
+    // };
 
     const handleCardClick = (card) => {
-        setSummarizedMeaning(summarizedMeaning);
+        setSummarizedMeaning(card.Mean);
         setShowFullscreen(true);
     };
 
@@ -140,13 +140,13 @@ function DashBoard() {
                                 <h2>Tóm tắt ý nghĩa</h2>
                                 <div className={styles['result-item']}>
                                     <div className={styles['result-label']}>Kết quả</div>
+                                    <ReadAloudButton text={summarizedMeaning} />
                                     <div className={styles['result-value']}>{summarizedMeaning}</div>
                                 </div>
                                 <div className={styles['overall-message']}>
                                     <h3>Lời nhắn</h3>
                                     <p>Ồ, quẻ bài này có vẻ thú vị đây! Nhưng đừng dừng lại ở đó, hãy khám phá thêm những điều bất ngờ đang chờ đón bạn trong các loại hình coi bói khác mà chúng tôi cung cấp. Biết đâu, bạn sẽ tìm thấy chìa khóa cho những bí ẩn trong cuộc sống của mình!</p>
                                 </div>
-                                <ReadAloudButton text={summarizedMeaning} />
                             </div>
                             <button
                                 className={styles.closeButton}

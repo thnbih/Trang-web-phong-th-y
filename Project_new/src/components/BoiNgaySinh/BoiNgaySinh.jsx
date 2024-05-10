@@ -4,6 +4,7 @@ import styles from './BoiNgaySinh.module.css';
 import { Analytics } from '@vercel/analytics/react';
 import { getAccessToken, getUser } from '../auth/auth';
 import { ReadAloudButton } from '../readAloud/ReadAloudButton';
+import { Helmet } from 'react-helmet';
 
 
 
@@ -92,140 +93,154 @@ function BoiNgaySinh() {
   };
 
   return (
-    <div className={styles['BoiNgaySinh']}>
-      <div className={styles['Banner-Welcome']}>
+    <>
+      <Helmet>
+        <title>Bói Ngày Sinh - Khám Phá Ý Nghĩa Và Tiềm Năng Của Bản Thân</title>
+        <meta
+          name="description"
+          content="Bói ngày sinh - khám phá ý nghĩa và tiềm năng của bản thân qua ngày tháng năm sinh. Nhập thông tin của bạn và để chúng tôi giải mã những bí ẩn của cuộc đời bạn!"
+        />
+      </Helmet>
+      {/* <div className={styles['BoiNgaySinh']}> */}
+      <header className={styles['Banner-Welcome']}>
         <h1 className={styles['Boi-Ngay-Sinh']}>Bói ngày sinh</h1>
         <p className={styles['text-Boi-Ngay-Sinh']}>
           Bói ngày sinh - khám phá ý nghĩa và tiềm năng của bản thân qua ngày tháng năm sinh. Hãy nhập thông tin của bạn và để chúng tôi giải mã những bí ẩn của cuộc đời bạn!
         </p>
-      </div>
-      <form className={styles['Body']} onSubmit={handleSubmit}>
-        <div className={styles['Input-area']}>
-          <ul>
-            <li>
-              <div className={styles['input-container']}>
-                <div className={styles['input-text']}>
-                  <p>Ngày</p>
-                </div>
-                <div className={styles['input-area']}>
-                  <select
-                    className={styles['select']}
-                    name="day"
-                    size={1}
-                    value={day}
-                    onChange={handleDayChange}
-                  >
-                    <option value="">Select Day</option>
-                    {Array.from({ length: 31 }, (_, index) => (
-                      <option key={index + 1} value={index + 1}>
-                        {index + 1}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div className={styles['input-container']}>
-                <div className={styles['input-text']}>
-                  <p>Tháng</p>
-                </div>
-                <div className={styles['input-area']}>
-                  <select
-                    className={styles['select']}
-                    name="month"
-                    size={1}
-                    value={month}
-                    onChange={handleMonthChange}
-                  >
-                    <option value="">Select Month</option>
-                    {Array.from({ length: 12 }, (_, index) => (
-                      <option key={index + 1} value={index + 1}>
-                        {index + 1}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div className={styles['input-container']}>
-                <div className={styles['input-text']}>
-                  <p>Năm</p>
-                </div>
-                <div className={styles['input-area']}>
-                  <select
-                    className={styles['select']}
-                    name="year"
-                    size={1}
-                    value={year}
-                    onChange={handleYearChange}
-                  >
-                    <option value="">Select Year</option>
-                    {Array.from({ length: 80 }, (_, index) => (
-                      <option key={index + 1950} value={index + 1950}>
-                        {index + 1950}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div className={styles['Button-area']}>
-          <button type="submit">Xem ngay</button>
-        </div>
-      </form>
+      </header>
+
+      <main>
+        <section>
+          <form className={styles['Body']} onSubmit={handleSubmit}>
+            <div className={styles['Input-area']}>
+              <ul>
+                <li>
+                  <div className={styles['input-container']}>
+                    <div className={styles['input-text']}>
+                      <p>Ngày</p>
+                    </div>
+                    <div className={styles['input-area']}>
+                      <select
+                        className={styles['select']}
+                        name="day"
+                        size={1}
+                        value={day}
+                        onChange={handleDayChange}
+                      >
+                        <option value="">Select Day</option>
+                        {Array.from({ length: 31 }, (_, index) => (
+                          <option key={index + 1} value={index + 1}>
+                            {index + 1}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div className={styles['input-container']}>
+                    <div className={styles['input-text']}>
+                      <p>Tháng</p>
+                    </div>
+                    <div className={styles['input-area']}>
+                      <select
+                        className={styles['select']}
+                        name="month"
+                        size={1}
+                        value={month}
+                        onChange={handleMonthChange}
+                      >
+                        <option value="">Select Month</option>
+                        {Array.from({ length: 12 }, (_, index) => (
+                          <option key={index + 1} value={index + 1}>
+                            {index + 1}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div className={styles['input-container']}>
+                    <div className={styles['input-text']}>
+                      <p>Năm</p>
+                    </div>
+                    <div className={styles['input-area']}>
+                      <select
+                        className={styles['select']}
+                        name="year"
+                        size={1}
+                        value={year}
+                        onChange={handleYearChange}
+                      >
+                        <option value="">Select Year</option>
+                        {Array.from({ length: 80 }, (_, index) => (
+                          <option key={index + 1950} value={index + 1950}>
+                            {index + 1950}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div className={styles['Button-area']}>
+              <button type="submit">Xem ngay</button>
+            </div>
+          </form>
+        </section>
+      </main>
       {showResult && (
-        <div className={styles['summarizedMeaning']}>
+        <section className={styles['summarizedMeaning']}>
           <h2>Kết quả:</h2>
           <div className={styles['overall-message']}>
             <h3>Tổng quan:</h3>
-            <p>{overallMessage}</p>
             <ReadAloudButton text={overallMessage} />
+            <p>{overallMessage}</p>
           </div>
           <div className={styles['result-items-container']}>
             <div className={styles['result-item']}>
               <div className={styles['result-content']}>
                 <span className={styles['result-label']}>Cung hoàng đạo</span>
+                <ReadAloudButton text={zodiacSign} />
                 <span className={styles['result-value']}>{zodiacSign}</span>
               </div>
-              <ReadAloudButton text={zodiacSign} />
             </div>
             <div className={styles['result-item']}>
               <div className={styles['result-content']}>
                 <span className={styles['result-label']}>Ý nghĩa ngày sinh</span>
+                <ReadAloudButton text={dayMeaning} />
                 <span className={styles['result-value']}>{dayMeaning}</span>
               </div>
-              <ReadAloudButton text={dayMeaning} />
             </div>
             <div className={styles['result-item']}>
               <div className={styles['result-content']}>
                 <span className={styles['result-label']}>Ý nghĩa tháng sinh</span>
+                <ReadAloudButton text={monthMeaning} />
                 <span className={styles['result-value']}>{monthMeaning}</span>
               </div>
-              <ReadAloudButton text={monthMeaning} />
             </div>
             <div className={styles['result-item']}>
               <div className={styles['result-content']}>
                 <span className={styles['result-label']}>Ý nghĩa năm sinh</span>
+                <ReadAloudButton text={yearMeaning} />
                 <span className={styles['result-value']}>{yearMeaning}</span>
               </div>
-              <ReadAloudButton text={yearMeaning} />
             </div>
             <div className={styles['result-item']}>
               <div className={styles['result-content']}>
                 <span className={styles['result-label']}>Số chủ đạo</span>
+                <ReadAloudButton text={soChuDao} />
                 <span className={styles['result-value']}>{soChuDao}</span>
               </div>
-              <ReadAloudButton text={soChuDao} />
             </div>
           </div>
-        </div>
+        </section>
       )}
       <Analytics />
-    </div>
+      {/* </div> */}
+    </>
   );
 }
 

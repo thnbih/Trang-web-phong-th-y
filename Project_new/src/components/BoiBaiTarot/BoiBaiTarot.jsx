@@ -4,6 +4,7 @@ import styles from './BoiBaiTarot.module.css';
 import { Analytics } from '@vercel/analytics/react';
 import { getAccessToken, getUser } from '../auth/auth';
 import { ReadAloudButton } from '../readAloud/ReadAloudButton';
+import { Helmet } from 'react-helmet';
 
 
 function BoiBaiTarot() {
@@ -112,51 +113,58 @@ function BoiBaiTarot() {
 
     return (
         <>
-            <div className={styles['Banner-Welcome']}>
+            <Helmet>
+                <title>Bói Bài Tarot - Khám Phá Tương Lai Qua Lá Bài Huyền Bí</title>
+                <meta name="description" content="Bói bài Tarot - môn nghệ thuật đọc vị tương lai qua những lá bài huyền bí. Nếu bạn muốn biết số phận của mình trong tương lai gần, hãy thử một quẻ bài Tarot xem sao." />
+            </Helmet>
+            <header className={styles['Banner-Welcome']}>
                 <h1 className={styles['Boi-Bai-Tarot']}>Bói bài Tarot</h1>
                 <p className={styles['text-Boi-Bai-Tarot']}>Bói bài Tarot - môn nghệ thuật đọc vị tương lai qua những lá bài huyền bí.
                     Nếu bạn muốn biết số phận của mình trong tương lai gần, hãy thử rút một lá bài Tarot xem sao.
                     Nhưng xin lưu ý, nếu kết quả không như ý muốn, đừng vội buồn nhé, vì biết đâu bài nó "lẫy" bạn thôi!</p>
                 <p className={styles['text-Boi-Bai-Tarot']}>Hướng dẫn: Suy nghĩ về một vấn đề bạn cần tham khảo, ấn vào nút lật bài, xem thông điệp từng lá bài bằng cách chọn vào lá bài mà bạn muốn. Ngoài ra, có thể xem tóm tắt bên dưới</p>
 
-            </div>
-            <div className={styles['Boi-bai-area']}>
-                <div className={styles.buttonContainer}>
-                    <button className={styles.Button} onClick={flipCard}>Lật Bài</button>
-                </div>
-                <div className={styles['Card-area']}>
-                    {tarotCards.length > 0 ? (
-                        tarotCards.map((card, index) => (
-                            <div
-                                key={index}
-                                className={`${styles['Card']} ${flipped ? styles.flipped : ''}`}
-                                onClick={() => handleCardClick(card)}
-                            >
-                                <img
-                                    src={`data:image/webp;base64,${card.img}`}
-                                    alt={card.Name}
-                                />
-                            </div>
-                        ))
-                    ) : (
-                        <p>Loading cards...</p>
-                    )}
-                </div>
-                {summarizedMeaning && (
-                    <div className={styles.summarizedMeaning}>
-                        <h2>Tóm tắt ý nghĩa</h2>
-                        <div className={styles['result-item']}>
-                            <div className={styles['result-label']}>Kết quả</div>
-                            <div className={styles['result-value']}>{summarizedMeaning}</div>
-                        </div>
-                        <div className={styles['overall-message']}>
-                            <h3>Lời nhắn</h3>
-                            <p>Ồ, những lá bài Tarot này hé lộ một khía cạnh thú vị trong tâm hồn bạn đấy! Nhưng đó chỉ là khởi đầu thôi. Hãy đào sâu hơn vào trí tuệ cổ xưa của Tarot và khám phá những bí mật còn ẩn giấu. Biết đâu, bạn sẽ tìm thấy con đường dẫn đến sự thấu hiểu bản thân và thế giới xung quanh!</p>
-                        </div>
-                        <ReadAloudButton text={summarizedMeaning} />
+            </header>
+
+            <main>
+                <section className={styles['Boi-bai-area']}>
+                    <div className={styles.buttonContainer}>
+                        <button className={styles.Button} onClick={flipCard}>Lật Bài</button>
                     </div>
-                )}
-            </div>
+                    <div className={styles['Card-area']}>
+                        {tarotCards.length > 0 ? (
+                            tarotCards.map((card, index) => (
+                                <div
+                                    key={index}
+                                    className={`${styles['Card']} ${flipped ? styles.flipped : ''}`}
+                                    onClick={() => handleCardClick(card)}
+                                >
+                                    <img
+                                        src={`data:image/webp;base64,${card.img}`}
+                                        alt={card.Name}
+                                    />
+                                </div>
+                            ))
+                        ) : (
+                            <p>Loading cards...</p>
+                        )}
+                    </div>
+                    {summarizedMeaning && (
+                        <div className={styles.summarizedMeaning}>
+                            <h2>Tóm tắt ý nghĩa</h2>
+                            <div className={styles['result-item']}>
+                                <div className={styles['result-label']}>Kết quả</div>
+                                <ReadAloudButton text={summarizedMeaning} />
+                                <div className={styles['result-value']}>{summarizedMeaning}</div>
+                            </div>
+                            <div className={styles['overall-message']}>
+                                <h3>Lời nhắn</h3>
+                                <p>Ồ, những lá bài Tarot này hé lộ một khía cạnh thú vị trong tâm hồn bạn đấy! Nhưng đó chỉ là khởi đầu thôi. Hãy đào sâu hơn vào trí tuệ cổ xưa của Tarot và khám phá những bí mật còn ẩn giấu. Biết đâu, bạn sẽ tìm thấy con đường dẫn đến sự thấu hiểu bản thân và thế giới xung quanh!</p>
+                            </div>
+                        </div>
+                    )}
+                </section>
+            </main>
             {selectedCard && (
                 <div className={styles.fullscreen}>
                     <div className={styles.fullscreenContent}>

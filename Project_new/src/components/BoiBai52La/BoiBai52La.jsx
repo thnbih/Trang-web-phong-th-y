@@ -153,13 +153,13 @@ function BoiBai52La() {
                             <h2>Tóm tắt ý nghĩa</h2>
                             <div className={styles['result-item']}>
                                 <div className={styles['result-label']}>Kết quả</div>
+                                <ReadAloudButton text={summarizedMeaning} />
                                 <div className={styles['result-value']}>{summarizedMeaning}</div>
                             </div>
                             <div className={styles['overall-message']}>
                                 <h3>Lời nhắn</h3>
                                 <p>Mỗi lá bài là một mảnh ghép trong bức tranh cuộc đời. Hãy kiên nhẫn ghép từng mảnh và chiêm ngưỡng bức tranh tổng thể về tương lai của bạn. Đừng bỏ lỡ cơ hội khám phá những điều kỳ diệu mà những lá bài Tây này mang lại!</p>
                             </div>
-                            <ReadAloudButton text={summarizedMeaning} />
                         </section>
                     )}
                 </section>
