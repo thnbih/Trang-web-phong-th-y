@@ -1,86 +1,158 @@
-/* Header */
-
-.ProfilePage {
-    border: 5px solid #FAACA8;
-    border-radius: 10px;
-    margin: 50px 200px 100px;
+.container {
+    width: 100%;
+    padding: 0px;
 }
-
-.profilepage-container {
-    margin-top: 50px;
-    margin-bottom: 80px;
-}
-
-.Header {
-    margin: 20px 0px;
-}
-
-.Header-container {
-    display: flex;
-}
-
-.Header .Header-title h1{
+.body-container {
     display: block;
-    font-family: var(--wp--preset--font-family--fjalla-one);
+    place-items: center;
+    border: 1px solid #FAACA8;
+    border-radius: 15px;
+    padding: 0px;
+}
+.sub-header-container {
+    padding: 0px;
+    display: block;
+    place-items: center;
+    border-bottom: 1px solid #FAACA8;
+    width: 100%;
+    height: 80px;
+}
+.sub-header-container-text p{
     color: #FAACA8;
     font-size: 40px;
+    font-weight: bold;
 }
-
-.Header .Change-button {
-    display: flex;
-    align-items: center;
-    justify-items: right;
-    margin-left: 180px;
+.sub-header-container-2 {
+    padding-right: 30px;
 }
-
-.Change-button button{
-    display: block;
-    font-family: var(--wp--preset--font-family--fjalla-one);
-    font-size: 25px;
+.sub-header-container button{
     background-color: #FAACA8;
-    border-radius: 10px;
-    width: 180px;
-    height: 50px;
-}
-
-/* Body */
-
-.Body {
-    display: block;
-}
-
-.Body .body-container {
-    align-items: center;
-}
-
-.Body .container {
-    display: flex;
-    margin: 30px 0px;
-}
-
-.Body .text {
-    align-items: center;
-    font-family: var(--wp--preset--font-family--fjalla-one);
-    color: #FAACA8;
-    font-size: 25px;
-    width: 100px;
-    height: 30px;
-    margin-right: 90px;
-}
-
-.Body .input input{
-    background: linear-gradient(to bottom right, #ff9966, #ff5e62);
     color: white;
-    border: none;
-    width: 390px;
-    height: 30px;
-    border-radius: 5px;
-    font-size: 1.2rem;
+    font-size: 20px;
+    height: 40px;
+    width: 150px;
+    font-weight: bold;
+    border: 1px solid transparent;
+    border-radius: 10px;
 }
-
-.Footer {
+.header-container button{
+    margin: 20px 0px;
+    background-color: #FAACA8;
+    color: white;
+    font-size: 20px;
+    height: 40px;
+    width: 150px;
+    font-weight: bold;
+    border: 1px solid transparent;
+    border-radius: 10px;
+}
+.sub-header-container {
     display: flex;
+    justify-content: space-between; 
     align-items: center;
-    margin: 0px 510px;
-    margin-bottom: 50px;
+}
+.sub-header-container-text {
+    text-align: left; 
+    color: #FAACA8;
+    font-weight: bold;
+}
+.sub-header-container-text p{
+    padding-left: 30px;
+}
+.sub-body-container {
+    width: 100%;
+    display: grid;
+    place-items: center;
+    padding: 0px;
+}
+.information-container  {
+    display: grid;
+    place-items: center;
+    padding: 0px 0px;
+}
+.title-container {
+    margin-bottom: 10px;
+}
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: left;
+    margin: 30px 0px;
+    width: 100%;
+}
+.item {
+    display: block;
+    justify-content: space-between;
+    align-items: left;
+    width: 50%;
+    padding: 0px;
+}
+.input-container {
+    margin-left: 40px;
+    padding-top: 0px;
+}
+.input-container input{
+    border: 1px solid #FAACA8;
+    background: transparent;
+    border-radius: 5px;
+    width: 200px;
+    height: 28px;
+}
+.input-history-container {
+    display: grid;
+    justify-items: left;
+    padding-left: 60px;
+    margin-bottom: 30px;
+}
+.input-history-container input{
+    border: 1px solid #FAACA8;
+    background: transparent;
+    border-radius: 15px;
+    width: 90%;
+    width: 500px;
+    height: 200px;
+}
+.row-history {
+    display: block;
+    place-items: center;
+    padding: 0px;
+    width: 100%;
+}
+.container-history {
+    width: 100%;
+    padding: 0px;
+}
+@media (max-width: 600px) {
+    .header-container button{
+        width: 120px;
+        font-size: 20px;
+    }
+    .sub-header-container-text p{
+        font-size: 30px;
+        padding-left: 20px;
+    }
+    .sub-header-container-2 {
+        padding-right: 20px;
+    }
+    .sub-header-container-2 button {
+        width: 120px;
+        font-size: 18px;
+    }
+    .row {
+        display: block;
+        margin: 0px;
+        padding: 0px 10px;
+    }
+    .item {
+        margin: 10px 0px;
+    }
+    .input-container input {
+        width: 200px;
+    }
+    .input-history-container {
+        padding-left: 40px;
+    }
+    .input-history-container input {
+        width: 200px;
+    }
 }
