@@ -104,9 +104,6 @@ function BoiNgaySinh() {
       {/* <div className={styles['BoiNgaySinh']}> */}
       <header className={styles['Banner-Welcome']}>
         <h1 className={styles['Boi-Ngay-Sinh']}>Bói ngày sinh</h1>
-        <p className={styles['text-Boi-Ngay-Sinh']}>
-          Bói ngày sinh - khám phá ý nghĩa và tiềm năng của bản thân qua ngày tháng năm sinh. Hãy nhập thông tin của bạn và để chúng tôi giải mã những bí ẩn của cuộc đời bạn!
-        </p>
       </header>
 
       <main>
