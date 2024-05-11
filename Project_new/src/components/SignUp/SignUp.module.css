@@ -49,7 +49,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 .item-button {
@@ -59,29 +59,49 @@
 .item-button button{
     height: 45px;
     width: 150px;
-    border-radius: 10px;
-    background-color: #FAACA8;
+    background: linear-gradient(to bottom right, #ff9966, #ff5e62);
+    color: white;
     border: none;
-    font-size: 20px;
-    font-family: 'Lato', sans-serif;
-    font-weight: bold;
-    color: #333;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
 @media (max-width: 485px) {
+    .container {
+        margin: 0px 10px;
+        margin-bottom: 10px;
+    }
+    .title-container {
+        padding-bottom: 20px;
+    }
+
     .title-container p{
-        font-size: 35px;
+        font-size: 30px;
+    }
+
+    .content-container {
+        margin-bottom: 10px;
     }
 
     .content-text p {
         font-size: 18px;
-        width: 170px;
+        width: 160px;
         height: 20px;
     }
 
+    .button-container {
+        margin-top: 0px;
+    }
+
     .content-input input {
-        width: 220px;
+        width: 150px;
         height: 25px;
+    }
+
+    .item-button {
+        padding: 0px 15px;
     }
 
     .item-button button{

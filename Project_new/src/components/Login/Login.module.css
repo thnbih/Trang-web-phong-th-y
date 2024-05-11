@@ -57,35 +57,45 @@
 .item-button button{
     height: 45px;
     width: 150px;
-    border-radius: 10px;
-    background-color: #FAACA8;
+    background: linear-gradient(to bottom right, #ff9966, #ff5e62);
+    color: white;
     border: none;
-    font-size: 20px;
-    font-family: 'Lato', sans-serif;
-    font-weight: bold;
-    color: #333;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
 @media (max-width: 485px) {
     .title-container {
-        padding-bottom: 30px;
+        padding-bottom: 20px;
     }
 
     .title-container p{
-        font-size: 30px;
+        font-size: 28px;
         font-weight: 700; 
+        margin: 0px 20px;
+    }
+
+    .input-container {
+        margin: 0px 20px;
+        padding-top: 10px;
     }
 
     .content-text p {
-        font-size: 20px;
-        width: 130px;
+        font-size: 18px;
+        width: 120px;
         height: 25px;
     }
     
     .content-input input {
-        width: 250px;
+        width: 230px;
         height: 25px;
         font-size: 18px;
+    }
+
+    .button-container {
+        margin-top: 30px;
     }
 
     .item-button button{
@@ -94,3 +104,4 @@
         font-size: 15px;
     }
 }
+

@@ -41,7 +41,6 @@
     border-radius: 10px;
     width: 180px;
     height: 50px;
-    color: #EFEFEB;
 }
 
 /* Body */
@@ -70,13 +69,13 @@
 }
 
 .Body .input input{
-    background-color: transparent;
-    border: 1.5px solid #FAACA8;
+    background: linear-gradient(to bottom right, #ff9966, #ff5e62);
+    color: white;
+    border: none;
     width: 390px;
     height: 30px;
-    font-family: var(--wp--preset--font-family--fjalla-one);
-    font-size: 25px;
-    color: #FAACA8;
+    border-radius: 5px;
+    font-size: 1.2rem;
 }
 
 .Footer {
