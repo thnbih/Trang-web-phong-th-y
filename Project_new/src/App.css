@@ -1,15 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Lato&display=swap');
-
 body {
   font-family: 'Lato', sans-serif;
   font-size: 1.1rem; /* Increase font size by 1 unit */
-  background-image: url('./img/background.jpg');
+  background-image: url('./img/background.webp');
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 100vh;
-  position: relative;
+  position:static;
   /* padding-bottom: 60px; */
   /* margin: 10px; */
 }
