@@ -4,7 +4,6 @@ import { Tooltip } from 'antd';
 import styles from './Footer.module.css';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import logoImg from '../../img/page-logo.png';
 
 function Footer() {
     const handleFacebookClick = () => {
@@ -29,7 +28,7 @@ function Footer() {
                 <div className={styles['footer-item']}>
                     <div className={styles['identity-container']}>
                         <div className={styles['logo-container']}>
-                            <img src={logoImg} alt="logo" />
+                            <img src="page-logo.webp" alt="logo" />
                         </div>
                         <div className={styles['name-container']}>
                             <p>AN NHIÊN</p>
