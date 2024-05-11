@@ -121,7 +121,7 @@ function DashBoard() {
                         {tarotCards.map((card, index) => (
                             <div
                                 key={index}
-                                className={styles['Card']}
+                                className={styles['CardDash']}
                                 onClick={() => handleCardClick(card)}
                             >
                                 <img

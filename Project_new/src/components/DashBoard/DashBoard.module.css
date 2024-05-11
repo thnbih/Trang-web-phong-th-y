@@ -119,6 +119,13 @@
     margin-top: 10px;
 }
 
+.CardDash {
+    width: 100%;
+    height: auto;
+    perspective: 1000px;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
 
 .Mean {
     flex: 2;
