@@ -1,15 +1,27 @@
 body {
   font-family: 'Lato', sans-serif;
-  font-size: 1.1rem; /* Increase font size by 1 unit */
-  background-image: url('background.webp');
+  font-size: 1.1rem;
+  background-image: url('../public/background.webp');
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 100vh;
-  position:static;
-  /* padding-bottom: 60px; */
-  /* margin: 10px; */
+  position: static;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: inherit;
+  background-size: cover;
+  background-position: center;
+  filter: blur(3px); /* Adjust the blur amount as needed */
+  z-index: -1;
 }
 
 h1, h2, h3, h4, h5, h6 {

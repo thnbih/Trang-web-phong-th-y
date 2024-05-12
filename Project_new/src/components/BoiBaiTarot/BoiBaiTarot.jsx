@@ -54,7 +54,7 @@ function BoiBaiTarot() {
                 }
             } catch (error) {
                 console.error('Error fetching Tarot cards:', error);
-                message.error("Create new account to view cards");
+                message.error("Login or Signup to view cards");
                 setTarotCards([]);
                 setSummarizedMeaning('');
             }

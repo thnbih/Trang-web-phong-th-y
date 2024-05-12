@@ -52,7 +52,7 @@ function BoiBai52La() {
                 }
             } catch (error) {
                 console.error('Error fetching cards:', error);
-                message.error("Create new account to view cards");
+                message.error("Login or Signup to view cards");
                 setCards([]);
                 setSummarizedMeaning('');
             }
