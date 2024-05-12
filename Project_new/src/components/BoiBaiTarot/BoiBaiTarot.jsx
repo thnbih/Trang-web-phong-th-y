@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { getAccessToken, getUser } from '../auth/auth';
 import { ReadAloudButton } from '../readAloud/ReadAloudButton';
 import { Helmet } from 'react-helmet';
+import { message } from 'antd';
 
 
 function BoiBaiTarot() {
@@ -53,6 +54,7 @@ function BoiBaiTarot() {
                 }
             } catch (error) {
                 console.error('Error fetching Tarot cards:', error);
+                message.error("Create new account to view cards");
                 setTarotCards([]);
                 setSummarizedMeaning('');
             }

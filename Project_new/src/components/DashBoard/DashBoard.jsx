@@ -29,16 +29,6 @@ function DashBoard() {
         fetchTarotCards();
     }, []);
 
-    // const summarizeCardMeanings = async (cards) => {
-    //     try {
-    //         const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/summarize', cards);
-    //         const summarizedMeaning = response.data.summarizedMeaning;
-    //         setSummarizedMeaning(summarizedMeaning);
-    //     } catch (error) {
-    //         console.error('Error summarizing card meanings:', error);
-    //     }
-    // };
-
     const handleCardClick = (card) => {
         setSummarizedMeaning(card.Mean);
         setShowFullscreen(true);

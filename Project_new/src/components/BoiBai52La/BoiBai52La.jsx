@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { getAccessToken, getUser } from '../auth/auth';
 import { ReadAloudButton } from '../readAloud/ReadAloudButton';
 import { Helmet } from 'react-helmet';
+import { message } from 'antd';
 
 function BoiBai52La() {
     const [flipped, setFlipped] = useState(true);
@@ -51,6 +52,7 @@ function BoiBai52La() {
                 }
             } catch (error) {
                 console.error('Error fetching cards:', error);
+                message.error("Create new account to view cards");
                 setCards([]);
                 setSummarizedMeaning('');
             }
