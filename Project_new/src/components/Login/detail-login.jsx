@@ -5,11 +5,12 @@ import axios from 'axios';
 import { setCookie } from './cookie';
 import { Analytics } from '@vercel/analytics/react';
 import { Helmet } from 'react-helmet';
+import { message } from 'antd';
 
 const Detail_Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+  const [mess, contextHolder] = message.useMessage();
   const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
@@ -31,8 +32,10 @@ const Detail_Login = () => {
       });
 
       // Handle successful login
-      console.log(response.data.message);
-      alert(JSON.stringify(response.data.message));
+      mess.open({
+        type: 'success',
+        content: 'Đăng nhập thành công!',
+      });
 
       // set cookie
       const time = 1;
@@ -48,8 +51,10 @@ const Detail_Login = () => {
       navigate('/');
     } catch (error) {
       // Handle login error
-      console.error(error.response.data.error);
-      alert(JSON.stringify(error.response.data.error));
+      mess.open({
+        type: 'error',
+        content: JSON.stringify(error.response.data.error),
+      });
     }
   };
 
@@ -60,6 +65,7 @@ const Detail_Login = () => {
         <meta name="description" content="Đăng nhập để truy cập các tính năng và dịch vụ của chúng tôi." />
       </Helmet>
       <main>
+        {contextHolder}
         <section>
           <div className={styles['container']}>
             <form onSubmit={handleSubmit}>
