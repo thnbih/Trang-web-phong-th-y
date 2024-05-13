@@ -1,7 +1,9 @@
 // VideoRoom.jsx
 import React, { useEffect, useState } from 'react';
+import { Navigate } from "react-router-dom";
 import AgoraRTC from 'agora-rtc-sdk-ng';
 import { VideoPlayer } from './VideoPlayer';
+import styles from './Call.module.css';
 
 const APP_ID = 'c437536f270343ed9ab53fc6af0f996a';
 const TOKEN =
@@ -11,6 +13,8 @@ const CHANNEL = 'annhien';
 export const VideoRoom = () => {
   const [users, setUsers] = useState([]);
   const [localTracks, setLocalTracks] = useState([]);
+  const [cameraEnabled, setCameraEnabled] = useState(true);
+  const [micEnabled, setMicEnabled] = useState(true);
   const [client] = useState(() =>
     AgoraRTC.createClient({
       mode: 'rtc',
@@ -21,8 +25,8 @@ export const VideoRoom = () => {
   useEffect(() => {
     const handleUserJoined = async (user, mediaType) => {
       await client.subscribe(user, mediaType);
-
-      if (mediaType === 'video') {
+    
+      if (mediaType === 'video' && user.videoTrack && user.videoTrack.enabled) {
         setUsers((previousUsers) => [
           ...previousUsers,
           {
@@ -31,7 +35,7 @@ export const VideoRoom = () => {
           },
         ]);
       }
-
+    
       if (mediaType === 'audio') {
         setUsers((previousUsers) => [
           ...previousUsers,
@@ -85,12 +89,58 @@ export const VideoRoom = () => {
     };
   }, []);
 
+  const toggleCamera = async () => {
+    if (localTracks.length > 0) {
+      const [videoTrack] = localTracks.filter(
+        (track) => track.kind === 'video'
+      );
+      if (videoTrack) {
+        await videoTrack.setEnabled(!videoTrack.enabled);
+        setCameraEnabled(videoTrack.enabled);
+      }
+    }
+  };
+  
+  const toggleMic = async () => {
+    if (localTracks.length > 0) {
+      const [audioTrack] = localTracks.filter(
+        (track) => track.kind === 'audio'
+      );
+      if (audioTrack) {
+        await audioTrack.setEnabled(!audioTrack.enabled);
+        setMicEnabled(audioTrack.enabled);
+      }
+    }
+  };
+
+  const leaveChannel = async () => {
+    for (let localTrack of localTracks) {
+      localTrack.stop();
+      localTrack.close();
+    }
+    client.off('user-published', handleUserJoined);
+    client.off('user-left', handleUserLeft);
+    await client.unpublish(localTracks);
+    await client.leave();
+  };
+
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 200px)' }}>
-        {users.map((user) => (
-          <VideoPlayer key={user.uid} user={user} />
-        ))}
+    <div>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 200px)' }}>
+          {users.map((user) => (
+            <VideoPlayer key={user.uid} user={user} />
+          ))}
+        </div>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+        <button onClick={toggleCamera}>
+          {cameraEnabled ? 'Disable Camera' : 'Enable Camera'}
+        </button>
+        <button onClick={toggleMic}>
+          {micEnabled ? 'Disable Microphone' : 'Enable Microphone'}
+        </button>
+        <button onClick={leaveChannel}>Leave Channel</button>
       </div>
     </div>
   );
