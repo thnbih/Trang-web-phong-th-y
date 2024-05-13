@@ -17,9 +17,6 @@ function DashBoard() {
             try {
                 const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/lat-bai-tarot-dashboard');
                 const { convertedCard } = response.data;
-                console.log(response.data);
-                const cardMeaning = convertedCard.Mean;
-                // summarizeCardMeanings(cardMeaning);
                 setTarotCards(convertedCard);
             } catch (error) {
                 console.error('Error fetching Tarot cards:', error);
@@ -151,13 +148,13 @@ function DashBoard() {
                 )}
 
 
-                <section className={styles['DashBoard3']}>
+                {/* <section className={styles['DashBoard3']}>
                     <h2>Xem bói online</h2>
                     <p className={styles['name-store']}>Trang web An nhiên cung cấp dịch vụ xem bói hữu duyên cho các anh chị</p>
                     <div className={styles['button-store']}>
-                        <p className={styles['text-button-store']}>Bắt đầu</p>
+                    <button className={styles['button-store']}>Bắt đầu</button>
                     </div>
-                </section>
+                </section> */}
 
                 <section className={styles['DashBoard4']}>
                     <div>

@@ -22,27 +22,12 @@
 }
 
 .DashBoard2 {
-    /* padding-top: 80px; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 100px;
-    /* margin-top: 50px; */
     text-align: justify;
-}
-
-.DashBoard3 {
-    margin-top: 100px;
-    background-size: 100% 100%;
-    background-position: center;
-    background-image: url("dashboard3.webp");
-    padding: 100px 100px 76px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 100px;
-    margin-top: 50px;
 }
 
 .DashBoard4 {
@@ -56,6 +41,7 @@
 .mini-container1 {
     flex: 1;
     width: 100%;
+    max-height: 480px;
 }
 
 .mini-container1 iframe {
@@ -69,38 +55,13 @@
     color: #FAACA8;
     font-size: 20px;
     line-height: 40px;
+    max-height: 480px;
 }
 
 .mini-container2 {
     display: flex;
     flex-direction: column;
     color: #FAACA8;
-}
-
-.name-store {
-    height: 49.44%;
-    color: black;
-    align-self: stretch;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.button-store {
-    background-color: pink;
-    padding: 23px 20px 22px 20px;
-    display: flex;
-    align-items: center;
-}
-
-.button-store:hover {
-    background-color: aqua;
-}
-
-.text-button-store {
-    color: black;
-    flex: 1;
-    align-self: stretch;
-    text-align: center;
 }
 
 .comment {
@@ -168,22 +129,13 @@ p {
 
     .DashBoard1,
     .DashBoard2,
-    .DashBoard3,
     .DashBoard4 {
         flex-direction: column;
-    }
-
-    .DashBoard3 {
-        padding: 50px 20px;
     }
 
     .mini-container1 iframe {
         /* margin-bottom: 20px; */
         height: 400px;
-    }
-
-    .button-store {
-        padding: 15px 10px;
     }
 
     .comment {
@@ -203,18 +155,6 @@ p {
 @media (max-width: 480px) {
     .BigDashBoard {
         padding-top: 2px;
-    }
-
-    .DashBoard3 {
-        padding: 30px 10px;
-    }
-
-    .name-store {
-        font-size: 14px;
-    }
-
-    .text-button-store {
-        font-size: 14px;
     }
 
     .comment {

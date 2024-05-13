@@ -28,7 +28,7 @@ function Footer() {
                 <div className={styles['footer-item']}>
                     <div className={styles['identity-container']}>
                         <div className={styles['logo-container']}>
-                            <img src="page-logo.webp" alt="logo" width={88.8} height={88.5} />
+                            <img src="page-logo.webp" alt="logo" width={90} height={88.5} />
                         </div>
                         <div className={styles['name-container']}>
                             <p>AN NHIÊN</p>
