@@ -1,147 +1,169 @@
 // VideoRoom.jsx
-import React, { useEffect, useState } from 'react';
-import { Navigate } from "react-router-dom";
-import AgoraRTC from 'agora-rtc-sdk-ng';
-import { VideoPlayer } from './VideoPlayer';
-import styles from './Call.module.css';
+import { useRef, useState } from "react";
+import styles from "./VideoRoom.module.css";
+import {
+  createClient,
+  createCameraVideoTrack,
+  createMicrophoneAudioTrack,
+  onCameraChanged,
+  onMicrophoneChanged
+} from "agora-rtc-sdk-ng/esm";
 
-const APP_ID = 'c437536f270343ed9ab53fc6af0f996a';
-const TOKEN =
-  '007eJxTYHi998F1lpovp1R1guS1Hs41a17E+eHSxpqpZbx36+pYX+QpMCSbGJubGpulGZkbGJsYp6ZYJiaZGqclmyWmGaRZWpolPq91TGsIZGRo/3eOkZEBAkF8dobEvLyMzNQ8BgYAJ7YioA==';
-const CHANNEL = 'annhien';
+const client = createClient({
+  mode: "rtc",
+  codec: "vp8",
+});
+
+let audioTrack;
+let videoTrack;
 
 export const VideoRoom = () => {
-  const [users, setUsers] = useState([]);
-  const [localTracks, setLocalTracks] = useState([]);
-  const [cameraEnabled, setCameraEnabled] = useState(true);
-  const [micEnabled, setMicEnabled] = useState(true);
-  const [client] = useState(() =>
-    AgoraRTC.createClient({
-      mode: 'rtc',
-      codec: 'vp8',
-    })
-  );
+  const [isAudioOn, setIsAudioOn] = useState(false);
+  const [isVideoOn, setIsVideoOn] = useState(false);
+  const [isAudioPubed, setIsAudioPubed] = useState(false);
+  const [isVideoPubed, setIsVideoPubed] = useState(false);
+  const [isVideoSubed, setIsVideoSubed] = useState(false);
 
-  useEffect(() => {
-    const handleUserJoined = async (user, mediaType) => {
-      await client.subscribe(user, mediaType);
+  const turnOnCamera = async (flag) => {
+    flag = flag ?? !isVideoOn;
+    setIsVideoOn(flag);
 
-      if (mediaType === 'video') {
-        setUsers((previousUsers) => [
-          ...previousUsers,
-          {
-            uid: user.uid,
-            videoTrack: user.videoTrack,
-          },
-        ]);
-      }
-
-      if (mediaType === 'audio') {
-        setUsers((previousUsers) => [
-          ...previousUsers,
-          {
-            uid: user.uid,
-            audioTrack: user.audioTrack,
-          },
-        ]);
-      }
-    };
-
-    const handleUserLeft = (user) => {
-      setUsers((previousUsers) =>
-        previousUsers.filter((u) => u.uid !== user.uid)
-      );
-    };
-
-    client.on('user-published', handleUserJoined);
-    client.on('user-left', handleUserLeft);
-
-    client
-      .join(APP_ID, CHANNEL, TOKEN, null)
-      .then((uid) =>
-        Promise.all([
-          AgoraRTC.createCameraVideoTrack({ facingMode: 'user' }),
-          AgoraRTC.createMicrophoneAudioTrack(),
-          uid,
-        ])
-      )
-      .then(([videoTrack, audioTrack, uid]) => {
-        setLocalTracks([videoTrack, audioTrack]);
-        setUsers((previousUsers) => [
-          ...previousUsers,
-          {
-            uid,
-            videoTrack,
-            audioTrack,
-          },
-        ]);
-        client.publish([videoTrack, audioTrack]);
-      });
-
-    return () => {
-      for (let localTrack of localTracks) {
-        localTrack.stop();
-        localTrack.close();
-      }
-      client.off('user-published', handleUserJoined);
-      client.off('user-left', handleUserLeft);
-      client.unpublish(localTracks).then(() => client.leave());
-    };
-  }, []);
-
-  const toggleCamera = async () => {
-    if (localTracks.length > 0) {
-      const [videoTrack] = localTracks.filter(
-        (track) => track.kind === 'video'
-      );
-      if (videoTrack) {
-        await videoTrack.setEnabled(!videoTrack.enabled);
-        setCameraEnabled(videoTrack.enabled);
-      }
+    if (videoTrack) {
+      return videoTrack.setEnabled(flag);
     }
+    videoTrack = await createCameraVideoTrack();
+    videoTrack.play("camera-video");
   };
-  
-  const toggleMic = async () => {
-    if (localTracks.length > 0) {
-      const [audioTrack] = localTracks.filter(
-        (track) => track.kind === 'audio'
-      );
-      if (audioTrack) {
-        await audioTrack.setEnabled(!audioTrack.enabled);
-        setMicEnabled(audioTrack.enabled);
-      }
+
+  const turnOnMicrophone = async (flag) => {
+    flag = flag ?? !isAudioOn;
+    setIsAudioOn(flag);
+
+    if (audioTrack) {
+      return audioTrack.setEnabled(flag);
     }
+
+    audioTrack = await createMicrophoneAudioTrack();
+  };
+
+  const [isJoined, setIsJoined] = useState(false);
+  const channel = useRef("annhien");
+  const appid = useRef("c437536f270343ed9ab53fc6af0f996a");
+  const token = useRef("007eJxTYHi998F1lpovp1R1guS1Hs41a17E+eHSxpqpZbx36+pYX+QpMCSbGJubGpulGZkbGJsYp6ZYJiaZGqclmyWmGaRZWpolPq91TGsIZGRo/3eOkZEBAkF8dobEvLyMzNQ8BgYAJ7YioA==");
+
+  const joinChannel = async () => {
+    if (!channel.current) {
+      channel.current = "react-room";
+    }
+
+    if (isJoined) {
+      await leaveChannel();
+    }
+
+    client.on("user-published", onUserPublish);
+
+    await client.join(
+      appid.current,
+      channel.current,
+      token.current || null,
+      null
+    );
+    setIsJoined(true);
   };
 
   const leaveChannel = async () => {
-    for (let localTrack of localTracks) {
-      localTrack.stop();
-      localTrack.close();
-    }
-    client.off('user-published', handleUserJoined);
-    client.off('user-left', handleUserLeft);
-    await client.unpublish(localTracks);
+    setIsJoined(false);
+    setIsAudioPubed(false);
+    setIsVideoPubed(false);
+
     await client.leave();
+  };
+
+  const onUserPublish = async (user, mediaType) => {
+    if (mediaType === "video") {
+      const remoteTrack = await client.subscribe(user, mediaType);
+      remoteTrack.play("remote-video");
+      setIsVideoSubed(true);
+    }
+    if (mediaType === "audio") {
+      const remoteTrack = await client.subscribe(user, mediaType);
+      remoteTrack.play();
+    }
+  };
+
+  const publishVideo = async () => {
+    await turnOnCamera(true);
+
+    if (!isJoined) {
+      await joinChannel();
+    }
+    await client.publish(videoTrack);
+    setIsVideoPubed(true);
+  };
+
+  const publishAudio = async () => {
+    await turnOnMicrophone(true);
+
+    if (!isJoined) {
+      await joinChannel();
+    }
+
+    await client.publish(audioTrack);
+    setIsAudioPubed(true);
   };
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 200px)' }}>
-          {users.map((user) => (
-            <VideoPlayer key={user.uid} user={user} />
-          ))}
+      <div className="left-side">
+        <h3 className={styles.text}>Please check your camera / microphone!</h3>
+        <div className={styles.buttonContainer}>
+          <button
+            onClick={() => turnOnCamera()}
+            className={`${styles.button} ${isVideoOn ? "button-on" : ""}`}
+          >
+            Turn {isVideoOn ? "off" : "on"} camera
+          </button>
+          <button
+            onClick={() => turnOnMicrophone()}
+            className={`${styles.button} ${isAudioOn ? "button-on" : ""}`}
+          >
+            Turn {isAudioOn ? "off" : "on"} Microphone
+          </button>
+        </div>
+
+        <div className={styles.buttonContainer}>
+          <button
+            onClick={joinChannel}
+            className={`${styles.button} ${isJoined ? "button-on" : ""}`}
+          >
+            Join Channel
+          </button>
+          <button
+            onClick={publishVideo}
+            className={`${styles.button} ${isVideoPubed ? "button-on" : ""}`}
+          >
+            Publish Video
+          </button>
+          <button
+            onClick={publishAudio}
+            className={`${styles.button} ${isAudioPubed ? "button-on" : ""}`}
+          >
+            Publish Audio
+          </button>
+          <button onClick={leaveChannel} className={styles.button}>
+            Leave Channel
+          </button>
         </div>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-        <button onClick={toggleCamera}>
-          {cameraEnabled ? 'Disable Camera' : 'Enable Camera'}
-        </button>
-        <button onClick={toggleMic}>
-          {micEnabled ? 'Disable Microphone' : 'Enable Microphone'}
-        </button>
-        <button onClick={leaveChannel}>Leave Channel</button>
+      <div className="right-side">
+        <video id="camera-video" hidden={isVideoOn ? false : true} width={250} height={250}></video>
+        <video id="remote-video" hidden={isVideoSubed ? false : true} width={250} height={250}></video>
+        {isJoined && !isVideoSubed ? (
+          <div className={`waiting ${styles.text}`}>
+            You can share channel {channel.current} with others...
+          </div>
+        ) : null}
       </div>
     </div>
   );
-};
+}; 

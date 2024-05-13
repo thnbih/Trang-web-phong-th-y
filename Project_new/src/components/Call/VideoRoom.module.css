@@ -1,0 +1,44 @@
+/* VideoRoom.module.css */
+.text {
+    margin-top: 5px;
+    width: auto;
+    text-align: center;
+    display: flex;
+    color: white;
+    align-items: center;
+}
+
+.button {
+    padding: 10px 20px;
+    background: linear-gradient(to bottom right, #ff9966, #ff5e62);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin: 0 10px;
+}
+
+.button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 94, 98, 0.5);
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content:left;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.input {
+    border: 2px solid #FAACA8;
+    border-radius: 5px;
+    background: transparent;
+    width: 300px;
+    height: 35px;
+    font-size: 22px;
+    color: #FAACA8;
+    font-family: 'Lato', sans-serif;
+}
