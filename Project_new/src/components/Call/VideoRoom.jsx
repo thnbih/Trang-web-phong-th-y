@@ -25,8 +25,8 @@ export const VideoRoom = () => {
   useEffect(() => {
     const handleUserJoined = async (user, mediaType) => {
       await client.subscribe(user, mediaType);
-    
-      if (mediaType === 'video' && user.videoTrack && user.videoTrack.enabled) {
+
+      if (mediaType === 'video') {
         setUsers((previousUsers) => [
           ...previousUsers,
           {
@@ -35,7 +35,7 @@ export const VideoRoom = () => {
           },
         ]);
       }
-    
+
       if (mediaType === 'audio') {
         setUsers((previousUsers) => [
           ...previousUsers,
