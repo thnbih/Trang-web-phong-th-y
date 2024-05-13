@@ -5,7 +5,7 @@ import { VideoPlayer } from './VideoPlayer';
 
 const APP_ID = 'c437536f270343ed9ab53fc6af0f996a';
 const TOKEN =
-  '007eJxTYChcGHG1cONuFbui78ltJ2Rvx8xbsiNcbeXVwDl9nxou8FQoMCSbGJubGpulGZkbGJsYp6ZYJiaZGqclmyWmGaRZWpolGidYpDUEMjKorG5gYmSAQBCfnSExLy8jMzWPgQEADKIhPw==';
+  '007eJxTYHi998F1lpovp1R1guS1Hs41a17E+eHSxpqpZbx36+pYX+QpMCSbGJubGpulGZkbGJsYp6ZYJiaZGqclmyWmGaRZWpolPq91TGsIZGRo/3eOkZEBAkF8dobEvLyMzNQ8BgYAJ7YioA==';
 const CHANNEL = 'annhien';
 
 export const VideoRoom = () => {
