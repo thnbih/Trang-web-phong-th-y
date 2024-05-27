@@ -1,10 +1,7 @@
 # An Nhiên - Trang web coi bói cực hay
 
-<a href="https://coiboicuchay.social/">
-<p align="center">
-  ![Website logo](https://static.overlay-tech.com/assets/9b8f6e55-f5d0-42d0-b508-be81c2425e2f.png)
-</p>
-</a>
+![Website logo](https://static.overlay-tech.com/assets/9b8f6e55-f5d0-42d0-b508-be81c2425e2f.png){ style="algin: center" }
+
 
 # Introduction
 This is a web app project about fortune telling which has these main features:
