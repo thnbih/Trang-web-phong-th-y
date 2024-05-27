@@ -2,7 +2,7 @@
 
 <a href="https://coiboicuchay.social/">
 <p align="center">
-    <img width="300" height="300" scr="https://static.overlay-tech.com/assets/9b8f6e55-f5d0-42d0-b508-be81c2425e2f.png">
+  ![Website logo](https://static.overlay-tech.com/assets/9b8f6e55-f5d0-42d0-b508-be81c2425e2f.png)
 </p>
 </a>
 
@@ -11,6 +11,7 @@ This is a web app project about fortune telling which has these main features:
 1. Fortune telling with normal cards
 2. Fortune telling with Tarot cards
 3. Fortune telling with date of birth
+
 **Note: all of the above features require an account to work. For testing purpose, use this account:**
 - Username: test123
 - Password: test123
