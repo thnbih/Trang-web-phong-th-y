@@ -33,13 +33,16 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 14px;
             font-family: 'Lato';
         }
 
         td {
             padding: 5px;
             white-space: nowrap;
+        }
+
+        td .selected {
+            border: 0.2px solid #ff5e62;
         }
     </style>
 </head>
@@ -68,6 +71,44 @@
 
         // Call the showVietCal() function
         showVietCal();
+
+        function handleCellClick(event) {
+            var target = event.target;
+            var cell = target.closest('td');
+
+            if (cell && cell.classList.contains('ngaythang')) {
+                var selectedCell = document.querySelector('.selected');
+                if (selectedCell) {
+                    selectedCell.classList.remove('selected');
+                }
+                cell.classList.add('selected');
+
+                var args = cell.getAttribute('data-args');
+                if (args) {
+                    var [dd, mm, yy, leap, jd, sday, smonth, syear] = args.split(',').map(Number);
+                    alertDayInfo(dd, mm, yy, leap, jd, sday, smonth, syear);
+                }
+            }
+        }
+
+        table.addEventListener('click', handleCellClick);
+
+        var today = new Date();
+        var currentDate = today.getDate();
+        var currentMonth = today.getMonth() + 1;
+        var currentYear = today.getFullYear();
+
+        var todayCell = document.querySelector(`.ngaythang[data-args*="${currentDate},${currentMonth},${currentYear}"]`);
+        if (todayCell) {
+            todayCell.classList.add('selected');
+            todayCell.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            var args = todayCell.getAttribute('data-args');
+            if (args) {
+                var [dd, mm, yy, leap, jd, sday, smonth, syear] = args.split(',').map(Number);
+                alertDayInfo(dd, mm, yy, leap, jd, sday, smonth, syear);
+            }
+        }
     </script>
 </body>
 

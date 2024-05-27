@@ -173,6 +173,7 @@ function BoiBaiTarot() {
                         />
                         <div className={styles.cardMeaning}>
                             <h2>{selectedCard.Name}</h2>
+                            <ReadAloudButton text={selectedCard.Mean} />
                             <p>{selectedCard.Mean}</p>
                         </div>
                         <button className={styles.closeButton} onClick={closeFullscreen}>

@@ -563,8 +563,7 @@ function printCell(lunarDate, solarDate, solarMonth, solarYear) {
 	var res = "";
 	var args = lunarDate.day + "," + lunarDate.month + "," + lunarDate.year + "," + lunarDate.leap;
 	args += ("," + lunarDate.jd + "," + solarDate + "," + solarMonth + "," + solarYear);
-	res += ('<td class="' + cellClass + '"');
-	if (lunarDate != null) res += (' title="' + getDayName(lunarDate) + '" onClick="alertDayInfo(' + args + ');"');
+	res += ('<td class="' + cellClass + '" data-args="' + args + '"');	if (lunarDate != null) res += (' title="' + getDayName(lunarDate) + '" onClick="alertDayInfo(' + args + ');"');
 	res += (' <div style=color:' + solarColor + ' class="' + solarClass + '">' + solarDate + '</div> <div class="' + lunarClass + '">' + lunar + '</div></td>\n');
 	return res;
 }
@@ -593,15 +592,15 @@ function infoCellSelect(id) {
 }
 
 function alertDayInfo(dd, mm, yy, leap, jd, sday, smonth, syear) {
-	var lunar = new LunarDate(dd, mm, yy, leap, jd);
-	var s = getDayString(lunar, sday, smonth, syear);
-	s += " \u00E2m l\u1ECBch<br>";
-	s += getDayName(lunar);
-	s += "<br>- <strong>Gi\u1EDD \u0111\u1EA7u ng\u00E0y</strong>: " + getCanHour0(jd) + " " + CHI[0];
-	s += "<br>- <strong>Ti\u1EBFt</strong>: " + TIETKHI[getSunLongitude(jd + 1, 7.0)];
-	s += "<br>- <strong>Gi\u1EDD ho\u00E0ng \u0111\u1EA1o</strong>: " + getGioHoangDao(jd);
+    var lunar = new LunarDate(dd, mm, yy, leap, jd);
+    var s = getDayString(lunar, sday, smonth, syear);
+    s += " \u00E2m l\u1ECBch<br>";
+    s += getDayName(lunar);
+    s += "<br>- <strong>Gi\u1EDD \u0111\u1EA7u ng\u00E0y</strong>: " + getCanHour0(jd) + " " + CHI[0];
+    s += "<br>- <strong>Ti\u1EBFt</strong>: " + TIETKHI[getSunLongitude(jd + 1, 7.0)];
+    s += "<br>- <strong>Gi\u1EDD ho\u00E0ng \u0111\u1EA1o</strong>: " + getGioHoangDao(jd);
 
-	window.parent.postMessage({ type: 'showContent', content: s }, '*');
+    window.parent.postMessage({ type: 'showContent', content: s }, '*');
 }
 
 

@@ -147,15 +147,6 @@ function DashBoard() {
                     </div>
                 )}
 
-
-                {/* <section className={styles['DashBoard3']}>
-                    <h2>Xem bói online</h2>
-                    <p className={styles['name-store']}>Trang web An nhiên cung cấp dịch vụ xem bói hữu duyên cho các anh chị</p>
-                    <div className={styles['button-store']}>
-                    <button className={styles['button-store']}>Bắt đầu</button>
-                    </div>
-                </section> */}
-
                 <section className={styles['DashBoard4']}>
                     <div>
                         <h1>Lời bình hữu duyên</h1>
