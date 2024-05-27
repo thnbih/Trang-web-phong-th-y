@@ -1,6 +1,6 @@
 # An Nhiên - Trang web coi bói cực hay
 
-<p align="center"> <img src="https://static.overlay-tech.com/assets/9b8f6e55-f5d0-42d0-b508-be81c2425e2f.png"> </p>
+<p align="center"> <img width="300" height="300" src="https://static.overlay-tech.com/assets/9b8f6e55-f5d0-42d0-b508-be81c2425e2f.png"> </p>
 
 # Introduction
 This is a web app project about fortune telling which has these main features:
