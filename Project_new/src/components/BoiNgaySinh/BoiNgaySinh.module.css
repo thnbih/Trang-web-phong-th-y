@@ -208,15 +208,24 @@
     color: #ff5e62;
 }
 
-.result-items-container {
+.result-items-container-2 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     justify-items: center;
     margin-top: 30px;
+    margin-bottom: 30px;
 }
 
-.result-item {
+.result-items-container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    justify-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.result-item-2 {
     display: flex;
     flex-direction: column;
     align-items: center;

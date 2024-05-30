@@ -204,25 +204,27 @@ function BoiNgaySinh() {
                 <span className={styles['result-value']}>{zodiacSign}</span>
               </div>
             </div>
-            <div className={styles['result-item']}>
-              <div className={styles['result-content']}>
-                <span className={styles['result-label']}>Ý nghĩa ngày sinh</span>
-                <ReadAloudButton text={dayMeaning} />
-                <span className={styles['result-value']}>{dayMeaning}</span>
+            <div className={styles['result-items-container-2']}>
+              <div className={styles['result-item-2']}>
+                <div className={styles['result-content']}>
+                  <span className={styles['result-label']}>Ý nghĩa ngày sinh</span>
+                  <ReadAloudButton text={dayMeaning} />
+                  <span className={styles['result-value']}>{dayMeaning}</span>
+                </div>
               </div>
-            </div>
-            <div className={styles['result-item']}>
-              <div className={styles['result-content']}>
-                <span className={styles['result-label']}>Ý nghĩa tháng sinh</span>
-                <ReadAloudButton text={monthMeaning} />
-                <span className={styles['result-value']}>{monthMeaning}</span>
+              <div className={styles['result-item-2']}>
+                <div className={styles['result-content']}>
+                  <span className={styles['result-label']}>Ý nghĩa tháng sinh</span>
+                  <ReadAloudButton text={monthMeaning} />
+                  <span className={styles['result-value']}>{monthMeaning}</span>
+                </div>
               </div>
-            </div>
-            <div className={styles['result-item']}>
-              <div className={styles['result-content']}>
-                <span className={styles['result-label']}>Ý nghĩa năm sinh</span>
-                <ReadAloudButton text={yearMeaning} />
-                <span className={styles['result-value']}>{yearMeaning}</span>
+              <div className={styles['result-item-2']}>
+                <div className={styles['result-content']}>
+                  <span className={styles['result-label']}>Ý nghĩa năm sinh</span>
+                  <ReadAloudButton text={yearMeaning} />
+                  <span className={styles['result-value']}>{yearMeaning}</span>
+                </div>
               </div>
             </div>
             <div className={styles['result-item']}>

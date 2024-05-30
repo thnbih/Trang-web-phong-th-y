@@ -10,6 +10,7 @@
   .Logo {
     margin-left: 10px;
     margin-bottom: 10px;
+    border-radius: 50%;
   }
 
   nav {
@@ -104,6 +105,7 @@
   .Logo {
     display: flex;
     margin-left: 20px;
+    border-radius: 50%;
   }
 
   .Menu {
