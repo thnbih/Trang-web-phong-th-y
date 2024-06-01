@@ -93,30 +93,17 @@
 
         table.addEventListener('click', handleCellClick);
 
-        var today = new Date();
-        var currentDate = today.getDate();
-        var currentMonth = today.getMonth() + 1;
-        var currentYear = today.getFullYear();
+        // Find the cell with the class "homnay"
+        var todayCell = document.querySelector('.homnay');
 
-        // Use the currentLunarDate variable directly
-        var lunarDay = currentLunarDate.day;
-        var lunarMonth = currentLunarDate.month;
-        var lunarYear = currentLunarDate.year;
-
-        // Find the cell based on the lunar date
-        var todayCell = document.querySelector(`.ngaythang[data-args*="${currentMonth},${currentYear}"]`);
-        console.log(todayCell);
         if (todayCell) {
             todayCell.classList.add('selected');
-            
+
             var args = todayCell.getAttribute('data-args');
-            console.log(args);
             if (args) {
                 var [dd, mm, yy, leap, jd, sday, smonth, syear] = args.split(',').map(Number);
                 alertDayInfo(dd, mm, yy, leap, jd, sday, smonth, syear);
             }
-        } else {
-            console.log('Today is not in the selected month');
         }
     </script>
 </body>
