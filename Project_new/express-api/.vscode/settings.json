@@ -1,4 +1,5 @@
 {
     "appService.defaultWebAppToDeploy": "undefined/subscriptions/7fc71adb-ca7b-4ccf-b854-1b69bd61ad0c/resourceGroups/coiboicuchay/providers/Microsoft.Web/sites/coiboicuchay-be",
-    "appService.deploySubpath": "."
+    "appService.deploySubpath": ".",
+    "appService.showBuildDuringDeployPrompt": false
 }
