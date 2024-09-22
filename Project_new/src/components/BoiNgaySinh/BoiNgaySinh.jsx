@@ -70,7 +70,7 @@ function BoiNgaySinh() {
           { Mean: soChuDao },
         ];
 
-        const summarizeResponse = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/get-overall-message', dateOfBirthMeanings);
+        const summarizeResponse = await axios.post('https://coiboicuchay.azurewebsites.net/api/get-overall-message', dateOfBirthMeanings);
         const { summarizedMeaning } = summarizeResponse.data;
         setOverallMessage(summarizedMeaning);
         setShowResult(true);

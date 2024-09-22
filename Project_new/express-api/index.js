@@ -636,7 +636,7 @@ client.connect()
         const { text } = req.body;
     
         const config = sdk.SpeechConfig.fromSubscription(process.env.SPEECH_KEY, process.env.SPEECH_REGION);
-        config.setSpeechSynthesisVoiceName("vi-VN-NamMinhNeural");
+        config.speechSynthesisVoiceName("vi-VN-NamMinhNeural");
     
         const synthesizer = new sdk.SpeechSynthesizer(config);
     

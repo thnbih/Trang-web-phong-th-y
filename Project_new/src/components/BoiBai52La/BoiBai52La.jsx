@@ -64,7 +64,7 @@ function BoiBai52La() {
     const summarizeCardMeanings = async (cardMeanings, cardsId) => {
         try {
             // console.log(cardMeanings);
-            const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/summarize', cardMeanings);
+            const response = await axios.post('https://coiboicuchay.azurewebsites.net/api/summarize', cardMeanings);
             const summarizedMeaning = response.data.summarizedMeaning;
             setSummarizedMeaning(summarizedMeaning);
             saveApiResponse('lat-bai-tay', { cardsId, summarizedMeaning });
@@ -93,7 +93,7 @@ function BoiBai52La() {
                 },
             };
 
-            await axios.post('https://coiboicuchay-be.azurewebsites.net/api/save-response', requestBody, { headers });
+            await axios.post('https://coiboicuchay.azurewebsites.net/api/save-response', requestBody, { headers });
         } catch (error) {
             console.error('Error saving API response:', error);
         }
