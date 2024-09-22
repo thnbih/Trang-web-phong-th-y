@@ -35,7 +35,7 @@ function BoiBaiTarot() {
                     userId: userId,
                 };
 
-                const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/lat-bai-tarot', requestBody, { headers });
+                const response = await axios.post('https://coiboicuchay.azurewebsites.net/api/lat-bai-tarot', requestBody, { headers });
                 const { tarotCards, summarizedMeaning } = response.data;
                 console.log(tarotCards);
                 if (tarotCards && tarotCards.length > 0) {

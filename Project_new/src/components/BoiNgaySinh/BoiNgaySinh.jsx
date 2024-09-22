@@ -43,7 +43,7 @@ function BoiNgaySinh() {
         userId: userId,
       };
 
-      const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/boi-ngay-sinh', requestBody, { headers });
+      const response = await axios.post('https://coiboicuchay.azurewebsites.net/api/boi-ngay-sinh', requestBody, { headers });
       const { zodiacSign, dayMeaning, monthMeaning, yearMeaning, soChuDao, summarizedMeaning } = response.data;
 
       if (summarizedMeaning) {

@@ -32,7 +32,7 @@ function Details_SignUp() {
 
     try {
       // Send form data to server-side API
-      const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/register', {
+      const response = await axios.post('https://coiboicuchay.azurewebsites.net/api/register', {
         username,
         password
       });

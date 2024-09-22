@@ -33,7 +33,7 @@ function BoiBai52La() {
                 const requestBody = {
                     userId: userId,
                 }
-                const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/lat-bai-tay', requestBody, { headers });
+                const response = await axios.post('https://coiboicuchay.azurewebsites.net/api/lat-bai-tay', requestBody, { headers });
                 const { cards, summarizedMeaning } = response.data;
                 console.log(cards)
                 if (cards && cards.length > 0) {

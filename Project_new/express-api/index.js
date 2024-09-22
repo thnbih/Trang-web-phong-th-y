@@ -32,8 +32,7 @@ app.use(
 
 app.use(express.json());
 // MongoDB connection string
-const connectionString =
-  "mongodb+srv://keandk:keandk12@cluster0.y4i0459.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const connectionString = process.env.MONGODB_CONNECTION_STRING;
 
 // Connect to MongoDB
 const client = new MongoClient(connectionString, {
@@ -680,7 +679,7 @@ client.connect()
   });
 
 const groq = new Groq({
-  apiKey: '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'
+  apiKey: process.env.GROQ_API_KEY
 });
 
 const summarizeCardMeaningsWithGroq = async (cards) => {
@@ -715,7 +714,7 @@ async function getGroqChatCompletion(prompt) {
         content: prompt,
       },
     ],
-    model: 'gemma-7b-it',
+    model: 'llama-3.1-8b-instant',
   });
 }
 

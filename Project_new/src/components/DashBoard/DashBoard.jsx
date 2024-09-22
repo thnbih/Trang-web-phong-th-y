@@ -15,7 +15,7 @@ function DashBoard() {
     useEffect(() => {
         const fetchTarotCards = async () => {
             try {
-                const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/lat-bai-tarot-dashboard');
+                const response = await axios.post('https://coiboicuchay.azurewebsites.net/api/lat-bai-tarot-dashboard');
                 const { convertedCard } = response.data;
                 setTarotCards(convertedCard);
             } catch (error) {
