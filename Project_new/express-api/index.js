@@ -10,7 +10,7 @@ dotenv.config();
 const { ObjectId } = require("mongodb");
 const Groq = require('groq-sdk');
 const sharp = require('sharp');
-const sdk = require('microsoft-cognitiveservices-speech-sdk');
+const { AudioConfig, SpeechConfig, SpeechSynthesizer, ResultReason } = require("microsoft-cognitiveservices-speech-sdk");
 
 // Parse request body
 app.use(express.json());
@@ -293,7 +293,7 @@ client.connect()
         // console.log(convertedCard)
 
         // Send the Tarot cards as a response
-        res.json({convertedCard: convertedCard});
+        res.json({ convertedCard: convertedCard });
       } catch (error) {
         console.error("Error fetching Tarot cards:", error);
         res.status(500).json({ error: "Failed to fetch Tarot cards" });
@@ -549,21 +549,21 @@ client.connect()
           yearMeaning: yearMeaning ? yearMeaning["Ý nghĩa tuổi"] : null,
           soChuDao: soChuDaoMeaning ? soChuDaoMeaning.Mean : null,
         };
-    
-    
-        // Save the new response in the user's session
-        await saveApiResponseInUserSession(userId, "boi-ngay-sinh", {
-          ...result,
-          timestamp: new Date(),
-        });
-    
+
 
         // Save the new response in the user's session
         await saveApiResponseInUserSession(userId, "boi-ngay-sinh", {
           ...result,
           timestamp: new Date(),
         });
-    
+
+
+        // Save the new response in the user's session
+        await saveApiResponseInUserSession(userId, "boi-ngay-sinh", {
+          ...result,
+          timestamp: new Date(),
+        });
+
         res.json(result);
       } catch (error) {
         console.error("Error fetching birth date meanings:", error);
@@ -630,35 +630,41 @@ client.connect()
       }
     });
 
-    app.options("/api/synthesize", cors());
-    app.post('/api/synthesize', async (req, res) => {
+    app.options('/api/synthesize', cors());
+    app.post('/api/synthesize', cors(), async (req, res) => {
       try {
         const { text } = req.body;
-    
-        const config = sdk.SpeechConfig.fromSubscription(process.env.SPEECH_KEY, process.env.SPEECH_REGION);
-        config.speechSynthesisVoiceName("vi-VN-NamMinhNeural");
-    
-        const synthesizer = new sdk.SpeechSynthesizer(config);
-    
-        const result = synthesizer.SpeakTextAsync(text);
-        if (result.getReason() == sdk.ResultReason.SynthesizingAudioCompleted) {
-          console.log("Speech synthesized for text [" + text + "]");
-        } else if (result.getReason() == sdk.ResultReason.Canceled) {
-          const cancellation = sdk.SpeechSynthesisCancellationDetails.fromResult(result);
-          console.log("CANCELED: Reason=" + cancellation.getReason());
-    
-          if (cancellation.getReason() == sdk.CancellationReason.Error) {
-            console.log("CANCELED: ErrorCode=" + cancellation.getErrorCode());
-            console.log("CANCELED: ErrorDetails=" + cancellation.getErrorDetails());
-            console.log("CANCELED: Did you update the subscription info?");
+
+        const speechConfig = SpeechConfig.fromSubscription(process.env.SPEECH_KEY, process.env.SPEECH_REGION);
+        const audioConfig = AudioConfig.fromDefaultSpeakerOutput();
+
+        speechConfig.speechSynthesisVoiceName = 'vi-VN-NamMinhNeural';
+
+        const synthesizer = new SpeechSynthesizer(speechConfig, audioConfig);
+
+        const ssml = `<speak version='1.0' xml:lang='en-US'><voice xml:lang='vi-VN' xml:gender='Female' name='vi-VN-NamMinhNeural'>${text}</voice></speak>`;
+
+        synthesizer.speakSsmlAsync(ssml, (result) => {
+          if (result.reason === ResultReason.SynthesizingAudioCompleted) {
+            const audioData = result.audioData;
+            res.set({
+              'Content-Type': 'audio/wav',
+              'Content-Disposition': 'attachment; filename="audio.wav"',
+              'Content-Length': audioData.byteLength,
+            });
+            res.send(Buffer.from(audioData));
+          } else {
+            console.error('Speech synthesis canceled, ' + result.errorDetails);
+            res.status(500).send('Speech synthesis failed.');
           }
-        }
-    
-        result.close();
-        synthesizer.close();
+          synthesizer.close();
+        }, (error) => {
+          console.error(error);
+          synthesizer.close();
+        });
       } catch (error) {
-        console.error("Error synthesizing speech:", error);
-        res.status(500).json({ error: "Error synthesizing speech" });
+        console.error('Error synthesizing speech:', error);
+        res.status(500).json({ error: 'Error synthesizing speech' });
       }
     });
 
