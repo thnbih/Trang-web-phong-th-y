@@ -634,37 +634,31 @@ client.connect()
     app.post('/api/synthesize', async (req, res) => {
       try {
         const { text } = req.body;
-
-        const speechConfig = sdk.SpeechConfig.fromSubscription(process.env.SPEECH_KEY, process.env.SPEECH_REGION);
-        const audioConfig = sdk.AudioConfig.fromDefaultSpeakerOutput();
-
-        speechConfig.speechSynthesisVoiceName = 'vi-VN-NamMinhNeural';
-
-        const synthesizer = new sdk.SpeechSynthesizer(speechConfig, audioConfig);
-
-        const ssml = `<speak version='1.0' xml:lang='en-US'><voice xml:lang='vi-VN' xml:gender='Female' name='vi-VN-NamMinhNeural'>${text}</voice></speak>`;
-
-        synthesizer.speakSsmlAsync(ssml, (result) => {
-          if (result.reason === sdk.ResultReason.SynthesizingAudioCompleted) {
-            const audioData = result.audioData;
-            res.set({
-              'Content-Type': 'audio/wav',
-              'Content-Disposition': 'attachment; filename="audio.wav"',
-              'Content-Length': audioData.byteLength,
-            });
-            res.send(Buffer.from(audioData));
-          } else {
-            console.error('Speech synthesis canceled, ' + result.errorDetails);
-            res.status(500).send('Speech synthesis failed.');
+    
+        const config = sdk.SpeechConfig.fromSubscription(process.env.SPEECH_KEY, process.env.SPEECH_REGION);
+        config.setSpeechSynthesisVoiceName("vi-VN-NamMinhNeural");
+    
+        const synthesizer = new sdk.SpeechSynthesizer(config);
+    
+        const result = synthesizer.SpeakTextAsync(text);
+        if (result.getReason() == sdk.ResultReason.SynthesizingAudioCompleted) {
+          console.log("Speech synthesized for text [" + text + "]");
+        } else if (result.getReason() == sdk.ResultReason.Canceled) {
+          const cancellation = sdk.SpeechSynthesisCancellationDetails.fromResult(result);
+          console.log("CANCELED: Reason=" + cancellation.getReason());
+    
+          if (cancellation.getReason() == sdk.CancellationReason.Error) {
+            console.log("CANCELED: ErrorCode=" + cancellation.getErrorCode());
+            console.log("CANCELED: ErrorDetails=" + cancellation.getErrorDetails());
+            console.log("CANCELED: Did you update the subscription info?");
           }
-          synthesizer.close();
-        }, (error) => {
-          console.error(error);
-          synthesizer.close();
-        });
+        }
+    
+        result.close();
+        synthesizer.close();
       } catch (error) {
-        console.error('Error synthesizing speech:', error);
-        res.status(500).json({ error: 'Error synthesizing speech' });
+        console.error("Error synthesizing speech:", error);
+        res.status(500).json({ error: "Error synthesizing speech" });
       }
     });
 

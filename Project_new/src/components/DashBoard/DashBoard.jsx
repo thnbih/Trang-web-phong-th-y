@@ -38,7 +38,7 @@ function DashBoard() {
     useEffect(() => {
         const fetchLoiBinh = async () => {
             try {
-                const response = await axios.post('https://coiboicuchay-be.azurewebsites.net/api/loi-binh-dashboard');
+                const response = await axios.post('https://coiboicuchay.azurewebsites.net/api/loi-binh-dashboard');
                 setLoiBinh(response.data);
             } catch (error) {
                 console.error('Error fetching Loi Binh:', error);
